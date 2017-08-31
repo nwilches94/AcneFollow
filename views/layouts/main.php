@@ -67,6 +67,16 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                     ["label" => "Home", "url" => "/", "icon" => "home"],
                                     ["label" => "Pacientes", "url" => ["paciente/index"], "icon" => "user-md"],
                                     [
+                                        "label" => "Examenes",
+                                        "url" => ["examen/index"],
+                                        "icon" => "heartbeat"
+                                    ],
+                                    [
+                                        "label" => "Fotos",
+                                        "url" => ["examen/index"],
+                                        "icon" => "camera"
+                                    ],
+                                    [
                                         "label" => "Badges",
                                         "url" => "#",
                                         "icon" => "table",
