@@ -14,18 +14,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Crear Paciente'), ['nuevo/paciente'], ['class' => 'btn btn-success']) ?>
+        <?php
+        if(!Yii::$app->user->identity->isAdmin){
+            Html::a(Yii::t('app', 'Crear Paciente'), ['nuevo/paciente'], ['class' => 'btn btn-success']);
+        }
+        ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+<?php Pjax::begin(); ?>
+    <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                'doctor_id',
+                'user_id',
 
-            'id',
-            'doctor_id',
-            'user_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{view}'
+                ],
+            ],
+        ]);
+    ?>
 <?php Pjax::end(); ?></div>

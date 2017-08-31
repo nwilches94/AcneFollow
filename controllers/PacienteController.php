@@ -29,9 +29,9 @@ class PacienteController extends Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'view'],
                         'allow' => true,
-                        'roles' => ['medico'],
+                        'roles' => ['medico', 'admin'],
                     ],
                 ],
             ],
@@ -44,10 +44,11 @@ class PacienteController extends Controller
      */
     public function actionIndex()
     {
-
-        //$query = Paciente::find();
-
-        $query = Paciente::find()->where(['doctor_id'=> \Yii::$app->user->identity->id]);
+        if(Yii::$app->user->identity->isAdmin){
+            $query = Paciente::find();
+        }else{
+            $query = Paciente::find()->where(['doctor_id'=> \Yii::$app->user->identity->id]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
