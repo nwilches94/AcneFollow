@@ -68,26 +68,31 @@ class NuevoController extends BaseAdminController
         $this->performAjaxValidation($user);
 
         $this->trigger(self::EVENT_BEFORE_CREATE, $event);
-        if ($user->load(\Yii::$app->request->post()) && $user->create()) {
-            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'User has been created'));
-            $this->trigger(self::EVENT_AFTER_CREATE, $event);
+        if($user->load(\Yii::$app->request->post())){
 
-            // colocarle rol de paciente
+            $user->username = $user->email;
 
-            $rol = Yii::createObject([
-                'class'   => Assignment::className(),
-                'user_id' => $user->id,
-            ]);
-            
-            $rol->items = ['paciente'];
+            if ($user->create()) {
+                \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'User has been created'));
+                $this->trigger(self::EVENT_AFTER_CREATE, $event);
 
-            $rol->updateAssignments();
+                // colocarle rol de paciente
+
+                $rol = Yii::createObject([
+                    'class'   => Assignment::className(),
+                    'user_id' => $user->id,
+                ]);
+                
+                $rol->items = ['paciente'];
+
+                $rol->updateAssignments();
 
 
-            $paciente = new Paciente();
-            $paciente->user_id = $user->id;
-            $paciente->doctor_id = Yii::$app->user->identity->id;
-            $paciente->save();
+                $paciente = new Paciente();
+                $paciente->user_id = $user->id;
+                $paciente->doctor_id = Yii::$app->user->identity->id;
+                $paciente->save();
+            }
 
             return $this->redirect(['paciente/index']);
         }
