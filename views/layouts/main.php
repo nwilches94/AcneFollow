@@ -65,40 +65,24 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                             [
                                 "items" => [
                                     ["label" => "Home", "url" => "/", "icon" => "home"],
-                                    ["label" => "Pacientes", "url" => ["paciente/index"], "icon" => "user-md"],
+                                    [
+                                        "label" => "Pacientes",
+                                        "url" => ["paciente/index"],
+                                        "icon" => "user-md",
+                                        "visible" => \Yii::$app->user->can('medico')
+                                    
+                                    ],
                                     [
                                         "label" => "Examenes",
                                         "url" => ["examen/index"],
-                                        "icon" => "heartbeat"
+                                        "icon" => "heartbeat",
+                                        "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [
                                         "label" => "Fotos",
                                         "url" => ["examen/index"],
-                                        "icon" => "camera"
-                                    ],
-                                    [
-                                        "label" => "Badges",
-                                        "url" => "#",
-                                        "icon" => "table",
-                                        "items" => [
-                                            [
-                                                "label" => "Default",
-                                                "url" => "#",
-                                                "badge" => "123",
-                                            ],
-                                            [
-                                                "label" => "Success",
-                                                "url" => "#",
-                                                "badge" => "new",
-                                                "badgeOptions" => ["class" => "label-success"],
-                                            ],
-                                            [
-                                                "label" => "Danger",
-                                                "url" => "#",
-                                                "badge" => "!",
-                                                "badgeOptions" => ["class" => "label-danger"],
-                                            ],
-                                        ],
+                                        "icon" => "camera",
+                                        "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [
                                         "label" => "Administracion",
@@ -110,6 +94,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                                 "url" => "/user/admin/index",
                                             ],
                                         ],
+                                        "visible" => Yii::$app->user->identity->isAdmin
                                     ],
                                 ],
                             ]

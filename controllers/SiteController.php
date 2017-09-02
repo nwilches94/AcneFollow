@@ -67,6 +67,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if (\Yii::$app->user->can('paciente')) {
+            return $this->render('index-paciente');
+        }
         return $this->render('index');
     }
 
