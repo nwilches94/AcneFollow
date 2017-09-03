@@ -6,6 +6,7 @@
  */
 
 use yii\helpers\Html;
+use app\models\Paciente;
 
 $bundle = yiister\gentelella\assets\Asset::register($this);
 
@@ -80,9 +81,15 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                     ],
                                     [
                                         "label" => "Fotos",
-                                        "url" => ["examen/index"],
+                                        "url" => ["nuevo/foto"],
                                         "icon" => "camera",
                                         "visible" => \Yii::$app->user->can('paciente')
+                                    ],
+                                    [
+                                        "label" => "Seguimiento de Periodo",
+                                        "url" => ["periodo/index"],
+                                        "icon" => "camera",
+                                        "visible" => Paciente::getSexo(),
                                     ],
                                     [
                                         "label" => "Administracion",

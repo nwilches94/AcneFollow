@@ -15,5 +15,9 @@
  */
 ?>
 
+<?= $form->field($user, 'name')->textInput(['maxlength' => 255]) ?>
 <?= $form->field($user, 'email')->textInput(['maxlength' => 255]) ?>
+<?= $form->field($user, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione...'])->label('Sexo'); ?>
+<?= $form->field($user, 'peso')->textInput(['maxlength' => 255]) ?>
+<?= $form->field($user, 'telefono')->textInput(['maxlength' => 255]) ?>
 <?= $form->field($user, 'password')->passwordInput() ?>

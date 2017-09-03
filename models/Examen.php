@@ -65,8 +65,8 @@ class Examen extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'paciente_id' => Yii::t('app', 'Paciente ID'),
-            'fecha' => Yii::t('app', 'Fecha'),
+            'paciente_id' => Yii::t('app', 'Paciente'),
+            'fecha' => Yii::t('app', 'Fecha del Examen'),
             'notas' => Yii::t('app', 'Notas'),
         ];
     }

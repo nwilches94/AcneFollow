@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Paciente;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Examen */
@@ -12,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="examen-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode('Ver Examen') ?></h1><br>
 
     <p>
         <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -29,10 +31,31 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
-            'created_at',
-            'updated_at',
-            'paciente_id',
-            'fecha',
+            //'created_at',
+            [
+		        'attribute' => 'created_at',
+		        'format' => 'datetime',
+		        'label' => 'Fecha de Creación',
+		    ],
+            //'updated_at',
+            [
+		        'attribute' => 'paciente_id',
+		        'format' => 'text',
+		        'label' => 'Paciente',
+		        'value' => function ($data) {
+					$paciente=Paciente::find()->where(['id' => $data->paciente_id])->one();
+					$user=User::find()->where(['id' => $paciente['user_id']])->one();
+					return $user['username'];
+			     }
+		    ],
+            [
+		        'attribute' => 'fecha',
+		        'format' => 'text',
+		        'label' => 'fecha',
+		        'value' => function ($data) {
+					return Yii::$app->formatter->asDate($data->fecha, 'php: M, Y');
+			     }
+		    ],
             'notas:ntext',
         ],
     ]) ?>

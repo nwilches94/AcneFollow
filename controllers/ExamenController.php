@@ -8,6 +8,8 @@ use app\models\ExamenSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Paciente;
+use app\models\User;
 
 /**
  * ExamenController implements the CRUD actions for Examen model.
@@ -37,7 +39,7 @@ class ExamenController extends Controller
     {
         $searchModel = new ExamenSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+		
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -64,12 +66,28 @@ class ExamenController extends Controller
     public function actionCreate()
     {
         $model = new Examen();
+		
+		$pacientes=Paciente::find()->all();
+		if($pacientes) {
+			foreach ($pacientes as $value) {
+				$user=User::find()->where(['id' => $value['user_id']])->one();
+				$listaPaciente[$user['id']] = $user['username'];
+			}
+		}
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+		if($model->load(Yii::$app->request->post())) {
+			
+			/*print_r(Yii::$app->request->post());
+		die;*/
+		
+			$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'yyyy-MM-dd');
+			$model->save();
+			
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        } 	
+        else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 'listaPaciente' => $listaPaciente
             ]);
         }
     }
@@ -84,7 +102,11 @@ class ExamenController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+        	
+			$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'yyyy-MM-dd');
+			$model->save();
+			
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

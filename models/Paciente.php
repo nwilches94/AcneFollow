@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use dektrium\user\models\User;
+use dektrium\user\models\Profile;
+
 /**
  * This is the model class for table "paciente".
  *
@@ -16,6 +18,8 @@ use dektrium\user\models\User;
  */
 class Paciente extends \yii\db\ActiveRecord
 {
+	public $name, $sexo, $peso, $telefono, $buscar;
+	
     /**
      * @inheritdoc
      */
@@ -30,8 +34,10 @@ class Paciente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['doctor_id', 'user_id'], 'required'],
-            [['doctor_id', 'user_id'], 'integer']   
+            [['doctor_id', 'user_id'], 'required', 'on' => ['create', 'update']],
+            [['doctor_id', 'user_id'], 'integer'],
+            ["buscar", "match", "pattern" => "/^[0-9a-záéíóúñ\s]+$/i", "message" => "Sólo se aceptan letras y números"],
+            'buscar' => ['buscar', 'required', 'on' => ['index']],
         ];
     }
 
@@ -44,9 +50,15 @@ class Paciente extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'doctor_id' => Yii::t('app', 'Doctor ID'),
             'user_id' => Yii::t('app', 'User ID'),
+            'buscar' => Yii::t('app', 'Buscar'),
         ];
     }
-
+	
+	public function search()
+    {
+        
+    }
+	
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -70,5 +82,26 @@ class Paciente extends \yii\db\ActiveRecord
     public static function find()
     {
         return new PacienteQuery(get_called_class());
+    }
+	
+	public static function getSexo()
+    {
+    	$profile=null;
+		
+       	if(\Yii::$app->user->can('paciente'))
+			$profile=Profile::find()->where(['user_id' => Yii::$app->user->id])->one();
+		else
+		{
+			if(isset($_GET['id']))
+			{
+				$paciente=Paciente::find()->where(['id' => $_GET['id']])->one();
+				$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
+			}
+		}
+		
+		if($profile && $profile['sexo'] == 'Mujer')
+			return true;
+
+		return false;
     }
 }
