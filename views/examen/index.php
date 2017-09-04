@@ -21,28 +21,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Cargar Examen'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    
-	<?= GridView::widget([
-	        'dataProvider' => $dataProvider,
-	        'filterModel' => $searchModel,
-	        'columns' => [
-            	['class' => 'yii\grid\SerialColumn'],
-            	[
-			        'attribute' => 'created_at',
-			        'format' => 'datetime',
-			        'label' => 'Fecha de Creación',
-			    ],
-				[
-			        'attribute' => 'fecha',
-			        'format' => 'text',
-			        'label' => 'fecha',
-			        'value' => function ($data) {
-						return Yii::$app->formatter->asDate($data->fecha, 'php: M, Y');
-				     }
-			    ],
-	            'notas:ntext',
-	            ['class' => 'yii\grid\ActionColumn'],
-	        ],
-	    ]); 
-	?>
-<?php Pjax::end(); ?></div>
+	<?php Pjax::begin(); ?>    
+		<?= GridView::widget([
+		        'dataProvider' => $dataProvider,
+		        'filterModel' => $searchModel,
+		        'columns' => [
+	            	['class' => 'yii\grid\SerialColumn'],
+	            	[
+				        'attribute' => 'created_at',
+				        'format' => 'datetime',
+				        'label' => 'Fecha de Creación',
+				    ],
+					[
+				        'attribute' => 'fecha',
+				        'format' => 'text',
+				        'label' => 'Fecha',
+				        'value' => function ($data) {
+							return Yii::$app->formatter->asDate($data->fecha, 'php: M, Y');
+					     }
+				    ],
+		            'notas:ntext',
+		            ['class' => 'yii\grid\ActionColumn'],
+		        ],
+		    ]); 
+		?>
+	<?php Pjax::end(); ?>
+</div>

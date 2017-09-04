@@ -76,10 +76,6 @@ class ExamenController extends Controller
 		}
 
 		if($model->load(Yii::$app->request->post())) {
-			
-			/*print_r(Yii::$app->request->post());
-		die;*/
-		
 			$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'yyyy-MM-dd');
 			$model->save();
 			

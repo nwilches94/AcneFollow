@@ -92,6 +92,11 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                         "visible" => Paciente::getSexo(),
                                     ],
                                     [
+                                        "label" => "Buzón de Mensajes",
+                                        "url" => ["mensaje/index"],
+                                        "icon" => "camera",
+                                    ],
+                                    [
                                         "label" => "Administracion",
                                         "url" => "#",
                                         "icon" => "cog",

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\models\Paciente;
-use app\models\User;
+use dektrium\user\models\profile;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Examen */
@@ -44,8 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'label' => 'Paciente',
 		        'value' => function ($data) {
 					$paciente=Paciente::find()->where(['id' => $data->paciente_id])->one();
-					$user=User::find()->where(['id' => $paciente['user_id']])->one();
-					return $user['username'];
+					$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
+					return $profile['name'];
 			     }
 		    ],
             [
