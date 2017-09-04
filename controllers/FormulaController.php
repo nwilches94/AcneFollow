@@ -47,15 +47,6 @@ class FormulaController extends Controller
 				$model->getErrors();
         } 
 		
-		if(\Yii::$app->user->can('medico'))
-    		$query = Formula::find()->where(['doctor_id' => Yii::$app->user->id]);
-		else
-			$query = Formula::find()->where(['paciente_id' => Yii::$app->user->id]);
-		
-        $dataProvider = new ActiveDataProvider([
-			'query' => $query
-		]);
-		
 		$listaPaciente=null;
 		if(\Yii::$app->user->can('medico')) {
 			$pacientes=Paciente::find()->where(['doctor_id' => Yii::$app->user->id])->all();
@@ -68,7 +59,7 @@ class FormulaController extends Controller
 		}
 		
        	return $this->render('create', [
-            'model' => $model, 'dataProvider' => $dataProvider, 'listaPaciente' => $listaPaciente
+            'model' => $model, 'listaPaciente' => $listaPaciente
         ]);
     }
 
@@ -89,15 +80,6 @@ class FormulaController extends Controller
 				$model->getErrors();
         }
 		
-		if(\Yii::$app->user->can('medico'))
-    		$query = Formula::find()->where(['doctor_id' => Yii::$app->user->id]);
-		else
-			$query = Formula::find()->where(['paciente_id' => Yii::$app->user->id]);
-		
-        $dataProvider = new ActiveDataProvider([
-			'query' => $query
-		]);
-		
 		$listaPaciente=null;
 		if(\Yii::$app->user->can('medico')) {
 			$pacientes=Paciente::find()->where(['doctor_id' => Yii::$app->user->id])->all();
@@ -110,7 +92,7 @@ class FormulaController extends Controller
 		}
 		
        	return $this->render('update', [
-            'model' => $model, 'dataProvider' => $dataProvider, 'listaPaciente' => $listaPaciente
+            'model' => $model, 'listaPaciente' => $listaPaciente
         ]);
     }
 

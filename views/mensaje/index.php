@@ -63,10 +63,15 @@ $this->params['breadcrumbs'][] = $this->title;
 				        'template' => '{view}',
 				        'buttons' => [
 			                'view' => function ($url,$model,$key) {
-			               		return Html::a('Ver Todo el Mensaje', $url);
+			               		return Html::a('Ver Historial de Mensajes', '/mensaje/leido?id='.$model->doctor_id."&paciente_id=".$model->paciente_id);
 			                },
 				        ],
 					],
+					[
+	                    'class' => 'yii\grid\ActionColumn',
+	                    'template' => '{delete}',
+	                    "visible" => \Yii::$app->user->can('medico')
+	                ],
 		        ],
 		    ]); 
 		?>

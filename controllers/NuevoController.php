@@ -123,7 +123,7 @@ class NuevoController extends BaseAdminController
 		
 		if(Yii::$app->request->post()) {
 			
-			$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();	
+			$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
 			$model->paciente_id = $paciente['id'];
 			$model->fecha = date('Y-m-d');
 			$model->save();

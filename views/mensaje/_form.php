@@ -36,6 +36,9 @@ use dektrium\user\models\Profile;
 		
 	    <div class="form-group">
 	        <?= Html::submitButton('Enviar Mensaje', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+	        <?php if(isset($_GET['id'])) { ?>
+	        		<?= Html::a(Yii::t('app', 'Regresar'), ['index'], ['class' => 'btn btn-primary']) ?>
+	    	<?php } ?>
 	    </div>
 
     <?php ActiveForm::end(); ?>

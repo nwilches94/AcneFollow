@@ -91,6 +91,11 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                         "icon" => "camera"
                                     ],
                                     [
+                                        "label" => "Control de Cajas",
+                                        "url" => ["control-caja/index"],
+                                        "icon" => "camera"
+                                    ],
+                                    [
                                         "label" => "Seguimiento de Periodo",
                                         "url" => ["periodo/index"],
                                         "icon" => "camera",

@@ -17,19 +17,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="paciente-view">
 
-    <h1><?= Html::encode('Actualizar Paciente') ?></h1><br>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <h1><?= Html::encode('Paciente') ?></h1><br>
+    
+    <div class="form-group">
+		<div class="col-lg-offset-0 col-lg-9">
+	    	<?= Html::a(Yii::t('app', 'Regresar'), ['index'], ['class' => 'btn btn-primary']) ?>
+		</div>
+	</div>
 	
+	<br><br><br>
+
 	<div class="form-group">
 		<div class="col-lg-offset-0 col-lg-6">	
 		    <?= DetailView::widget([

@@ -36,7 +36,7 @@ class PacienteController extends Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'update'],
+                        'actions' => ['index', 'view', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['medico', 'admin'],
                     ],

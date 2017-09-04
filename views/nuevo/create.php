@@ -32,30 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             	
             	<h1><?= Html::encode($this->title) ?></h1><br>
             	
-                <div class="alert alert-info">
-                    <?= Yii::t('user', 'Credentials will be sent to the user by email') ?>.
-                    <?= Yii::t('user', 'A password will be generated automatically if not provided') ?>.
-                </div>
-                <?php $form = ActiveForm::begin([
-                    'layout' => 'horizontal',
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                    'fieldConfig' => [
-                        'horizontalCssClasses' => [
-                            'wrapper' => 'col-sm-9',
-                        ],
-                    ],
-                ]); ?>
-
-                <?= $this->render('@vendor/dektrium/yii2-user/views/admin/_user', ['form' => $form, 'user' => $user]) ?>
-
-                <div class="form-group">
-                    <div class="col-lg-offset-3 col-lg-9">
-                        <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?>
-                    </div>
-                </div>
-
-                <?php ActiveForm::end(); ?>
+                <?= $this->render('_formCreate', [
+				    'user' => $user
+				]) ?>
+	
             </div>
         </div>
     </div>
