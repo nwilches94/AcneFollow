@@ -43,6 +43,7 @@ class MensajeController extends Controller
 			}
 		}
 		
+		$query=null;
 		if(\Yii::$app->user->can('medico'))
 		{
 			$sql =	"SELECT * 
@@ -63,19 +64,22 @@ class MensajeController extends Controller
 		{
 			$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
 			
-			$sql =	"SELECT * 
-					FROM mensaje
-					WHERE origen='medico' AND paciente_id=".$paciente['id']." AND id IN (
-						SELECT MAX(id) AS id 
+			if($paciente)
+			{
+				$sql =	"SELECT * 
 						FROM mensaje
-						WHERE origen='medico' AND paciente_id=".$paciente['id']." 
+						WHERE origen='medico' AND paciente_id=".$paciente['id']." AND id IN (
+							SELECT MAX(id) AS id 
+							FROM mensaje
+							WHERE origen='medico' AND paciente_id=".$paciente['id']." 
+							GROUP BY doctor_id, paciente_id
+							ORDER BY doctor_id, paciente_id
+						)
 						GROUP BY doctor_id, paciente_id
-						ORDER BY doctor_id, paciente_id
-					)
-					GROUP BY doctor_id, paciente_id
-					ORDER BY doctor_id, paciente_id";
-			
-            $query = Mensaje::findBySql($sql);
+						ORDER BY doctor_id, paciente_id";
+						
+				$query = Mensaje::findBySql($sql);
+			}
 		}
 		
 		$dataProvider = new ActiveDataProvider([

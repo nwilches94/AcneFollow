@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h3><?= Html::encode($this->title) ?> <span class="badge"><?= $count ?> Nuevos</span></h3><br>
 
-<div>
+<?php if($dataProvider->query){ ?> 
 	<?php Pjax::begin(); ?>    
 		<?= GridView::widget([
 		        'dataProvider' => $dataProvider,
@@ -76,8 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		    ]); 
 		?>
 	<?php Pjax::end(); ?>
-	
-</div>
+<?php } ?>
 
 <br>
 

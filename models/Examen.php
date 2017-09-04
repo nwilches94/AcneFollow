@@ -49,7 +49,7 @@ class Examen extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'updated_at', 'fecha'], 'safe'],
-            [['paciente_id'], 'required'],
+            [['paciente_id', 'fecha'], 'required'],
             [['paciente_id'], 'integer'],
             [['notas'], 'string'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id']],

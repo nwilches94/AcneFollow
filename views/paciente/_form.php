@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Paciente */
@@ -18,6 +19,7 @@ use yii\bootstrap\ActiveForm;
 			<?= $form->field($profile, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione...'])->label('Sexo'); ?>
 			<?= $form->field($profile, 'peso')->textInput(['value' => $profile['peso']]) ?>
 			<?= $form->field($profile, 'telefono')->textInput(['value' => $profile['telefono']]) ?>
+			<?= $form->field($profile, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y'])->label('Fecha de Nacimiento') ?>
 		</div>
 		 
 	    <div class="form-group">

@@ -82,8 +82,8 @@ class PacienteController extends Controller
 			'query' => $query
 		]);
 		
-		$model = Paciente::find()->one();
-		
+		$model = new Paciente();
+
         return $this->render('index', [
             'dataProvider' => $dataProvider, 'model' => $model
         ]);
@@ -95,8 +95,14 @@ class PacienteController extends Controller
 		$paciente=Paciente::find()->where(['id' => $id])->one();
 		$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
 		
-        if ($profile->load(Yii::$app->request->post()) && $profile->save()) {
+        if ($profile->load(Yii::$app->request->post())) {
+        		
+        	$attributes=Yii::$app->request->post();
+        	$profile->fecha=Yii::$app->formatter->asDate($attributes['Profile']['fecha'], 'php: Y-m-d');
+			$profile->save();
+
             return $this->redirect(['view', 'id' => $id]);
+			
         } else {
             return $this->render('update', [
                 'model' => $model, 'profile' => $profile
@@ -112,7 +118,6 @@ class PacienteController extends Controller
     public function actionView($id)
     {
     	$ids=null; $query=null;
-		
     	if(\Yii::$app->user->can('medico'))
 			$fotos=Foto::find()->where(['paciente_id' => $id])->all();
 		else 
@@ -126,7 +131,7 @@ class PacienteController extends Controller
 				$ids[] = $value['id'];
 			}
 		}
-		
+
 		if($ids){
 			$query = File::find()->where(['in', 'itemId', $ids])->andWhere(['model' => 'Foto']);
 	        $dataProvider = new ActiveDataProvider([
@@ -135,19 +140,17 @@ class PacienteController extends Controller
 		}
 		else
 			$dataProvider = '';
-		
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query
-		]);
 
 		$query=null;
-		
 		if(\Yii::$app->user->can('medico'))
+		{
 			$query=Periodo::find()->where(['paciente_id' => $id])->orderBy(['fecha' => SORT_DESC]);
-		
-		$dataProviderPeriodo = new ActiveDataProvider([
-			'query' => $query
-		]);
+				$dataProviderPeriodo = new ActiveDataProvider([
+				'query' => $query
+			]);
+		}
+		else
+			$dataProviderPeriodo = '';
 		
         return $this->render('view', [
             'model' => $this->findModel($id), 'dataProvider' => $dataProvider, 'dataProviderPeriodo' => $dataProviderPeriodo

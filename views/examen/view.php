@@ -17,38 +17,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode('Ver Examen') ?></h1><br>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Eliminar'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a(Yii::t('app', 'Regresar'), ['index'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             [
-		        'attribute' => 'created_at',
-		        'format' => 'datetime',
-		        'label' => 'Fecha de Creación',
-		    ],
-            [
-		        'attribute' => 'paciente_id',
-		        'format' => 'text',
-		        'label' => 'Paciente',
-		        'value' => function ($data) {
-					$paciente=Paciente::find()->where(['id' => $data->paciente_id])->one();
-					$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
-					return $profile['name'];
-			     }
-		    ],
-            [
 		        'attribute' => 'fecha',
 		        'format' => 'text',
-		        'label' => 'fecha',
+		        'label' => 'Fecha del Examen',
 		        'value' => function ($data) {
 					return Yii::$app->formatter->asDate($data->fecha, 'php: M, Y');
 			     }

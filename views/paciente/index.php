@@ -44,34 +44,36 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <br>
     
-	<?php Pjax::begin(); ?>
-	    <?= GridView::widget([
-	            'dataProvider' => $dataProvider,
-	            'columns' => [
-	            	[
-	                    'label' => 'Paciente ID',
-					    'value' => 'id'
-	                ],
-					[
-	                    'label' => 'Nombre del Paciente',
-					    'value' => function ($model) {
-							$user=Profile::find()->where(['user_id' => $model->user_id])->one();
-							return $user['name'];
-					     }
-	                ],
-	                [
-	                    'label' => 'Teléfono',
-					    'value' => function ($model) {
-							$user=Profile::find()->where(['user_id' => $model->user_id])->one();
-							return $user['telefono'];
-					     }
-	                ],
-	                [
-	                    'class' => 'yii\grid\ActionColumn',
-	                    'template' => '{view}{update}{delete}'
-	                ],
-	            ],
-	        ]);
-	    ?>
-	<?php Pjax::end(); ?>
+    <?php if($dataProvider){ ?>
+		<?php Pjax::begin(); ?>
+		    <?= GridView::widget([
+		            'dataProvider' => $dataProvider,
+		            'columns' => [
+		            	[
+		                    'label' => 'Paciente ID',
+						    'value' => 'id'
+		                ],
+						[
+		                    'label' => 'Nombre del Paciente',
+						    'value' => function ($model) {
+								$user=Profile::find()->where(['user_id' => $model->user_id])->one();
+								return $user['name'];
+						     }
+		                ],
+		                [
+		                    'label' => 'Teléfono',
+						    'value' => function ($model) {
+								$user=Profile::find()->where(['user_id' => $model->user_id])->one();
+								return $user['telefono'];
+						     }
+		                ],
+		                [
+		                    'class' => 'yii\grid\ActionColumn',
+		                    'template' => '{view}{update}{delete}'
+		                ],
+		            ],
+		        ]);
+		    ?>
+		<?php Pjax::end(); ?>
+	<?php } ?>
 </div>

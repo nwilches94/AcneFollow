@@ -48,8 +48,8 @@ class Paciente extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'doctor_id' => Yii::t('app', 'Doctor ID'),
-            'user_id' => Yii::t('app', 'User ID'),
+            'doctor_id' => Yii::t('app', 'Doctor'),
+            'user_id' => Yii::t('app', 'User'),
             'buscar' => Yii::t('app', 'Buscar'),
         ];
     }

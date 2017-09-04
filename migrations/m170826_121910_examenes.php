@@ -11,7 +11,7 @@ class m170826_121910_examenes extends Migration
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
             'paciente_id' => $this->integer()->notNull(),
-            'fecha' => $this->date(),
+            'fecha' => $this->date()->notNull(),
             'notas' => $this->text()->null(),
         ]);
 

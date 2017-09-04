@@ -15,9 +15,19 @@ use dektrium\user\models\Profile;
 	
 	<?php $form = ActiveForm::begin(); ?>
 		
-		<?php 	if(true && \Yii::$app->user->can('medico'))
+		<?php 	if(\Yii::$app->user->can('medico'))
 				{
-					echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione...'])->label('Seleccione el Paciente');
+					if($listaPaciente)
+						echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione...'])->label('Seleccione el Paciente');
+					else
+					{
+						echo 	'<div class="form-group field-formula-dosis required">
+									<label class="control-label col-sm-2" style="padding-left:0px">Seleccione el Paciente</label>
+									<div class="col-sm-10">
+										<p style="color:#FF0000; padding-top:0%; padding-bottom:0px">Debe crear un Paciente</p>
+									</div>
+								</div>';
+					}
 					echo $form->field($model, 'doctor_id')->hiddenInput(['value' => Yii::$app->user->id])->label(false);
 					echo $form->field($model, 'origen')->hiddenInput(['value' => 'medico'])->label(false);
 				}

@@ -27,11 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'filterModel' => $searchModel,
 		        'columns' => [
 	            	['class' => 'yii\grid\SerialColumn'],
-	            	[
-				        'attribute' => 'created_at',
-				        'format' => 'datetime',
-				        'label' => 'Fecha de Creación',
-				    ],
 					[
 				        'attribute' => 'fecha',
 				        'format' => 'text',

@@ -63,8 +63,8 @@ class NuevoController extends BaseAdminController
         ];
     }
 
-
-    function actionPaciente(){
+    function actionPaciente()
+    {
         /** @var User $user */
         $user = \Yii::createObject([
             'class'    => User::className(),
@@ -78,13 +78,12 @@ class NuevoController extends BaseAdminController
         if($user->load(\Yii::$app->request->post())){
 
             $user->username = $user->email;
-			
+
             if ($user->create()) {
-                \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'User has been created'));
+                \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Pacient has been created'));
                 $this->trigger(self::EVENT_AFTER_CREATE, $event);
 
                 // colocarle rol de paciente
-
                 $rol = Yii::createObject([
                     'class'   => Assignment::className(),
                     'user_id' => $user->id,
@@ -99,6 +98,7 @@ class NuevoController extends BaseAdminController
 				$profile->sexo=$attributes['User']['sexo'];
 				$profile->peso=$attributes['User']['peso'];
 				$profile->telefono=$attributes['User']['telefono'];
+				$profile->fecha=Yii::$app->formatter->asDate($attributes['User']['fecha'], 'php: Y-m-d');
 				$profile->save();
 				
                 $rol->updateAssignments();
@@ -141,12 +141,19 @@ class NuevoController extends BaseAdminController
 				$ids[] = $value['id'];
 			}
 		}
-
-		$query = File::find()->where(['in', 'itemId', $ids])->andWhere(['model' => 'Foto']);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
+		
+		if($ids)
+		{
+			$query = File::find()->where(['in', 'itemId', $ids])->andWhere(['model' => 'Foto']);
+	        if($query){
+		        $dataProvider = new ActiveDataProvider([
+		            'query' => $query,
+		        ]);
+			}
+		}
+		else
+			$dataProvider="";
+		
         return $this->render('foto', [
             'model' => $model, 'dataProvider' => $dataProvider
         ]);

@@ -16,27 +16,29 @@ $this->params['breadcrumbs'][] = $this->title;
 	
     <h1><?= Html::encode($this->title) ?></h1><br>
     
-    <?php Pjax::begin(); ?>    
-		<?= GridView::widget([
-		        'dataProvider' => $dataProvider,
-		        'columns' => [
-	            	['class' => 'yii\grid\SerialColumn'],
-	            	[
-				        'attribute' => 'name',
-				        'format' => 'text',
-				        'label' => 'Nombre',
-				    ],
-				    [
-				        'attribute' => 'mime',
-				        'format' => 'text',
-				        'label' => 'Tipo',
-				    ],
-		            ['class' => 'yii\grid\ActionColumn'],
-		        ],
-		    ]); 
-		?>
-	<?php Pjax::end(); ?></div>
-
+    <?php if($dataProvider){ ?> 
+	    <?php Pjax::begin(); ?>    
+			<?= GridView::widget([
+			        'dataProvider' => $dataProvider,
+			        'columns' => [
+		            	['class' => 'yii\grid\SerialColumn'],
+		            	[
+					        'attribute' => 'name',
+					        'format' => 'text',
+					        'label' => 'Nombre',
+					    ],
+					    [
+					        'attribute' => 'mime',
+					        'format' => 'text',
+					        'label' => 'Tipo',
+					    ],
+			            ['class' => 'yii\grid\ActionColumn'],
+			        ],
+			    ]); 
+			?>
+		<?php Pjax::end(); ?>
+	<?php } ?>
+	
     <?= $this->render('_form', [
         'model' => $model
     ]) ?>
