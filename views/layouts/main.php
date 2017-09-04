@@ -86,10 +86,15 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                         "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [
+                                        "label" => "Fórmula",
+                                        "url" => ["formula/index"],
+                                        "icon" => "camera"
+                                    ],
+                                    [
                                         "label" => "Seguimiento de Periodo",
                                         "url" => ["periodo/index"],
                                         "icon" => "camera",
-                                        "visible" => Paciente::getSexo(),
+                                        "visible" => Paciente::viewMenu(),
                                     ],
                                     [
                                         "label" => "Buzón de Mensajes",

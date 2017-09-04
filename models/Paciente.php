@@ -84,19 +84,27 @@ class Paciente extends \yii\db\ActiveRecord
         return new PacienteQuery(get_called_class());
     }
 	
-	public static function getSexo()
+	public static function viewMenu()
     {
     	$profile=null;
 		
        	if(\Yii::$app->user->can('paciente'))
 			$profile=Profile::find()->where(['user_id' => Yii::$app->user->id])->one();
-		else
+
+		if($profile && $profile['sexo'] == 'Mujer')
+			return true;
+
+		return false;
+    }
+	
+	public static function getSexo()
+    {
+    	$profile=null;
+		
+		if(isset($_GET['id']))
 		{
-			if(isset($_GET['id']))
-			{
-				$paciente=Paciente::find()->where(['id' => $_GET['id']])->one();
-				$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
-			}
+			$paciente=Paciente::find()->where(['id' => $_GET['id']])->one();
+			$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
 		}
 		
 		if($profile && $profile['sexo'] == 'Mujer')
