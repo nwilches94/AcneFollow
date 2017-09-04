@@ -9,7 +9,8 @@ use yii\helpers\Html;
 use app\models\Paciente;
 
 $bundle = yiister\gentelella\assets\Asset::register($this);
-
+use app\assets\AppAsset;
+AppAsset::register($this);
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
@@ -126,7 +127,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
 
                 </div>
                 <!-- /sidebar menu -->
-
+                <?php /*
                 <!-- /menu footer buttons -->
                 <div class="sidebar-footer hidden-small">
                     <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -142,6 +143,8 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                     </a>
                 </div>
+                */
+                ?>
                 <!-- /menu footer buttons -->
             </div>
         </div>
