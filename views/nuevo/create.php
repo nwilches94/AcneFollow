@@ -29,6 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
+            	
+            	<h1><?= Html::encode($this->title) ?></h1><br>
+            	
                 <div class="alert alert-info">
                     <?= Yii::t('user', 'Credentials will be sent to the user by email') ?>.
                     <?= Yii::t('user', 'A password will be generated automatically if not provided') ?>.

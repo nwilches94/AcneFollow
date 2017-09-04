@@ -6,6 +6,7 @@
  */
 
 use yii\helpers\Html;
+use app\models\Paciente;
 
 $bundle = yiister\gentelella\assets\Asset::register($this);
 use app\assets\AppAsset;
@@ -81,9 +82,25 @@ AppAsset::register($this);
                                     ],
                                     [
                                         "label" => "Fotos",
-                                        "url" => ["examen/index"],
+                                        "url" => ["nuevo/foto"],
                                         "icon" => "camera",
                                         "visible" => \Yii::$app->user->can('paciente')
+                                    ],
+                                    [
+                                        "label" => "Fórmula",
+                                        "url" => ["formula/index"],
+                                        "icon" => "camera"
+                                    ],
+                                    [
+                                        "label" => "Seguimiento de Periodo",
+                                        "url" => ["periodo/index"],
+                                        "icon" => "camera",
+                                        "visible" => Paciente::viewMenu(),
+                                    ],
+                                    [
+                                        "label" => "Buzón de Mensajes",
+                                        "url" => ["mensaje/index"],
+                                        "icon" => "camera",
                                     ],
                                     [
                                         "label" => "Administracion",

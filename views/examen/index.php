@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use app\models\Paciente;
+use dektrium\user\models\profile;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ExamenSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,19 +21,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Cargar Examen'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'created_at',
-            'updated_at',
-            'paciente_id',
-            'fecha',
-            // 'notas:ntext',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-<?php Pjax::end(); ?></div>
+	<?php Pjax::begin(); ?>    
+		<?= GridView::widget([
+		        'dataProvider' => $dataProvider,
+		        'filterModel' => $searchModel,
+		        'columns' => [
+	            	['class' => 'yii\grid\SerialColumn'],
+	            	[
+				        'attribute' => 'created_at',
+				        'format' => 'datetime',
+				        'label' => 'Fecha de Creación',
+				    ],
+					[
+				        'attribute' => 'fecha',
+				        'format' => 'text',
+				        'label' => 'Fecha',
+				        'value' => function ($data) {
+							return Yii::$app->formatter->asDate($data->fecha, 'php: M, Y');
+					     }
+				    ],
+		            'notas:ntext',
+		            ['class' => 'yii\grid\ActionColumn'],
+		        ],
+		    ]); 
+		?>
+	<?php Pjax::end(); ?>
+</div>

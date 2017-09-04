@@ -2,30 +2,31 @@
 
 use yii\db\Migration;
 
-class m170826_121910_examenes extends Migration
+class m170829_030917_mensajes extends Migration
 {
     public function safeUp()
     {
-        $this->createTable('examen', [
+        $this->createTable('mensaje', [
             'id' => $this->primaryKey(),
-            'created_at' => $this->dateTime(),
-            'updated_at' => $this->dateTime(),
             'paciente_id' => $this->integer()->notNull(),
-            'fecha' => $this->date(),
-            'notas' => $this->text()->null(),
+            'doctor_id' => $this->integer()->notNull(),
+            'mensaje' => $this->text()->notNull(),
+            'leido' => $this->integer(1)->notNull(),
+            'origen' => $this->string()->notNull(),
+            'fecha' => $this->date()->notNull()
         ]);
-
-        // creates index for column `paciente_id`
+		
+		// creates index for column `paciente_id`
         $this->createIndex(
-            'idx-examen-paciente_id',
-            'examen',
+            'idx-mensaje-paciente_id',
+            'mensaje',
             'paciente_id'
         );
 
         // add foreign key for table `paciente`
         $this->addForeignKey(
-            'fk-post-paciente_id',
-            'examen',
+            'fk-post-mensaje_id',
+            'mensaje',
             'paciente_id',
             'paciente',
             'id',
@@ -35,7 +36,7 @@ class m170826_121910_examenes extends Migration
 
     public function safeDown()
     {
-        echo "m170826_121910_examenes cannot be reverted.\n";
+        echo "m170829_030917_mensajes cannot be reverted.\n";
 
         return false;
     }
@@ -46,10 +47,9 @@ class m170826_121910_examenes extends Migration
     {
 
     }
-
     public function down()
     {
-        echo "m170826_121910_examenes cannot be reverted.\n";
+        echo "m170829_030917_mensajes cannot be reverted.\n";
 
         return false;
     }

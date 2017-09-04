@@ -11,11 +11,11 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Examenes'), 'url' =>
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="examen-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+	
+    <h1><?= Html::encode($this->title) ?></h1><br>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model, 'listaPaciente' => $listaPaciente
     ]) ?>
 
 </div>

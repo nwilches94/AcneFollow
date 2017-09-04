@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Html;
 use app\models\PacienteCreate;
 use app\models\Paciente;
 use yii\data\ActiveDataProvider;
@@ -11,6 +12,12 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
+use dektrium\user\models\Profile;
+
+use app\models\Foto;
+use app\models\Periodo;
+use nemmo\attachments\models\File;
+
 /**
  * PacienteController implements the CRUD actions for Paciente model.
  */
@@ -29,7 +36,7 @@ class PacienteController extends Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['index', 'view'],
+                        'actions' => ['index', 'view', 'update'],
                         'allow' => true,
                         'roles' => ['medico', 'admin'],
                     ],
@@ -44,19 +51,57 @@ class PacienteController extends Controller
      */
     public function actionIndex()
     {
-        if(Yii::$app->user->identity->isAdmin){
-            $query = Paciente::find();
-        }else{
-            $query = Paciente::find()->where(['doctor_id'=> \Yii::$app->user->identity->id]);
+		$pacienteSearch = new Paciente;
+        $sql = null;
+		
+        if($pacienteSearch->load(Yii::$app->request->get()))
+        {
+            if($pacienteSearch->validate())
+            {
+                $search = Html::encode($pacienteSearch->buscar);
+
+				$sql =	"SELECT paciente.* 
+						FROM profile 
+						JOIN paciente ON paciente.user_id = profile.user_id
+						WHERE paciente.doctor_id = ".\Yii::$app->user->identity->id." AND (profile.user_id LIKE '%$search%' OR profile.name LIKE '%$search%')";
+
+                $query = Paciente::findBySql($sql);
+            }
+            else
+                $pacienteSearch->getErrors();
         }
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
+		else 
+		{
+			if(Yii::$app->user->identity->isAdmin)
+				$query = Paciente::find();
+	        else
+	            $query = Paciente::find()->where(['doctor_id'=> \Yii::$app->user->identity->id]);
+        }
+		
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query
+		]);
+		
+		$model = Paciente::find()->one();
+		
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider, 'model' => $model
         ]);
+    }
+
+	public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+		$paciente=Paciente::find()->where(['id' => $id])->one();
+		$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
+		
+        if ($profile->load(Yii::$app->request->post()) && $profile->save()) {
+            return $this->redirect(['view', 'id' => $id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model, 'profile' => $profile
+            ]);
+        }
     }
 
     /**
@@ -66,8 +111,46 @@ class PacienteController extends Controller
      */
     public function actionView($id)
     {
+    	$ids=null; $query=null;
+		
+    	if(\Yii::$app->user->can('medico'))
+			$fotos=Foto::find()->where(['paciente_id' => $id])->all();
+		else 
+		{
+	    	$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
+			$fotos=Foto::find()->where(['paciente_id' => $paciente['id']])->all();
+		}
+		
+		if($fotos){
+			foreach ($fotos as $key => $value){
+				$ids[] = $value['id'];
+			}
+		}
+		
+		if($ids){
+			$query = File::find()->where(['in', 'itemId', $ids])->andWhere(['model' => 'Foto']);
+	        $dataProvider = new ActiveDataProvider([
+	            'query' => $query,
+	        ]);
+		}
+		else
+			$dataProvider = '';
+		
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query
+		]);
+
+		$query=null;
+		
+		if(\Yii::$app->user->can('medico'))
+			$query=Periodo::find()->where(['paciente_id' => $id])->orderBy(['fecha' => SORT_DESC]);
+		
+		$dataProviderPeriodo = new ActiveDataProvider([
+			'query' => $query
+		]);
+		
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id), 'dataProvider' => $dataProvider, 'dataProviderPeriodo' => $dataProviderPeriodo
         ]);
     }
 

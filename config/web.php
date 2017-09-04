@@ -6,6 +6,7 @@ $db = require(__DIR__ . '/db.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    'language' => 'es',
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
@@ -62,7 +63,7 @@ $config = [
         'user' => [
             'class' => 'dektrium\user\Module',
             'admins' => ['olivercera'],
-            'enableRegistration' => false,
+            'enableRegistration' => true,
             'controllerMap' => [
                 'security' => [
                   'class' => 'dektrium\user\controllers\SecurityController',
@@ -103,7 +104,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 
