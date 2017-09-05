@@ -69,6 +69,10 @@ $config = [
                   'class' => 'dektrium\user\controllers\SecurityController',
                   'layout' => '@app/views/layouts/nomenu',
                 ],
+                'registration' => [
+                  'class' => 'dektrium\user\controllers\RegistrationController',
+                  'layout' => '@app/views/layouts/nomenu',
+                ],
             ],
             'modelMap' => [
                 'User' => [
