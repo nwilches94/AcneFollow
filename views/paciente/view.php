@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <div class="form-group">
 		<div class="col-lg-offset-0 col-lg-9">
+			<?= Html::a(Yii::t('app', 'Ver Galería'), ['nuevo/galeria?id='.$_GET['id']], ['class' => 'btn btn-success']) ?>
 	    	<?= Html::a(Yii::t('app', 'Regresar'), ['index'], ['class' => 'btn btn-primary']) ?>
 		</div>
 	</div>
@@ -28,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<br><br><br>
 
 	<div class="form-group">
-		<div class="col-lg-offset-0 col-lg-6">	
+		<div class="col-lg-offset-0 col-lg-12">	
 		    <?= DetailView::widget([
 		        'model' => $model,
 		        'attributes' => [
@@ -76,45 +77,15 @@ $this->params['breadcrumbs'][] = $this->title;
 		    ]) ?>
 		</div>
 	</div>
-	
-	<div class="form-group">
-		<div class="col-lg-offset-0 col-lg-6">	
-			
-			<?php if($dataProvider) { ?>
-					<?php Pjax::begin(); ?>    
-						<?= GridView::widget([
-						        'dataProvider' => $dataProvider,
-						        'columns' => [
-					            	['class' => 'yii\grid\SerialColumn'],
-					            	[
-								        'attribute' => 'name',
-								        'format' => 'text',
-								        'label' => 'Nombre',
-								    ],
-								    [
-								        'attribute' => 'mime',
-								        'format' => 'text',
-								        'label' => 'Tipo',
-								    ],
-						        ],
-						    ]); 
-						?>
-					<?php Pjax::end(); ?>
-			<?php } ?>
-		</div>
-	</div>
-	
+
 	<br><br>
 	
 	<div class="form-group">
-		<div class="col-lg-offset-0 col-lg-6">
-			<br><br>
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<div class="col-lg-offset-0 col-lg-6">
+		<div class="col-lg-offset-0 col-lg-12">
 			<?php if($dataProviderPeriodo && Paciente::getSexo()) { ?>
+				
+				<h3><?= Html::encode('Ciclo Menstrual') ?></h3><br>
+				
 				<?php Pjax::begin(); ?>
 				    <?= GridView::widget([
 				            'dataProvider' => $dataProviderPeriodo,

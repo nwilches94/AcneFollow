@@ -16,29 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 	
     <h1><?= Html::encode($this->title) ?></h1><br>
     
-    <?php if($dataProvider){ ?> 
-	    <?php Pjax::begin(); ?>    
-			<?= GridView::widget([
-			        'dataProvider' => $dataProvider,
-			        'columns' => [
-		            	['class' => 'yii\grid\SerialColumn'],
-		            	[
-					        'attribute' => 'name',
-					        'format' => 'text',
-					        'label' => 'Nombre',
-					    ],
-					    [
-					        'attribute' => 'mime',
-					        'format' => 'text',
-					        'label' => 'Tipo',
-					    ],
-			            ['class' => 'yii\grid\ActionColumn'],
-			        ],
-			    ]); 
-			?>
-		<?php Pjax::end(); ?>
-	<?php } ?>
-	
+    <?= Html::a(Yii::t('app', 'Ver Galería'), ['nuevo/galeria?id='.Yii::$app->user->id], ['class' => 'btn btn-primary']) ?>
+    
+    <br><br>
+
     <?= $this->render('_form', [
         'model' => $model
     ]) ?>

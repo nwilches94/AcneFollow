@@ -29,7 +29,10 @@ use app\models\Paciente;
     ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Crear') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', [
+			'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+			'onclick' => "$('#file-input').fileinput('upload');"
+		]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

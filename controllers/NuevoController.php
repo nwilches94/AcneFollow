@@ -54,6 +54,16 @@ class NuevoController extends BaseAdminController
                         'roles' => ['admin', 'paciente'],
                     ],
                     [
+                        'actions' => ['galeria'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico', 'paciente'],
+                    ],
+                     [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico', 'paciente'],
+                    ],
+                    [
                         'actions' => ['futuros'],
                         'allow' => true,
                         'roles' => ['?', '@', 'admin'],
@@ -117,7 +127,7 @@ class NuevoController extends BaseAdminController
         ]);
     }
 
-     public function actionFoto()
+    public function actionFoto()
     {
         $model = new Foto();
 		
@@ -128,9 +138,9 @@ class NuevoController extends BaseAdminController
 			$model->fecha = date('Y-m-d');
 			$model->save();
 
-			$model = new Foto();
+			return $this->redirect('/nuevo/galeria?id='.$paciente['user_id']);
 			
-			\Yii::$app->getSession()->setFlash('success', 'Se ha cargado las Fotos');
+			//\Yii::$app->getSession()->setFlash('success', 'Se ha cargado las Fotos');
 		}
 		
 		$ids=null;
@@ -149,13 +159,80 @@ class NuevoController extends BaseAdminController
 		        $dataProvider = new ActiveDataProvider([
 		            'query' => $query,
 		        ]);
+				$fotos=$query->all();
 			}
 		}
 		else
+		{
 			$dataProvider="";
-		
+			$fotos="";
+		}
+
         return $this->render('foto', [
-            'model' => $model, 'dataProvider' => $dataProvider
+            'model' => $model, 'dataProvider' => $dataProvider, 'fotos' => $fotos
         ]);
+    }
+	
+	public function actionGaleria($id)
+    {
+        $model = new Foto();
+		
+		if(Yii::$app->request->post()) {
+			
+			$paciente=Paciente::find()->where(['user_id' => $id])->one();
+			$model->paciente_id = $paciente['id'];
+			$model->fecha = date('Y-m-d');
+			$model->save();
+
+			$model = new Foto();
+			
+			\Yii::$app->getSession()->setFlash('success', 'Se ha cargado las Fotos');
+		}
+		
+		$ids=null;
+		if(\Yii::$app->user->can('medico')) {
+			$fotos=Foto::find()->where(['paciente_id' => $id])->all();
+			if($fotos){
+				foreach ($fotos as $key => $value) {
+					$ids[] = $value['id'];
+				}
+			}
+		}
+		else {
+			$paciente=Paciente::find()->where(['user_id' => $id])->one();
+			$fotos=Foto::find()->where(['paciente_id' => $paciente['id']])->all();
+			if($fotos){
+				foreach ($fotos as $key => $value) {
+					$ids[] = $value['id'];
+				}
+			}	
+		}
+		
+		if($ids)
+		{
+			$query = File::find()->where(['in', 'itemId', $ids])->andWhere(['model' => 'Foto']);
+	        if($query){
+		        $dataProvider = new ActiveDataProvider([
+		            'query' => $query,
+		        ]);
+				$fotos=$query->all();
+			}
+		}
+		else
+		{
+			$dataProvider="";
+			$fotos="";
+		}
+
+        return $this->render('galeria', [
+            'model' => $model, 'dataProvider' => $dataProvider, 'fotos' => $fotos
+        ]);
+    }
+	
+	public function actionDelete($id)
+    {
+        Foto::findOne($id)->delete();
+
+        return $this->redirect(['nuevo/galeria']);
     }
 }
