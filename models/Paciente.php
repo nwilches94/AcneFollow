@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-use dektrium\user\models\User;
+/*use dektrium\user\models\User;*/
 use dektrium\user\models\Profile;
 
 /**
