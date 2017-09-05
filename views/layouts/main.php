@@ -89,23 +89,23 @@ AppAsset::register($this);
                                     [
                                         "label" => "Fórmula",
                                         "url" => ["formula/index"],
-                                        "icon" => "camera"
+                                        "icon" => "tachometer"
                                     ],
                                     [
                                         "label" => "Control de Cajas",
                                         "url" => ["control-caja/index"],
-                                        "icon" => "camera"
+                                        "icon" => "medkit"
                                     ],
                                     [
                                         "label" => "Seguimiento de Periodo",
                                         "url" => ["periodo/index"],
-                                        "icon" => "camera",
+                                        "icon" => "heart-o",
                                         "visible" => Paciente::viewMenu(),
                                     ],
                                     [
                                         "label" => "Buzón de Mensajes",
                                         "url" => ["mensaje/index"],
-                                        "icon" => "camera",
+                                        "icon" => "envelope",
                                     ],
                                     [
                                         "label" => "Administracion",
