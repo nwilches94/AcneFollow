@@ -40,12 +40,6 @@ class Profile extends BaseUser
 	
 	public function getName()
     {
-        if(\Yii::$app->user->can('medico'))
-			return $profile=Profile::find()->where(['user_id' => Yii::$app->user->id])->one()->name;
-		else 
-		{
-			$paciente=Paciente::find()->where(['id' => Yii::$app->user->id])->one();
-			return Profile::find()->where(['user_id' => $paciente['user_id']])->one()->name;
-		}
+		return Profile::find()->where(['user_id' => Yii::$app->user->id])->one()->name;
     }
 }
