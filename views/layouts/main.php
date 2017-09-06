@@ -7,6 +7,7 @@
 
 use yii\helpers\Html;
 use app\models\Paciente;
+use app\models\Profile;
 
 $bundle = yiister\gentelella\assets\Asset::register($this);
 use app\assets\AppAsset;
@@ -50,7 +51,7 @@ AppAsset::register($this);
                     </div>
                     <div class="profile_info">
                         <span>Bienvenido,</span>
-                        <h2><?= @Yii::$app->user->identity->username ?></h2>
+                        <h2><?= Profile::getName(); ?></h2>
                     </div>
                 </div>
                 <!-- /menu prile quick info -->
@@ -161,7 +162,7 @@ AppAsset::register($this);
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="http://placehold.it/128x128" alt=""> <?= @Yii::$app->user->identity->username ?>
+                                <img src="http://placehold.it/128x128" alt=""> <?= Profile::getName(); ?>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">

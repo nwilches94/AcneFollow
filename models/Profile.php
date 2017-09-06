@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use dektrium\user\models\Profile as BaseUser;
 
 class Profile extends BaseUser
@@ -35,5 +36,16 @@ class Profile extends BaseUser
         	'telefono'       => \Yii::t('user', 'Teléfono'),
         	'fecha'      	 => \Yii::t('user', 'Fecha de Nacimiento'),
         ];
+    }
+	
+	public function getName()
+    {
+        if(\Yii::$app->user->can('medico'))
+			return $profile=Profile::find()->where(['user_id' => Yii::$app->user->id])->one()->name;
+		else 
+		{
+			$paciente=Paciente::find()->where(['id' => Yii::$app->user->id])->one();
+			return Profile::find()->where(['user_id' => $paciente['user_id']])->one()->name;
+		}
     }
 }

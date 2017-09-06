@@ -3,8 +3,7 @@
 namespace app\models;
 
 use Yii;
-/*use dektrium\user\models\User;*/
-use dektrium\user\models\Profile;
+use app\models\Profile;
 
 /**
  * This is the model class for table "paciente".
