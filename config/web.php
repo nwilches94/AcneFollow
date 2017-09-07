@@ -24,7 +24,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -62,8 +62,8 @@ $config = [
         'rbac' => 'dektrium\rbac\Module',
         'user' => [
             'class' => 'dektrium\user\Module',
-            'admins' => ['olivercera'],
-            'enableRegistration' => true,
+            'admins' => ['olivercera@gmail.com'],
+            'enableRegistration' => false,
             'controllerMap' => [
                 'security' => [
                   'class' => 'dektrium\user\controllers\SecurityController',

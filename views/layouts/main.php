@@ -47,9 +47,7 @@ AppAsset::register($this);
 
                 <!-- menu prile quick info -->
                 <div class="profile">
-                    <div class="profile_pic">
-                        <img src="http://placehold.it/128x128" alt="..." class="img-circle profile_img">
-                    </div>
+                   
                     <div class="profile_info">
                         <span>Bienvenido,</span>
                         <h2><?= Profile::getName(); ?></h2>
@@ -57,13 +55,12 @@ AppAsset::register($this);
                 </div>
                 <!-- /menu prile quick info -->
 
-                <br />
+                <div class="clearfix"></div>
 
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                     <div class="menu_section">
-                        <h3>General</h3>
                         <?=
                         \yiister\gentelella\widgets\Menu::widget(
                             [

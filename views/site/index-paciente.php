@@ -1,30 +1,27 @@
+<p>Bienvenido Hola,</p> 
 
+<p> Si ha llegado a esta p&aacute;gina muy seguramente usted, un familiar o amigo cercano padece de acn&eacute;.</p>
 
+<p>Recuerde que esta aplicaci&oacute;n le ayudar&aacute; con el tratamiento que el dermat&oacute;logo le recomend&oacute;, siga las recomendaciones indicadas para que tenga &eacute;xito.</p>
 
-Bienvenido
-Hola, Si ha llegado a esta página muy seguramente usted, un familiar o amigo cercano padece de acné.
+<p>No olvide que esta aplicaci&oacute;n es una ayuda y nunca reemplazar&aacute; a su dermat&oacute;logo, cualquier inquietud puede preguntar directamente en la opci&oacute;n &ldquo;BUZON&rdquo;.</p>
 
-Recuerde que esta aplicación le ayudará con el tratamiento que el dermatólogo le recomendó, siga las recomendaciones indicadas para que tenga éxito.
+<p>El &eacute;xito del tratamiento depende de su responsabilidad con la toma del medicamento y con su estilo de vida.</p>
 
-No olvide que esta aplicación es una ayuda y nunca reemplazará a su dermatólogo, cualquier inquietud puede preguntar directamente en la opción “BUZON”.
-
-El éxito del tratamiento depende de su responsabilidad con la toma del medicamento y con su estilo de vida.
-
-Esta aplicación no se hace responsable por el uso que usted le dé al medicamento, ni por las consecuencias que resulten por su mal uso.
-
- 
+<p>Esta aplicaci&oacute;n no se hace responsable por el uso que usted le d&eacute; al medicamento, ni por las consecuencias que resulten por su mal uso.</p>
 
 <hr />
 
-Tipos de examen
+<p>Tipos de examen</p>
 
-TGO
-TGP
-Colesterol: valor máximo 200
-Triglicéridos valor máximo 150
+<ul>
+    <li>TGO TGP Colesterol: valor m&aacute;ximo 200</li>
+    <li>Triglic&eacute;ridos valor m&aacute;ximo 150</li>
+</ul>
+    
 
-Parámetros:
+<p>Par&aacute;metros:</p>
 
-Valor
-Fecha del examen
-Valor de referencia 
+<ul>
+    <li>Valor Fecha del examen Valor de referencia </li>
+</ul>
