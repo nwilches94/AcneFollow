@@ -88,12 +88,14 @@ AppAsset::register($this);
                                     [
                                         "label" => "Fórmula",
                                         "url" => ["formula/index"],
-                                        "icon" => "tachometer"
+                                        "icon" => "tachometer",
+                                        "visible" => !Yii::$app->user->identity->isAdmin
                                     ],
                                     [
                                         "label" => "Control de Cajas",
                                         "url" => ["control-caja/index"],
-                                        "icon" => "medkit"
+                                        "icon" => "medkit",
+                                        "visible" => !Yii::$app->user->identity->isAdmin
                                     ],
                                     [
                                         "label" => "Seguimiento de Periodo",
@@ -105,11 +107,9 @@ AppAsset::register($this);
                                         "label" => "Buzón de Mensajes",
                                         "url" => ["mensaje/index"],
                                         "icon" => "envelope",
-                                        
 										"badge" => Mensaje::getCount()." nuevo",
-                                        "badgeOptions" => ["class" => "label-success"],
-                                        "visible" => Mensaje::getCount(),
-                                                
+                                        "badgeOptions" => ["class" => "label-success"] ,
+                                        "visible" => !Yii::$app->user->identity->isAdmin      
                                     ],
                                     [
                                         "label" => "Administracion",
