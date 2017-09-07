@@ -2,14 +2,20 @@
 
 namespace app\models;
 
-use Yii;
 use dektrium\user\models\Profile as BaseUser;
+use Yii;
 
 class Profile extends BaseUser
 {
-    public function init() {
+	const BEFORE_CREATE   = 'beforeCreate';
+    const BEFORE_REGISTER = 'beforeRegister';
+	
+	public function init() {
         /*$this->on(self::BEFORE_REGISTER, function() {
-            $this->username = $this->email;
+            $this->name = $this->name;
+        });
+        $this->on(self::BEFORE_CREATE, function() {
+            $this->name = $this->name;
         });*/
 
         parent::init();
@@ -19,10 +25,14 @@ class Profile extends BaseUser
         $rules = parent::rules();
         
 		$rules['name'] = ['name', 'required', 'on' => ['register', 'create', 'update']];
-		$rules['sexo'] = ['sexo', 'required', 'on' => ['register', 'create', 'update']];
-		$rules['peso'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
-		$rules['telefono'] = ['telefono', 'required', 'on' => ['register', 'create', 'update']];
-		$rules['fecha'] = ['fecha', 'required', 'on' => ['register', 'create', 'update']];
+		
+		if(!Yii::$app->user->identity->isAdmin)
+		{
+			$rules['sexo'] = ['sexo', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['peso'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['telefono'] = ['telefono', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['fecha'] = ['fecha', 'required', 'on' => ['register', 'create', 'update']];
+		}
 		
         return $rules;
     }

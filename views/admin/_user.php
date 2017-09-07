@@ -1,6 +1,7 @@
 <?php
 
 use yii\jui\DatePicker;
+use app\models\Profile;
 
 /*
  * This file is part of the Dektrium project.
@@ -15,11 +16,14 @@ use yii\jui\DatePicker;
  * @var yii\widgets\ActiveForm $form
  * @var dektrium\user\models\User $user
  */
+ 
+ $profile=Profile::find()->where(['user_id' => $user->id])->one();
 ?>
+
+<?= $form->field($user, 'name')->textInput(['maxlength' => 255, 'value' => $profile->name]) ?>
 
 <?php 	if(!Yii::$app->user->identity->isAdmin)
 		{ ?>
-			<?= $form->field($user, 'name')->textInput(['maxlength' => 255]) ?>
 			<?= $form->field($user, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione...'])->label('Sexo'); ?>
 			<?= $form->field($user, 'peso')->textInput(['maxlength' => 255]) ?>
 			<?= $form->field($user, 'telefono')->textInput(['maxlength' => 255]) ?>
