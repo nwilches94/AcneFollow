@@ -3,6 +3,8 @@
 namespace app\models;
 
 use dektrium\user\models\User as BaseUser;
+use yii;
+use yii\helpers\ArrayHelper;
 
 class User extends BaseUser
 {
@@ -19,13 +21,16 @@ class User extends BaseUser
     public function rules() {
         $rules = parent::rules();
         unset($rules['usernameRequired']);
-
-		$rules['name'] = ['name', 'required', 'on' => ['register', 'create', 'update']];
-		$rules['sexo'] = ['sexo', 'required', 'on' => ['register', 'create', 'update']];
-		$rules['peso'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
-		$rules['telefono'] = ['telefono', 'required', 'on' => ['register', 'create', 'update']];
-		$rules['fecha'] = ['fecha', 'required', 'on' => ['register', 'create', 'update']];
-
+		
+		if(!Yii::$app->user->identity->isAdmin)
+		{
+			$rules['name'] = ['name', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['sexo'] = ['sexo', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['peso'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['telefono'] = ['telefono', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['fecha'] = ['fecha', 'required', 'on' => ['register', 'create', 'update']];
+		}
+		
         return $rules;
     }
 	

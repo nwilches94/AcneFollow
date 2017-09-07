@@ -17,10 +17,14 @@ use yii\jui\DatePicker;
  */
 ?>
 
-<?= $form->field($user, 'name')->textInput(['maxlength' => 255]) ?>
-<?= $form->field($user, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione...'])->label('Sexo'); ?>
-<?= $form->field($user, 'peso')->textInput(['maxlength' => 255]) ?>
-<?= $form->field($user, 'telefono')->textInput(['maxlength' => 255]) ?>
-<?= $form->field($user, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y'])->label('Fecha de Nacimiento') ?>
+<?php 	if(!Yii::$app->user->identity->isAdmin)
+		{ ?>
+			<?= $form->field($user, 'name')->textInput(['maxlength' => 255]) ?>
+			<?= $form->field($user, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione...'])->label('Sexo'); ?>
+			<?= $form->field($user, 'peso')->textInput(['maxlength' => 255]) ?>
+			<?= $form->field($user, 'telefono')->textInput(['maxlength' => 255]) ?>
+			<?= $form->field($user, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y'])->label('Fecha de Nacimiento') ?>
+<?php 	} ?>
+
 <?= $form->field($user, 'email')->textInput(['maxlength' => 255]) ?>
 <?= $form->field($user, 'password')->passwordInput() ?>
