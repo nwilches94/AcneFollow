@@ -8,6 +8,7 @@
 use yii\helpers\Html;
 use app\models\Paciente;
 use app\models\Profile;
+use app\models\Mensaje;
 
 $bundle = yiister\gentelella\assets\Asset::register($this);
 use app\assets\AppAsset;
@@ -107,6 +108,11 @@ AppAsset::register($this);
                                         "label" => "Buzón de Mensajes",
                                         "url" => ["mensaje/index"],
                                         "icon" => "envelope",
+                                        
+										"badge" => Mensaje::getCount()." nuevo",
+                                        "badgeOptions" => ["class" => "label-success"],
+                                        "visible" => Mensaje::getCount(),
+                                                
                                     ],
                                     [
                                         "label" => "Administracion",

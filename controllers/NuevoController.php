@@ -27,6 +27,7 @@ use dektrium\user\controllers\AdminController as BaseAdminController;
 
 use app\models\Paciente;
 use app\models\Foto;
+use app\models\Examen;
 use nemmo\attachments\models\File;
 use yii\data\ActiveDataProvider;
 
@@ -231,8 +232,22 @@ class NuevoController extends BaseAdminController
 	
 	public function actionDelete($id)
     {
-        Foto::findOne($id)->delete();
+		$file = File::findOne($_GET['foto']);
+		$fileAll = File::find()->where(['itemId' => $file['itemId'], 'model' => $_GET['type']])->all();
 
-        return $this->redirect(['nuevo/galeria']);
+		if(count($fileAll) <= 1)
+		{
+			if($_GET['type'] == 'Foto')
+        		Foto::findOne($file['itemId'])->delete();
+			else
+				$file->delete();
+		}
+		else
+			$file->delete();
+		
+		if($_GET['type'] == 'Foto')
+        	return $this->redirect(['nuevo/galeria?id='.$id]);
+		else
+			return $this->redirect(['examen/view?id='.$id]);
     }
 }

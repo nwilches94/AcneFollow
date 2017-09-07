@@ -12,6 +12,14 @@ use app\models\Paciente;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<style>
+	.ui-datepicker-calendar {
+    	display: none;
+	}​
+</style>
+
+<?php $this->registerJsFile('@web/js/datePicker.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
+
 <div class="examen-form">
 
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
@@ -25,9 +33,7 @@ use app\models\Paciente;
 				}
 	    ?>
 	    
-		<?= $form->field($model, 'fecha')->widget(DatePicker::className(), [
-		    'language' => 'es', 'dateFormat' => 'php: M, Y',
-		]) ?>
+		<?= $form->field($model, 'fecha')->widget(DatePicker::className()) ?>
 	
 	    <?= $form->field($model, 'notas')->textarea(['rows' => 4]) ?>
 		

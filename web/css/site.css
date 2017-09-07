@@ -1,3 +1,4 @@
+
 html,
 body {
     height: 100%;
@@ -29,4 +30,24 @@ body {
     width: 230px;
     background: #614051;
 	z-index:999;
+}
+
+.krajee-default.file-preview-frame .kv-file-content {
+    width: 18%;
+}
+
+.file-preview-image {
+    width: 100%;
+}
+
+.file-zoom-content .file-preview-image, .file-zoom-content .file-preview-video {
+	max-height: null !important;
+}
+
+.file-zoom-content {
+    height: 100%;
+}
+
+.krajee-default.file-preview-frame .file-thumbnail-footer {
+    float: left;
 }

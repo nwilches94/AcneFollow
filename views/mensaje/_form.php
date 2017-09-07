@@ -18,7 +18,18 @@ use dektrium\user\models\Profile;
 		<?php 	if(\Yii::$app->user->can('medico'))
 				{
 					if($listaPaciente)
-						echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione...'])->label('Seleccione el Paciente');
+					{
+						if(isset($_GET['paciente_id']))
+						{
+							$paciente=Paciente::find()->where(['id' => $_GET['paciente_id']])->one();
+							$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
+							echo $form->field($model, 'paciente_id')->hiddenInput(['value' => $_GET['paciente_id']])->label(false);
+							echo '<label class="control-label" for="mensaje-mensaje">Paciente: </label> '.$profile['name']."<br><br>";
+						}
+						else
+							echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione...'])->label('Seleccione el Paciente');
+						
+					}
 					else
 					{
 						echo 	'<div class="form-group field-formula-dosis required">

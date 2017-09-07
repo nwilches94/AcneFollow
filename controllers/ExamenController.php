@@ -10,6 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Paciente;
 use app\models\User;
+use app\models\Foto;
+use nemmo\attachments\models\File;
+use yii\data\ActiveDataProvider;
 
 /**
  * ExamenController implements the CRUD actions for Examen model.
@@ -53,11 +56,36 @@ class ExamenController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+    	$ids=null;
+		$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
+		$examenes=Examen::find()->where(['id' => $id, 'paciente_id' => $paciente['id']])->all();
+		if($examenes){
+			foreach ($examenes as $key => $value) {
+				$ids[] = $value['id'];
+			}
+		}	
+
+		if($ids)
+		{
+			$query = File::find()->where(['in', 'itemId', $ids])->andWhere(['model' => 'Examen']);
+	        if($query){
+		        $dataProvider = new ActiveDataProvider([
+		            'query' => $query,
+		        ]);
+				$fotos=$query->all();
+			}
+		}
+		else
+		{
+			$dataProvider="";
+			$fotos="";
+		}
+		
+		return $this->render('view', [
+            'model' => $this->findModel($id), 'dataProvider' => $dataProvider, 'fotos' => $fotos
         ]);
     }
-
+	
     /**
      * Creates a new Examen model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -76,7 +104,7 @@ class ExamenController extends Controller
 		}
 
 		if($model->load(Yii::$app->request->post())) {
-			$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'yyyy-MM-dd');
+			$model->fecha = Examen::changeDate($model->fecha, 0);
 			$model->save();
 			
             return $this->redirect(['view', 'id' => $model->id]);
@@ -87,7 +115,7 @@ class ExamenController extends Controller
             ]);
         }
     }
-
+	
     /**
      * Updates an existing Examen model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -97,10 +125,10 @@ class ExamenController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$model->fecha = Examen::changeDate($model->fecha, 1);
 
         if ($model->load(Yii::$app->request->post())) {
-        	
-			$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'yyyy-MM-dd');
+			$model->fecha = Examen::changeDate($model->fecha, 0);
 			$model->save();
 			
             return $this->redirect(['view', 'id' => $model->id]);

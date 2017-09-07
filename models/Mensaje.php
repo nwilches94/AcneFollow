@@ -82,4 +82,90 @@ class Mensaje extends \yii\db\ActiveRecord
 		else
 			return 'Paciente';
     }	
+	
+	public function getListaPaciente()
+    {
+    	$listaPaciente=null;
+		if(\Yii::$app->user->can('medico')) {
+			$pacientes=Paciente::find()->where(['doctor_id' => Yii::$app->user->id])->all();
+			if($pacientes) {
+				foreach ($pacientes as $value) {
+					$user=Profile::find()->where(['user_id' => $value['user_id']])->one();
+					$listaPaciente[$value['id']] = $user['name'];
+				}
+			}
+		}
+		
+		return $listaPaciente;
+	}
+	
+	public function getDataProvider()
+    {
+    	$query=null;
+		if(\Yii::$app->user->can('medico'))
+		{
+			$sql =	"SELECT * 
+					FROM mensaje
+					WHERE origen='paciente' AND doctor_id=".Yii::$app->user->id." AND id IN (
+						SELECT MAX(id) AS id 
+						FROM mensaje
+						WHERE origen='paciente' AND doctor_id=".Yii::$app->user->id." 
+						GROUP BY doctor_id, paciente_id
+						ORDER BY doctor_id, paciente_id
+					)
+					GROUP BY doctor_id, paciente_id
+					ORDER BY doctor_id, paciente_id";
+
+            $query = Mensaje::findBySql($sql);
+		}
+		else
+		{
+			$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
+			
+			if($paciente)
+			{
+				$sql =	"SELECT * 
+						FROM mensaje
+						WHERE origen='medico' AND paciente_id=".$paciente['id']." AND id IN (
+							SELECT MAX(id) AS id 
+							FROM mensaje
+							WHERE origen='medico' AND paciente_id=".$paciente['id']." 
+							GROUP BY doctor_id, paciente_id
+							ORDER BY doctor_id, paciente_id
+						)
+						GROUP BY doctor_id, paciente_id
+						ORDER BY doctor_id, paciente_id";
+						
+				$query = Mensaje::findBySql($sql);
+			}
+		}
+		
+		return $query;
+	}
+	
+	public function getCount()
+    {
+    	$count=0;
+		if(\Yii::$app->user->can('medico'))
+			$query = Mensaje::find()->where(['origen' => 'paciente', 'doctor_id' => \Yii::$app->user->identity->id]);
+		else
+		{
+			$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
+			$query = Mensaje::find()->where(['origen' => 'medico', 'paciente_id' => $paciente['id']]);
+		}
+		
+		$count=0;
+		if($query)
+		{
+			$registros = $query->all();
+			if($registros) {
+				foreach($registros as $value) {
+					if($value['leido'] == 0)
+						$count += 1;
+				}
+			}
+		}
+		
+		return $count;
+	}
 }
