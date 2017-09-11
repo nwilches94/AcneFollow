@@ -11,7 +11,7 @@
 
 use dektrium\user\migrations\Migration;
 
-class m170832_050917_profile extends Migration
+class m170833_110917_profile extends Migration
 {
     public function up()
     {
