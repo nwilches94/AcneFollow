@@ -16,11 +16,19 @@ use app\models\Profile;
  * @var yii\widgets\ActiveForm $form
  * @var dektrium\user\models\User $user
  */
- 
- $profile=Profile::find()->where(['user_id' => $user->id])->one();
+ 	
+ 	if(Yii::$app->user->identity->isAdmin)
+		$this->title = Yii::t('user', 'Crear Doctor');
+	else
+		$this->title = Yii::t('user', 'Crear Paciente');
+	
+	if($user->id)
+ 		$name=Profile::find()->where(['user_id' => $user->id])->one()->name;
+	else
+		$name="";
 ?>
 
-<?= $form->field($user, 'name')->textInput(['maxlength' => 255, 'value' => $profile->name]) ?>
+<?= $form->field($user, 'name')->textInput(['maxlength' => 255, 'value' => $name]) ?>
 
 <?php 	if(!Yii::$app->user->identity->isAdmin)
 		{ ?>

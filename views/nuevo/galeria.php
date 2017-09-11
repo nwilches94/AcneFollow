@@ -58,6 +58,9 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <br><br>
     
-    <?= Html::a(Yii::t('app', 'Regresar'), '/nuevo/foto', ['class' => 'btn btn-primary']) ?>
-    
+    <?php if(\Yii::$app->user->can('medico')) { ?>
+    	<?= Html::a(Yii::t('app', 'Regresar'), '/paciente/view?id='.$_GET['id'], ['class' => 'btn btn-primary']) ?>
+    <?php } else { ?>
+    	<?= Html::a(Yii::t('app', 'Regresar'), '/nuevo/foto', ['class' => 'btn btn-primary']) ?>
+    <?php } ?>
 </div>
