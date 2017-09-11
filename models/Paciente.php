@@ -17,7 +17,7 @@ use app\models\Profile;
  */
 class Paciente extends \yii\db\ActiveRecord
 {
-	public $name, $sexo, $peso, $telefono, $buscar;
+	public $cedula, $name, $sexo, $peso, $telefono, $buscar;
 	
     /**
      * @inheritdoc

@@ -51,7 +51,14 @@ $this->params['breadcrumbs'][] = $this->title;
 		            'columns' => [
 		            	[
 		                    'label' => 'Paciente ID',
-						    'value' => 'id'
+						    'value' => 'user_id'
+		                ],
+						[
+		                    'label' => 'Cedula',
+						    'value' => function ($model) {
+								$user=Profile::find()->where(['user_id' => $model->user_id])->one();
+								return $user['cedula'];
+						     }
 		                ],
 						[
 		                    'label' => 'Nombre del Paciente',

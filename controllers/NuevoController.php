@@ -105,6 +105,7 @@ class NuevoController extends BaseAdminController
 				$attributes=\Yii::$app->request->post();
 				
 				$profile = Profile::find()->where(['user_id' => $user->id])->one();
+				$profile->cedula=$attributes['User']['cedula'];
 				$profile->name=$attributes['User']['name'];
 				$profile->sexo=$attributes['User']['sexo'];
 				$profile->peso=$attributes['User']['peso'];

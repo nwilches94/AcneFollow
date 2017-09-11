@@ -15,6 +15,7 @@ class m170832_050917_profile extends Migration
 {
     public function up()
     {
+        $this->addColumn('{{%profile}}', 'cedula', $this->string(255)->null());
         $this->addColumn('{{%profile}}', 'sexo', $this->string(255)->null());
 		$this->addColumn('{{%profile}}', 'peso', $this->integer(11)->null());
 		$this->addColumn('{{%profile}}', 'telefono', $this->string(255)->null());
@@ -23,6 +24,7 @@ class m170832_050917_profile extends Migration
 
     public function down()
     {
+        $this->dropcolumn('{{%profile}}', 'cedula');
         $this->dropcolumn('{{%profile}}', 'sexo');
 		$this->dropcolumn('{{%profile}}', 'peso');
 		$this->dropcolumn('{{%profile}}', 'telefono');

@@ -32,6 +32,7 @@ use app\models\Profile;
 
 <?php 	if(!Yii::$app->user->identity->isAdmin)
 		{ ?>
+			<?= $form->field($user, 'cedula')->textInput(['maxlength' => 255]) ?>
 			<?= $form->field($user, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione...'])->label('Sexo'); ?>
 			<?= $form->field($user, 'peso')->textInput(['maxlength' => 255]) ?>
 			<?= $form->field($user, 'telefono')->textInput(['maxlength' => 255]) ?>

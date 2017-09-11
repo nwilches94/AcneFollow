@@ -10,7 +10,7 @@ class User extends BaseUser
 {
 	const AFTER_UPDATE = 'afterUpdate';
 	
-	public $name, $sexo, $peso, $telefono, $fecha;
+	public $cedula, $name, $sexo, $peso, $telefono, $fecha;
 	
     public function init() {
         $this->on(self::BEFORE_REGISTER, function() {
@@ -51,6 +51,7 @@ class User extends BaseUser
 		
 		if(!Yii::$app->user->identity->isAdmin)
 		{
+            $rules['cedula'] = ['cedula', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['sexo'] = ['sexo', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['peso'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['telefono'] = ['telefono', 'required', 'on' => ['register', 'create', 'update']];
@@ -63,6 +64,7 @@ class User extends BaseUser
     public function attributeLabels()
     {
         return [
+            'cedula'         	=> \Yii::t('user', 'Cedula'),
             'name'         		=> \Yii::t('user', 'Nombres'),
             'sexo'              => \Yii::t('user', 'Sexo'),
             'peso'              => \Yii::t('user', 'Peso'),

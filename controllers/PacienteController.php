@@ -63,8 +63,8 @@ class PacienteController extends Controller
 				$sql =	"SELECT paciente.* 
 						FROM profile 
 						JOIN paciente ON paciente.user_id = profile.user_id
-						WHERE paciente.doctor_id = ".\Yii::$app->user->identity->id." AND (profile.user_id LIKE '%$search%' OR profile.name LIKE '%$search%')";
-
+						WHERE paciente.doctor_id = ".\Yii::$app->user->identity->id." AND (profile.user_id LIKE '%$search%' OR profile.cedula LIKE '%$search%' OR profile.name LIKE '%$search%')";
+                
                 $query = Paciente::findBySql($sql);
             }
             else

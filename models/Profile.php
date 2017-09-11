@@ -7,9 +7,6 @@ use Yii;
 
 class Profile extends BaseUser
 {
-	const BEFORE_CREATE   = 'beforeCreate';
-    const BEFORE_REGISTER = 'beforeRegister';
-	
 	public function init() {
         /*$this->on(self::BEFORE_REGISTER, function() {
             $this->name = $this->name;
@@ -28,6 +25,7 @@ class Profile extends BaseUser
 		
 		if(!Yii::$app->user->identity->isAdmin)
 		{
+            $rules['cedula'] = ['cedula', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['sexo'] = ['sexo', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['peso'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['telefono'] = ['telefono', 'required', 'on' => ['register', 'create', 'update']];
@@ -40,6 +38,7 @@ class Profile extends BaseUser
     public function attributeLabels()
     {
         return [
+            'cedula'         => \Yii::t('user', 'Cedula'),
             'name'           => \Yii::t('user', 'Nombre'),
         	'sexo'           => \Yii::t('user', 'Sexo'),
         	'peso'           => \Yii::t('user', 'Peso'),
