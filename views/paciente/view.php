@@ -34,11 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'model' => $model,
 		        'attributes' => [
 					[
-						'attribute' => 'name',
-		                'label' => 'Nombre del Paciente',
+						'attribute' => 'cedula',
+		                'label' => 'Cedula',
 					    'value' => function ($model) {
 							$profile=Profile::find()->where(['user_id' => $model->user_id])->one();
-							return $profile['name'];
+							return $profile['cedula'];
 					     }
 		            ],
 		            [

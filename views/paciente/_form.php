@@ -15,6 +15,7 @@ use yii\jui\DatePicker;
 		
 		<div class="form-group">
 			<?= $form->field($profile, 'user_id')->hiddenInput(['value' => $profile['user_id']])->label(false); ?>
+			<?= $form->field($profile, 'cedula')->textInput(['value' => $profile['cedula']]) ?>
 		    <?= $form->field($profile, 'name')->textInput(['value' => $profile['name']]) ?>
 			<?= $form->field($profile, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione...'])->label('Sexo'); ?>
 			<?= $form->field($profile, 'peso')->textInput(['value' => $profile['peso']]) ?>
