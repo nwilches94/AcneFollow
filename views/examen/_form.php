@@ -42,12 +42,13 @@ use app\models\Paciente;
 		<div class="form-group">
 			<div class="col-lg-offset-3 col-lg-9">
 			    <?= \nemmo\attachments\components\AttachmentsInput::widget([
-			            'id' => 'file-input', // Optional
+			            'id' => 'fileIinput', // Optional
 			            'model' => $model,
 			            'options' => [ // Options of the Kartik's FileInput widget
 			                'multiple' => true, // If you want to allow multiple upload, default to false
 			            ],
 			            'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
+			            	'allowedFileExtensions'=>['jpg','gif','png', 'doc', 'docx', 'pdf'],
 			                'maxFileCount' => 10 // Client max files
 			            ]
 			        ])

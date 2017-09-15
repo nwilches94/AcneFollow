@@ -25,11 +25,20 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="row"> 
     		<?php 	if($fotos) {
 			    		foreach ($fotos as $value) {
-				    		echo 	'<div class="col-xs-6 col-md-3">
-						    			<a class="thumbnail" style="margin-bottom: 5px;" type="button" data-toggle="modal" data-target="#w'.$value['id'].'"> 
-						    				<img data-src="/attachments/file/download?id='.$value['id'].'" style="height: 180px; width: 100%; display: block;" 
-						    				src="/attachments/file/download?id='.$value['id'].'" data-holder-rendered="true"> 
-						    			</a>';
+				    		echo 	'<div class="col-xs-6 col-md-3">';
+							
+									if($value['type'] == 'jpg' || $value['type'] == 'png'|| $value['type'] == 'gif'){
+						    			echo 	'<a class="thumbnail" style="margin-bottom: 5px;" type="button" data-toggle="modal" data-target="#w'.$value['id'].'"> 
+							    					<img data-src="/attachments/file/download?id='.$value['id'].'" style="height: 180px; width: 100%; display: block;" 
+							    					src="/attachments/file/download?id='.$value['id'].'" data-holder-rendered="true"> 
+							    				</a>';
+									}
+									else{
+										echo  	'<a class="thumbnail" style="margin-bottom: 5px;" type="button" data-toggle="modal" data-target="#w'.$value['id'].'"> 
+						    						<img data-src="/img/default.jpg" style="height: 180px; width: 100%; display: block;" 
+						    						src="/img/default.jpg" data-holder-rendered="true"> 
+						    					</a>';
+						    		}
 										
 						    			Modal::begin(
 						    				[
@@ -37,8 +46,15 @@ $this->params['breadcrumbs'][] = $this->title;
 											    'header' => $value['name'].".".$value['type'],
 											    //'toggleButton' => ['label' => 'Ver Imagen'],
 											]);
-											echo 	'<img data-src="/attachments/file/download?id='.$value['id'].'" style="height: 100%; width: 100%; display: block;" 
-						    						src="/attachments/file/download?id='.$value['id'].'" data-holder-rendered="true">';
+											
+											if($value['type'] == 'jpg' || $value['type'] == 'png'|| $value['type'] == 'gif'){
+								    			echo 	'<img data-src="/attachments/file/download?id='.$value['id'].'" style="height: 100%; width: 100%; display: block;" 
+								    				 	src="/attachments/file/download?id='.$value['id'].'" data-holder-rendered="true">';
+											}
+											else{
+												echo 	'<img data-src="/img/default2.jpg" style="height: 100%; width: 100%; display: block;" 
+								    				  	src="/img/default2.jpg" data-holder-rendered="true">';
+								    		}
 										Modal::end();
 										
 							if(\Yii::$app->user->can('paciente')){		

@@ -212,8 +212,8 @@ class ExamenController extends BaseAdminController
 	public function actionDownload($id)
     {
 		$model = File::find()->where(['id' => $id])->andWhere(['model' => 'Examen'])->one();
-
-		header ("Content-Disposition: attachment; filename=".$model->name.".".$model->type);
+		
+		header ("Content-Disposition: attachment; filename=".str_replace(" ", "_", $model->name).".".$model->type);
 		header ("Content-Type: application/octet-stream");
 		header ("Content-Length: ".filesize($model->path));
 		readfile($model->path);
