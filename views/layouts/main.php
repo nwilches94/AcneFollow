@@ -86,6 +86,12 @@ AppAsset::register($this);
                                         "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [
+                                        "label" => "Recomendaciones",
+                                        "url" => ["site/recomendaciones"],
+                                        "icon" => "eye",
+                                        "visible" => \Yii::$app->user->can('paciente')
+                                    ],
+                                    [
                                         "label" => "Fórmula",
                                         "url" => ["formula/index"],
                                         "icon" => "tachometer",

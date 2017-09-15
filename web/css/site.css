@@ -74,3 +74,24 @@ body {
 .textIndex {
 	font-size: 16px;
 }
+
+.textB {
+	margin-left:0px;
+	text-align: justify;
+}
+
+blockquote {
+    border-left: 0px;
+}
+
+blockquote footer, blockquote small, blockquote .small {
+    font-size: 90%;
+}
+
+.textP {
+	line-height: 1.42857143;
+	color: #777;
+	background: #fff;
+	padding: 10px 20px;
+	font-size: 16px;
+}

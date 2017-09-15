@@ -114,4 +114,9 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+	
+	public function actionRecomendaciones()
+    {
+        return $this->render('recomendaciones');
+    }
 }
