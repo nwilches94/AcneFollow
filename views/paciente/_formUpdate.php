@@ -21,14 +21,14 @@ use dektrium\user\models\Profile;
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
 		
 		<div class="form-group">
-			<?= $form->field($profile, 'name')->textInput(['value' => $profile['name']])->label('Nombres'); ?>
+			<?= $form->field($profile, 'name')->textInput(['value' => $profile['name'], 'placeholder' => 'Nombres'])->label('Nombres'); ?>
 			<?php 	if(!Yii::$app->user->identity->isAdmin)
 					{ ?>
-						<?= $form->field($profile, 'cedula')->textInput(['value' => $profile['cedula']])->label('Cedula'); ?>
-						<?= $form->field($profile, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione...'])->label('Sexo'); ?>
-						<?= $form->field($profile, 'peso')->textInput(['value' => $profile['peso']]) ?>
-						<?= $form->field($profile, 'telefono')->textInput(['value' => $profile['telefono']]) ?>
-						<?= $form->field($profile, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y'])->label('Fecha de Nacimiento') ?>	
+						<?= $form->field($profile, 'cedula')->textInput(['value' => $profile['cedula'], 'placeholder' => 'Cedula'])->label('Cedula'); ?>
+						<?= $form->field($profile, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione el Sexo'])->label('Sexo'); ?>
+						<?= $form->field($profile, 'peso')->textInput(['value' => $profile['peso'], 'placeholder' => 'Kg']) ?>
+						<?= $form->field($profile, 'telefono')->textInput(['value' => $profile['telefono'], 'placeholder' => 'Teléfono']) ?>
+						<?= $form->field($profile, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['changeMonth' => true,  'yearRange' => '-70:+0', 'changeYear' => true]])->textInput(['placeholder' => 'Clic para seleccionar la Fecha de Nacimiento'])->label('Fecha de Nacimiento') ?>	
 			<?php 	} ?>
 		</div>
 		 

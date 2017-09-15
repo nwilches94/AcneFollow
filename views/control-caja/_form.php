@@ -15,12 +15,12 @@ use dektrium\user\models\Profile;
 
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
 	
-		<?= $form->field($model, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y'])->label('Fecha') ?>
+		<?= $form->field($model, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['changeMonth' => true, 'changeYear' => true]])->textInput(['placeholder' => 'Clic para seleccionar la Fecha'])->label('Fecha') ?>
 		
 	    <?php 	if(true && \Yii::$app->user->can('medico'))
 				{
 					if($listaPaciente)
-						echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione...'])->label('Seleccione el Paciente');
+						echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione el Paciente'])->label('Seleccione el Paciente');
 					else
 					{
 						echo 	'<div class="form-group field-formula-dosis required">
@@ -40,13 +40,13 @@ use dektrium\user\models\Profile;
 				}
 		?>
 		
-	    <?= $form->field($model, 'cajaTomada')->textInput() ?>
+	    <?= $form->field($model, 'cajaTomada')->textInput(['placeholder' => 'Cajas Tomadas']) ?>
 	
-	    <?= $form->field($model, 'dosisAcumulada')->textInput() ?>
+	    <?= $form->field($model, 'dosisAcumulada')->textInput(['placeholder' => 'Dosis Acumuladas']) ?>
 	
-	    <?= $form->field($model, 'dosisRestante')->textInput() ?>
+	    <?= $form->field($model, 'dosisRestante')->textInput(['placeholder' => 'mg']) ?>
 	
-	    <?= $form->field($model, 'dosisCaja')->textInput() ?>
+	    <?= $form->field($model, 'dosisCaja')->textInput(['placeholder' => 'Dosis Restante de Cajas']) ?>
 	
 		<div class="form-group">
 			<div class="col-lg-offset-3 col-lg-9">

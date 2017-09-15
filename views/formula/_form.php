@@ -16,7 +16,7 @@ use dektrium\user\models\Profile;
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
 		
 		<div class="form-group">
-			<?= $form->field($model, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y'])->label('Fecha') ?>
+			<?= $form->field($model, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['changeMonth' => true, 'changeYear' => true]])->textInput(['placeholder' => 'Clic para seleccionar la Fecha'])->label('Fecha') ?>
 			<?php 	if(true && \Yii::$app->user->can('medico'))
 					{
 						if($listaPaciente)
@@ -39,9 +39,9 @@ use dektrium\user\models\Profile;
 						echo $form->field($model, 'paciente_id')->hiddenInput(['value' => $paciente['id']])->label(false);
 					}
 	    	?>
-		    <?= $form->field($model, 'dosis')->textInput(['value' => $model['dosis']])->label('Dosis (mg)') ?>
-		    <?= $form->field($model, 'capsula')->textInput(['value' => $model['capsula']])->label('Cápsula (mg)') ?>
-		    <?= $form->field($model, 'cajas')->textInput(['value' => $model['cajas']]) ?> 
+		    <?= $form->field($model, 'dosis')->textInput(['value' => $model['dosis'], 'placeholder' => 'mg'])->label('Dosis (mg)') ?>
+		    <?= $form->field($model, 'capsula')->textInput(['value' => $model['capsula'], 'placeholder' => 'mg'])->label('Cápsula (mg)') ?>
+		    <?= $form->field($model, 'cajas')->textInput(['value' => $model['cajas'], 'placeholder' => 'Cajas']) ?> 
 	    </div>
 	    
 	    <div class="form-group">

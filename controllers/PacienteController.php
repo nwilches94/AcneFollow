@@ -187,8 +187,9 @@ class PacienteController extends BaseAdminController
 		$paciente=Paciente::find()->where(['id' => $id])->one();
 		$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
 		
-        if ($profile->load(Yii::$app->request->post())) {
-        	
+		$profile->fecha=Yii::$app->formatter->asDate($profile['fecha'], 'php: d-m-Y');
+		
+        if($profile->load(Yii::$app->request->post())) {
 			\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'El Paciente ha sido Actualizado'));
 			
         	$attributes=Yii::$app->request->post();
@@ -203,7 +204,8 @@ class PacienteController extends BaseAdminController
 
             return $this->redirect(['view', 'id' => $id]);
 			
-        } else {
+        } 
+        else {
             return $this->render('update', [
                 'model' => $model, 'profile' => $profile
             ]);
