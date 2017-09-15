@@ -12,12 +12,18 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Pacientes'), 'url' =
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="paciente-update">
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
 
-    <h1><?= Html::encode('Actualizar Paciente') ?></h1><br>
+			    <h1><?= Html::encode('Actualizar Paciente') ?></h1><br>
+			
+			    <?= $this->render('_formUpdate', [
+			        'model' => $model, 'profile' => $profile
+			    ]) ?>
 
-    <?= $this->render('_form', [
-        'model' => $model, 'profile' => $profile
-    ]) ?>
-
-</div>
+			</div>
+        </div>
+    </div>
+</div>	

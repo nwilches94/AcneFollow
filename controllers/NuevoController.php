@@ -45,11 +45,6 @@ class NuevoController extends BaseAdminController
                 ],
                 'rules' => [
                     [
-                        'actions' => ['paciente'],
-                        'allow' => true,
-                        'roles' => ['admin', 'medico'],
-                    ],
-                    [
                         'actions' => ['foto'],
                         'allow' => true,
                         'roles' => ['admin', 'paciente'],
@@ -72,61 +67,6 @@ class NuevoController extends BaseAdminController
                 ],
             ],
         ];
-    }
-
-    function actionPaciente()
-    {
-        /** @var User $user */
-        $user = \Yii::createObject([
-            'class'    => User::className(),
-            'scenario' => 'create',
-        ]);
-        $event = $this->getUserEvent($user);
-
-        $this->performAjaxValidation($user);
-
-        $this->trigger(self::EVENT_BEFORE_CREATE, $event);
-        if($user->load(\Yii::$app->request->post())){
-
-            $user->username = $user->email;
-
-            if ($user->create()) {
-                \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Pacient has been created'));
-                $this->trigger(self::EVENT_AFTER_CREATE, $event);
-
-                // colocarle rol de paciente
-                $rol = Yii::createObject([
-                    'class'   => Assignment::className(),
-                    'user_id' => $user->id,
-                ]);
-                
-                $rol->items = ['paciente'];
-				
-				$attributes=\Yii::$app->request->post();
-				
-				$profile = Profile::find()->where(['user_id' => $user->id])->one();
-				$profile->cedula=$attributes['User']['cedula'];
-				$profile->name=$attributes['User']['name'];
-				$profile->sexo=$attributes['User']['sexo'];
-				$profile->peso=$attributes['User']['peso'];
-				$profile->telefono=$attributes['User']['telefono'];
-				$profile->fecha=Yii::$app->formatter->asDate($attributes['User']['fecha'], 'php: Y-m-d');
-				$profile->save();
-				
-                $rol->updateAssignments();
-				
-                $paciente = new Paciente();
-                $paciente->user_id = $user->id;
-                $paciente->doctor_id = Yii::$app->user->identity->id;
-                $paciente->save();
-            }
-
-            return $this->redirect(['paciente/index']);
-        }
-
-        return $this->render('create', [
-            'user' => $user,
-        ]);
     }
 
     public function actionFoto()

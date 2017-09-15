@@ -65,7 +65,7 @@ AppAsset::register($this);
                         \yiister\gentelella\widgets\Menu::widget(
                             [
                                 "items" => [
-                                    ["label" => "Home", "url" => "/", "icon" => "home"],
+                                    ["label" => "Principal", "url" => "/", "icon" => "home"],
                                     [
                                         "label" => "Pacientes",
                                         "url" => ["paciente/index"],

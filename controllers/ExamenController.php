@@ -60,13 +60,12 @@ class ExamenController extends Controller
 		$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
 		$examenes=Examen::find()->where(['id' => $id, 'paciente_id' => $paciente['id']])->all();
 		if($examenes){
-			foreach ($examenes as $key => $value) {
+			foreach ($examenes as $key => $value){
 				$ids[] = $value['id'];
 			}
 		}	
 
-		if($ids)
-		{
+		if($ids){
 			$query = File::find()->where(['in', 'itemId', $ids])->andWhere(['model' => 'Examen']);
 	        if($query){
 		        $dataProvider = new ActiveDataProvider([
@@ -75,8 +74,7 @@ class ExamenController extends Controller
 				$fotos=$query->all();
 			}
 		}
-		else
-		{
+		else{
 			$dataProvider="";
 			$fotos="";
 		}

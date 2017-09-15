@@ -51,3 +51,26 @@ body {
 .krajee-default.file-preview-frame .file-thumbnail-footer {
     float: left;
 }
+
+.bs-callout {
+    padding: 25px;
+    margin: 25px 0;
+        margin-top: 20px;
+    border: 1px solid #eee;
+        border-left-width: 1px;
+        border-left-color: rgb(238, 238, 238);
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout + .bs-callout {
+    margin-top: -5px;
+}
+
+.bs-callout-info {
+    border-left-color: #1ABB9C;
+}
+
+.textIndex {
+	font-size: 16px;
+}

@@ -2,26 +2,43 @@
 
 namespace app\controllers;
 
-use Yii;
+//namespace dektrium\user\controllers;
+use dektrium\user\filters\AccessRule;
+use dektrium\user\Finder;
+use dektrium\rbac\models\Assignment;
+use dektrium\user\models\Profile;
+use dektrium\user\models\User;
+use dektrium\user\models\UserSearch;
+use dektrium\user\helpers\Password;
+use dektrium\user\Module;
+use dektrium\user\traits\EventTrait;
+use yii;
 use yii\helpers\Html;
-use app\models\PacienteCreate;
-use app\models\Paciente;
-use yii\data\ActiveDataProvider;
+use yii\base\ExitException;
+use yii\base\Model;
+use yii\base\Module as Module2;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use dektrium\user\filters\AccessRule;
-use dektrium\user\models\Profile;
+use yii\web\ForbiddenHttpException;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+use dektrium\user\controllers\AdminController as BaseAdminController;
 
-use app\models\Foto;
+use app\models\Paciente;
 use app\models\Periodo;
+use app\models\Foto;
+use app\models\Examen;
+use app\models\Mensaje;
 use nemmo\attachments\models\File;
+use yii\data\ActiveDataProvider;
 
 /**
  * PacienteController implements the CRUD actions for Paciente model.
  */
-class PacienteController extends Controller
+class PacienteController extends BaseAdminController
 {
     /**
      * @inheritdoc
@@ -35,10 +52,30 @@ class PacienteController extends Controller
                     'class' => AccessRule::className(),
                 ],
                 'rules' => [
-                    [
-                        'actions' => ['index', 'view', 'update', 'delete'],
+                	[
+                        'actions' => ['index'],
                         'allow' => true,
-                        'roles' => ['medico', 'admin'],
+                        'roles' => ['admin', 'medico'],
+                    ],
+                    [
+                        'actions' => ['view'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico'],
+                    ],
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico'],
+                    ],
+                    [
+                        'actions' => ['update'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico'],
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico', 'paciente'],
                     ],
                 ],
             ],
@@ -89,6 +126,61 @@ class PacienteController extends Controller
         ]);
     }
 
+	function actionCreate()
+    {
+        /** @var User $user */
+        $user = \Yii::createObject([
+            'class'    => User::className(),
+            'scenario' => 'create',
+        ]);
+        $event = $this->getUserEvent($user);
+
+        $this->performAjaxValidation($user);
+
+        $this->trigger(self::EVENT_BEFORE_CREATE, $event);
+        if($user->load(\Yii::$app->request->post())){
+
+            $user->username = $user->email;
+
+            if ($user->create()) {
+                \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'El Paciente ha sido Creado'));
+                $this->trigger(self::EVENT_AFTER_CREATE, $event);
+
+                // colocarle rol de paciente
+                $rol = Yii::createObject([
+                    'class'   => Assignment::className(),
+                    'user_id' => $user->id,
+                ]);
+                
+                $rol->items = ['paciente'];
+				
+				$attributes=\Yii::$app->request->post();
+				
+				$profile = Profile::find()->where(['user_id' => $user->id])->one();
+				$profile->cedula=$attributes['User']['cedula'];
+				$profile->name=$attributes['User']['name'];
+				$profile->sexo=$attributes['User']['sexo'];
+				$profile->peso=$attributes['User']['peso'];
+				$profile->telefono=$attributes['User']['telefono'];
+				$profile->fecha=Yii::$app->formatter->asDate($attributes['User']['fecha'], 'php: Y-m-d');
+				$profile->save();
+				
+                $rol->updateAssignments();
+				
+                $paciente = new Paciente();
+                $paciente->user_id = $user->id;
+                $paciente->doctor_id = Yii::$app->user->identity->id;
+                $paciente->save();
+            }
+
+            return $this->redirect(['paciente/index']);
+        }
+
+        return $this->render('create', [
+            'user' => $user,
+        ]);
+    }
+
 	public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -96,9 +188,17 @@ class PacienteController extends Controller
 		$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
 		
         if ($profile->load(Yii::$app->request->post())) {
-        		
+        	
+			\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'El Paciente ha sido Actualizado'));
+			
         	$attributes=Yii::$app->request->post();
-        	$profile->fecha=Yii::$app->formatter->asDate($attributes['Profile']['fecha'], 'php: Y-m-d');
+			
+			$profile->cedula=$attributes['Profile']['cedula'];
+			$profile->name=$attributes['Profile']['name'];
+			$profile->sexo=$attributes['Profile']['sexo'];
+			$profile->peso=$attributes['Profile']['peso'];
+			$profile->telefono=$attributes['Profile']['telefono'];
+			$profile->fecha=Yii::$app->formatter->asDate($attributes['Profile']['fecha'], 'php: Y-m-d');
 			$profile->save();
 
             return $this->redirect(['view', 'id' => $id]);
@@ -165,8 +265,40 @@ class PacienteController extends Controller
      */
     public function actionDelete($id)
     {
+    	\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'El Paciente se ha eliminado'));
+		
         $this->findModel($id)->delete();
-
+		
+		$examen=Examen::find()->where(['paciente_id' => $id])->all();
+		if($examen){
+			foreach ($examen as $value) {
+				Examen::delete($value['id']);
+			}
+		}
+		
+		//File::find()->where(['itemId' => $i])->all()->delete();
+		
+		$foto=Foto::find()->where(['paciente_id' => $id])->all();
+		if($foto){
+			foreach ($foto as $value) {
+				Foto::delete($value['id']);
+			}
+		}
+		
+		$msj=Mensaje::find()->where(['paciente_id' => $id])->all();
+		if($msj){
+			foreach ($msj as $value) {
+				Mensaje::delete($value['id']);
+			}
+		}
+		
+		$periodo=Periodo::find()->where(['paciente_id' => $id])->all();
+		if($periodo){
+			foreach ($periodo as $value) {
+				Periodo::delete($value['id']);
+			}
+		}
+		
         return $this->redirect(['index']);
     }
 

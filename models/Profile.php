@@ -25,9 +25,11 @@ class Profile extends BaseUser
 		
 		if(!Yii::$app->user->identity->isAdmin)
 		{
-            $rules['cedula'] = ['cedula', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['cedulaRequired'] = ['cedula', 'integer'];
+			$rules['cedulaPattern'] = ['cedula', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['sexo'] = ['sexo', 'required', 'on' => ['register', 'create', 'update']];
-			$rules['peso'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['pesoRequired'] = ['peso', 'integer'];
+			$rules['pesoPattern'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['telefono'] = ['telefono', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['fecha'] = ['fecha', 'required', 'on' => ['register', 'create', 'update']];
 		}
@@ -38,15 +40,15 @@ class Profile extends BaseUser
     public function attributeLabels()
     {
         return [
-            'cedula'         => \Yii::t('user', 'Cedula'),
-            'name'           => \Yii::t('user', 'Nombre'),
-        	'sexo'           => \Yii::t('user', 'Sexo'),
-        	'peso'           => \Yii::t('user', 'Peso'),
-        	'telefono'       => \Yii::t('user', 'Teléfono'),
-        	'fecha'      	 => \Yii::t('user', 'Fecha de Nacimiento'),
+            'cedula'         	=> \Yii::t('user', 'Cedula'),
+            'name'         		=> \Yii::t('user', 'Nombres'),
+            'sexo'              => \Yii::t('user', 'Sexo'),
+            'peso'              => \Yii::t('user', 'Peso'),
+            'telefono'          => \Yii::t('user', 'Teléfono'),
+            'fecha'         	=> \Yii::t('user', 'Fecha de Nacimiento'),
         ];
     }
-	
+
 	public function getName()
     {
 		return Profile::find()->where(['user_id' => Yii::$app->user->id])->one()->name;

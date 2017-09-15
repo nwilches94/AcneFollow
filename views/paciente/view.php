@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use dektrium\user\models\Profile;
+use dektrium\user\models\User;
 use app\models\Paciente;
 
 use yii\grid\GridView;
@@ -17,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="paciente-view">
 
-    <h1><?= Html::encode('Paciente') ?></h1><br>
+    <h1><?= Html::encode('Datos del Paciente') ?></h1><br>
     
     <div class="form-group">
 		<div class="col-lg-offset-0 col-lg-9">
@@ -33,6 +34,18 @@ $this->params['breadcrumbs'][] = $this->title;
 		    <?= DetailView::widget([
 		        'model' => $model,
 		        'attributes' => [
+		        	[
+		            	'label' => 'Paciente ID',
+						'attribute' => 'id'
+		            ],
+		        	[
+						'attribute' => 'name',
+		                'label' => 'Nombres',
+					    'value' => function ($model) {
+							$profile=Profile::find()->where(['user_id' => $model->user_id])->one();
+							return $profile['name'];
+					     }
+		            ],
 					[
 						'attribute' => 'cedula',
 		                'label' => 'Cedula',
@@ -71,6 +84,14 @@ $this->params['breadcrumbs'][] = $this->title;
 					    'value' => function ($model) {
 					    	$profile=Profile::find()->where(['user_id' => $model->user_id])->one();
 							return Yii::$app->formatter->asDate($profile['fecha'], 'php: d-m-Y');
+					     }
+		            ],
+		            [
+						'attribute' => 'id',
+		                'label' => 'Email',
+					    'value' => function ($model) {
+							$user=User::find()->where(['id' => $model->user_id])->one();
+							return $user['email'];
 					     }
 		            ] 
 		        ],

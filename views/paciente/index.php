@@ -6,21 +6,24 @@ use yii\widgets\ActiveForm;
 
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use dektrium\user\models\profile;
+use dektrium\user\models\Profile;
+use dektrium\user\models\User;
 
 $this->title = Yii::t('app', 'Pacientes');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?= $this->render('@vendor/dektrium/yii2-user/views/_alert', ['module' => Yii::$app->getModule('user'),]) ?>
+
 <div class="paciente-index">
 
     <h1><?= Html::encode($this->title) ?></h1><br>
-
 
     <?php $form = ActiveForm::begin(['method' => 'get', 'action' => Url::toRoute('paciente/index')]); ?>
 	
 		<div class="form-group">
 			<div class="col-lg-offset-0 col-lg-4" style="padding-left:0px">
-				<?= $form->field($model, 'buscar')->textInput(['placeholder' => "Agregue el ID o Nombre del Paciente"])->label(false); ?>
+				<?= $form->field($model, 'buscar')->textInput(['placeholder' => "Busqueda por: ID / Cedula / Nombres"])->label(false); ?>
 			</div>
 		</div>	
 		
@@ -34,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="col-lg-offset-0 col-lg-4">
 		        <?php
 			        if(!Yii::$app->user->identity->isAdmin){
-			           echo Html::a(Yii::t('app', 'Crear Paciente'), ['nuevo/paciente'], ['class' => 'btn btn-success']);
+			           echo Html::a(Yii::t('app', 'Crear Paciente'), ['paciente/create'], ['class' => 'btn btn-success']);
 			        }
 		        ?>
     		</div>
@@ -51,27 +54,34 @@ $this->params['breadcrumbs'][] = $this->title;
 		            'columns' => [
 		            	[
 		                    'label' => 'Paciente ID',
-						    'value' => 'user_id'
+						    'value' => 'id'
 		                ],
 						[
 		                    'label' => 'Cedula',
 						    'value' => function ($model) {
-								$user=Profile::find()->where(['user_id' => $model->user_id])->one();
-								return $user['cedula'];
+								$profile=Profile::find()->where(['user_id' => $model->user_id])->one();
+								return $profile['cedula'];
 						     }
 		                ],
 						[
-		                    'label' => 'Nombre del Paciente',
+		                    'label' => 'Nombres',
 						    'value' => function ($model) {
-								$user=Profile::find()->where(['user_id' => $model->user_id])->one();
-								return $user['name'];
+								$profile=Profile::find()->where(['user_id' => $model->user_id])->one();
+								return $profile['name'];
 						     }
 		                ],
 		                [
 		                    'label' => 'Teléfono',
 						    'value' => function ($model) {
-								$user=Profile::find()->where(['user_id' => $model->user_id])->one();
-								return $user['telefono'];
+								$profile=Profile::find()->where(['user_id' => $model->user_id])->one();
+								return $profile['telefono'];
+						     }
+		                ],
+		                [
+		                    'label' => 'Email',
+						    'value' => function ($model) {
+								$user=User::find()->where(['id' => $model->user_id])->one();
+								return $user['email'];
 						     }
 		                ],
 		                [
