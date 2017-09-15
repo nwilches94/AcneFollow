@@ -133,7 +133,7 @@ AppAsset::register($this);
                                                 "url" => "/user/admin/index",
                                             ],
                                         ],
-                                        "visible" => \Yii::$app->user->can('admin')
+                                        "visible" => Yii::$app->user->id && Yii::$app->user->identity->isAdmin
                                     ],
                                 ],
                             ]

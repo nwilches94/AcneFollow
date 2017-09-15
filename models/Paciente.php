@@ -94,7 +94,7 @@ class Paciente extends \yii\db\ActiveRecord
     {
     	$profile=null;
 		
-		if(!\Yii::$app->user->can('admin'))
+		if(!isset(Yii::$app->user->identity->isAdmin))
 		{
 	       	if(\Yii::$app->user->can('paciente'))
 				$profile=Profile::find()->where(['user_id' => Yii::$app->user->id])->one();

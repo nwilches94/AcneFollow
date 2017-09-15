@@ -78,7 +78,7 @@ class SiteController extends Controller
 		if(\Yii::$app->user->can('medico'))
         	return $this->redirect('/paciente/index');
 		
-		if(\Yii::$app->user->can('admin'))
+		if(isset(Yii::$app->user->identity->isAdmin))
 			return $this->redirect('/user/admin/index');
     }
 
