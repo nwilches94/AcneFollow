@@ -10,11 +10,14 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Paciente;
 use dektrium\user\models\Profile;
+use dektrium\user\controllers\AdminController as BaseAdminController;
+use yii\filters\AccessControl;
+use dektrium\user\filters\AccessRule;
 
 /**
  * ControlCajaController implements the CRUD actions for ControlCaja model.
  */
-class ControlCajaController extends Controller
+class ControlCajaController extends BaseAdminController
 {
     /**
      * @inheritdoc
@@ -22,10 +25,33 @@ class ControlCajaController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                	[
+                        'actions' => ['view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico'],
+                    ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico', 'paciente'],
+                    ],
+                    [
+                        'actions' => ['login', 'logout'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                ],    
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'logout' => ['post'],
                 ],
             ],
         ];

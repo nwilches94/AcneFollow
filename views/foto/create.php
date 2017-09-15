@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
     <h1><?= Html::encode($this->title) ?></h1><br>
     
-    <?= Html::a(Yii::t('app', 'Ver Galería'), ['nuevo/galeria?id='.Yii::$app->user->id], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a(Yii::t('app', 'Ver Galería'), ['foto/galeria?id='.Yii::$app->user->id], ['class' => 'btn btn-primary']) ?>
     
     <br><br>
 

@@ -34,7 +34,6 @@ use app\models\Examen;
 use app\models\Mensaje;
 use nemmo\attachments\models\File;
 use yii\data\ActiveDataProvider;
-
 /**
  * PacienteController implements the CRUD actions for Paciente model.
  */
@@ -53,30 +52,26 @@ class PacienteController extends BaseAdminController
                 ],
                 'rules' => [
                 	[
-                        'actions' => ['index'],
+                        'actions' => ['index', 'view', 'create', 'update'],
                         'allow' => true,
-                        'roles' => ['admin', 'medico'],
-                    ],
-                    [
-                        'actions' => ['view'],
-                        'allow' => true,
-                        'roles' => ['admin', 'medico'],
-                    ],
-                    [
-                        'actions' => ['create'],
-                        'allow' => true,
-                        'roles' => ['admin', 'medico'],
-                    ],
-                    [
-                        'actions' => ['update'],
-                        'allow' => true,
-                        'roles' => ['admin', 'medico'],
+                        'roles' => ['admin', 'medico', 'paciente'],
                     ],
                     [
                         'actions' => ['delete'],
                         'allow' => true,
-                        'roles' => ['admin', 'medico', 'paciente'],
+                        'roles' => ['admin', 'medico'],
                     ],
+                    [
+                        'actions' => ['login', 'logout'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                ],    
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -186,8 +181,8 @@ class PacienteController extends BaseAdminController
         $model = $this->findModel($id);
 		$paciente=Paciente::find()->where(['id' => $id])->one();
 		$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
-		
 		$profile->fecha=Yii::$app->formatter->asDate($profile['fecha'], 'php: d-m-Y');
+		$profile->scenario = 'update';
 		
         if($profile->load(Yii::$app->request->post())) {
 			\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'El Paciente ha sido Actualizado'));
@@ -203,7 +198,6 @@ class PacienteController extends BaseAdminController
 			$profile->save();
 
             return $this->redirect(['view', 'id' => $id]);
-			
         } 
         else {
             return $this->render('update', [

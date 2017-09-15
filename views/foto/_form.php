@@ -29,7 +29,7 @@ use app\models\Paciente;
     ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', [
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', [
 			'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
 			'onclick' => "$('#file-input').fileinput('upload');"
 		]) ?>

@@ -34,7 +34,7 @@ use yii\data\ActiveDataProvider;
 /**
  * PacienteController implements the CRUD actions for Paciente model.
  */
-class NuevoController extends BaseAdminController
+class FotoController extends BaseAdminController
 {
     public function behaviors(){
         return [
@@ -44,8 +44,8 @@ class NuevoController extends BaseAdminController
                     'class' => AccessRule::className(),
                 ],
                 'rules' => [
-                    [
-                        'actions' => ['foto'],
+                	[
+                        'actions' => ['create', 'delete'],
                         'allow' => true,
                         'roles' => ['admin', 'paciente'],
                     ],
@@ -54,22 +54,23 @@ class NuevoController extends BaseAdminController
                         'allow' => true,
                         'roles' => ['admin', 'medico', 'paciente'],
                     ],
-                     [
-                        'actions' => ['delete'],
-                        'allow' => true,
-                        'roles' => ['admin', 'medico', 'paciente'],
-                    ],
                     [
-                        'actions' => ['futuros'],
+                        'actions' => ['login', 'logout'],
                         'allow' => true,
-                        'roles' => ['?', '@', 'admin'],
+                        'roles' => ['?'],
                     ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
                 ],
             ],
         ];
     }
 
-    public function actionFoto()
+    public function actionCreate()
     {
         $model = new Foto();
 		
@@ -80,7 +81,7 @@ class NuevoController extends BaseAdminController
 			$model->fecha = date('Y-m-d');
 			$model->save();
 
-			return $this->redirect('/nuevo/galeria?id='.$paciente['user_id']);
+			return $this->redirect('/foto/galeria?id='.$paciente['user_id']);
 			
 			//\Yii::$app->getSession()->setFlash('success', 'Se ha cargado las Fotos');
 		}
@@ -110,7 +111,7 @@ class NuevoController extends BaseAdminController
 			$fotos="";
 		}
 
-        return $this->render('foto', [
+        return $this->render('create', [
             'model' => $model, 'dataProvider' => $dataProvider, 'fotos' => $fotos
         ]);
     }
@@ -187,7 +188,7 @@ class NuevoController extends BaseAdminController
 			$file->delete();
 		
 		if($_GET['type'] == 'Foto')
-        	return $this->redirect(['nuevo/galeria?id='.$id]);
+        	return $this->redirect(['foto/galeria?id='.$id]);
 		else
 			return $this->redirect(['examen/view?id='.$id]);
     }

@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <div class="form-group">
 		<div class="col-lg-offset-0 col-lg-9">
-			<?= Html::a(Yii::t('app', 'Ver Galería'), ['nuevo/galeria?id='.$_GET['id']], ['class' => 'btn btn-success']) ?>
+			<?= Html::a(Yii::t('app', 'Ver Galería'), ['foto/galeria?id='.$_GET['id']], ['class' => 'btn btn-success']) ?>
 	    	<?= Html::a(Yii::t('app', 'Regresar'), ['index'], ['class' => 'btn btn-primary']) ?>
 		</div>
 	</div>

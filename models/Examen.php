@@ -90,19 +90,24 @@ class Examen extends \yii\db\ActiveRecord
 	
 	public function changeDate($fecha, $option)
 	{
-		$mesesNum = ['enero'=>'01', 'febrero'=>'02', 'marzo'=>'03', 'abril'=>'04', 'mayo'=>'05', 'junio'=>'06', 'julio'=>'07',
-					 'agosto'=>'08', 'septiembre'=>'09', 'octubre'=>'10', 'noviembre'=>'11', 'diciembre'=>'12'];
+		if($fecha)
+		{
+			$mesesNum = ['enero'=>'01', 'febrero'=>'02', 'marzo'=>'03', 'abril'=>'04', 'mayo'=>'05', 'junio'=>'06', 'julio'=>'07',
+						 'agosto'=>'08', 'septiembre'=>'09', 'octubre'=>'10', 'noviembre'=>'11', 'diciembre'=>'12'];
+			
+			$numMeses = ['01'=>'enero',  '02'=>'febrero', '03'=>'marzo', '04'=>'abril', '05'=>'mayo', '06'=>'junio', '07'=>'julio',
+						 '08'=>'agosto', '09'=>'septiembre', '10'=>'octubre', '11'=>'noviembre', '12'=>'diciembre'];
+					
+			if(!$option) {
+				$f=explode(" ", $fecha);
+				return $f[1]."-".$mesesNum[$f[0]]."-01";
+			}
+			else {
+				$f=explode("-", $fecha);
+				return $numMeses[$f[1]]." ".$f[0];
+			}
+		}
 		
-		$numMeses = ['01'=>'enero',  '02'=>'febrero', '03'=>'marzo', '04'=>'abril', '05'=>'mayo', '06'=>'junio', '07'=>'julio',
-					 '08'=>'agosto', '09'=>'septiembre', '10'=>'octubre', '11'=>'noviembre', '12'=>'diciembre'];
-				
-		if(!$option) {
-			$f=explode(" ", $fecha);
-			return $f[1]."-".$mesesNum[$f[0]]."-01";
-		}
-		else {
-			$f=explode("-", $fecha);
-			return $numMeses[$f[1]]." ".$f[0];
-		}
+		return;
 	}
 }

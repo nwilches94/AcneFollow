@@ -8,9 +8,48 @@ use app\models\Formula;
 use app\models\Paciente;
 use dektrium\user\models\Profile;
 use yii\data\ActiveDataProvider;
+use dektrium\user\controllers\AdminController as BaseAdminController;
+use yii\filters\AccessControl;
+use dektrium\user\filters\AccessRule;
+use yii\filters\VerbFilter;
 
-class FormulaController extends Controller
+class FormulaController extends BaseAdminController
 {
+	public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                	[
+                        'actions' => ['view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico'],
+                    ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico', 'paciente'],
+                    ],
+                    [
+                        'actions' => ['login', 'logout'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                ],    
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
     	if(\Yii::$app->user->can('medico'))

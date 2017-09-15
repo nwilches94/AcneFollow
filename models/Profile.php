@@ -4,6 +4,7 @@ namespace app\models;
 
 use dektrium\user\models\Profile as BaseUser;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 class Profile extends BaseUser
 {
@@ -35,6 +36,17 @@ class Profile extends BaseUser
 		}
 		
         return $rules;
+    }
+	
+	 /** @inheritdoc */
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        return ArrayHelper::merge($scenarios, [
+            'register' => ['cedula', 'name', 'sexo', 'peso', 'telefono'],
+            'create'   => ['cedula', 'name', 'sexo', 'peso', 'telefono'],
+            'update'   => ['cedula', 'name', 'sexo', 'peso', 'telefono']
+        ]);
     }
 	
     public function attributeLabels()

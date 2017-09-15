@@ -14,10 +14,13 @@ use app\models\Foto;
 use nemmo\attachments\models\File;
 use yii\data\ActiveDataProvider;
 
+use dektrium\user\controllers\AdminController as BaseAdminController;
+use yii\filters\AccessControl;
+use dektrium\user\filters\AccessRule;
 /**
  * ExamenController implements the CRUD actions for Examen model.
  */
-class ExamenController extends Controller
+class ExamenController extends BaseAdminController
 {
     /**
      * @inheritdoc
@@ -25,10 +28,33 @@ class ExamenController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                	[
+                        'actions' => ['view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['admin', 'paciente'],
+                    ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['admin', 'medico', 'paciente'],
+                    ],
+                    [
+                        'actions' => ['login', 'logout'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                ],    
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'logout' => ['post'],
                 ],
             ],
         ];

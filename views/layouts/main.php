@@ -81,7 +81,7 @@ AppAsset::register($this);
                                     ],
                                     [
                                         "label" => "Fotos",
-                                        "url" => ["nuevo/foto"],
+                                        "url" => ["foto/create"],
                                         "icon" => "camera",
                                         "visible" => \Yii::$app->user->can('paciente')
                                     ],

@@ -17,7 +17,7 @@ use yii\jui\DatePicker;
 			
 			<div class="col-lg-offset-0 col-lg-4" style="vertical-align:middle; padding-left:0px">
 				<?= $form->field($model, 'fecha')->widget(DatePicker::className(), [
-				    'language' => 'es', 'dateFormat' => 'php: d-m-Y',
+				    'language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['changeMonth' => true,  'changeYear' => true]
 				])->label('Seleccione la fecha') ?>
 			</div>
 			

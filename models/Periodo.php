@@ -29,7 +29,7 @@ class Periodo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['paciente_id'], 'required'],
+            [['paciente_id', 'fecha'], 'required'],
             [['paciente_id'], 'integer'],
             [['fecha'], 'safe'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id']],

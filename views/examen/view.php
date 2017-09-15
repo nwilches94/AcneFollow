@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
 										
 							echo		'<p align="right">
 											<a type="button" data-toggle="modal" data-target="#w'.$value['id'].'" title="Ver" aria-label="Ver"><span class="glyphicon glyphicon-eye-open"></span></a>
-						    				<a href="/nuevo/delete?id='.$_GET['id'].'&foto='.$value['id'].'&type=Examen" title="Eliminar" aria-label="Eliminar" data-pjax="0" data-confirm="¿Está seguro de eliminar este elemento?" data-method="post"><span class="glyphicon glyphicon-trash"></span></a>
+						    				<a href="/foto/delete?id='.$_GET['id'].'&foto='.$value['id'].'&type=Examen" title="Eliminar" aria-label="Eliminar" data-pjax="0" data-confirm="¿Está seguro de eliminar este elemento?" data-method="post"><span class="glyphicon glyphicon-trash"></span></a>
 						    			</p>
 							    	</div>';
 						}

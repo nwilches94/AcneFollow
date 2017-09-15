@@ -58,16 +58,43 @@ class ExamenSearch extends Examen
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
+        /*$query->andFilterWhere([
             'id' => $this->id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'paciente_id' => $this->paciente_id,
-            'fecha' => $this->fecha,
-        ]);
-
-        $query->andFilterWhere(['like', 'notas', $this->notas]);
-
+            'fecha' => $this->fecha
+        ]);*/
+        
+        $query->andFilterWhere(['paciente_id' => Paciente::find()->where(['user_id' => Yii::$app->user->id])->one()->id]);
+		
+        if($this->fecha){
+        	
+			$mesesNum = ['Ene'=>'01', 'Feb'=>'02', 'Mar'=>'03', 'Abr'=>'04', 'May'=>'05', 'Jun'=>'06', 
+						 'Jul'=>'07', 'Ago'=>'08', 'Sep'=>'09', 'Oct'=>'10', 'Nov'=>'11', 'Dic'=>'12'];
+			
+			$ban=0;
+			foreach ($mesesNum as $key => $value) {
+				if($key == $this->fecha) 
+					$ban=1;
+			}
+			
+			if($ban) {
+				$query->andFilterWhere([
+					'and',
+			    	['like', 'fecha', $mesesNum[$this->fecha]]
+				]);
+			}
+	 
+	        $query->andFilterWhere([
+			    'or',
+			    ['like', 'fecha', $this->fecha],
+			    ['like', 'fecha', Yii::$app->formatter->asDate($this->fecha, 'php:Y')]
+			]);
+		}
+		
+		$query->andFilterWhere(['like', 'notas', $this->notas]);
+		
         return $dataProvider;
     }
 }
