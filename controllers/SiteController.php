@@ -72,10 +72,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if (\Yii::$app->user->can('paciente')) {
+        if(\Yii::$app->user->can('paciente'))
             return $this->render('index-paciente');
-        }
-        return $this->redirect('/paciente/index');
+		
+		if(\Yii::$app->user->can('medico'))
+        	return $this->redirect('/paciente/index');
+		
+		if(\Yii::$app->user->can('admin'))
+			return $this->redirect('/user/admin/index');
     }
 
     /**

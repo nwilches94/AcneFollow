@@ -52,6 +52,9 @@ class Profile extends BaseUser
 
 	public function getName()
     {
-		return Profile::find()->where(['user_id' => Yii::$app->user->id])->one()->name;
+    	if(Yii::$app->user->id)
+			return Profile::find()->where(['user_id' => Yii::$app->user->id])->one()->name;
+		
+		return 'Usuario';
     }
 }

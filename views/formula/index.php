@@ -18,11 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<h1><?= Html::encode($this->title) ?></h1><br>
 	
-	<?php if(\Yii::$app->user->can('medico')){ ?>
+	<!--<?php if(\Yii::$app->user->can('medico')){ ?>
 		<p>
 			<?= Html::a(Yii::t('app', 'Crear Fórmula'), ['create'], ['class' => 'btn btn-success']) ?>
 	 	</p>
-	<?php } ?>
+	<?php } ?>-->
 	
 	<br>
 	 

@@ -95,13 +95,13 @@ AppAsset::register($this);
                                         "label" => "Fórmula",
                                         "url" => ["formula/index"],
                                         "icon" => "tachometer",
-                                        "visible" => !Yii::$app->user->identity->isAdmin
+                                        "visible" => \Yii::$app->user->can('paciente') || \Yii::$app->user->can('medico')
                                     ],
                                     [
                                         "label" => "Control de Cajas",
                                         "url" => ["control-caja/index"],
                                         "icon" => "medkit",
-                                        "visible" => !Yii::$app->user->identity->isAdmin
+                                        "visible" => \Yii::$app->user->can('paciente') || \Yii::$app->user->can('medico')
                                     ],
                                     [
                                         "label" => "Seguimiento de Periodo",
@@ -115,7 +115,13 @@ AppAsset::register($this);
                                         "icon" => "envelope",
 										"badge" => Mensaje::getCount()." nuevo",
                                         "badgeOptions" => ["class" => "label-success"] ,
-                                        "visible" => !Yii::$app->user->identity->isAdmin      
+                                        "visible" => \Yii::$app->user->can('paciente') || \Yii::$app->user->can('medico')  
+                                    ],
+                                    [
+                                        "label" => "Recuperar la contraseña",
+                                        "url" => ["/user/forgot"],
+                                        "icon" => "tachometer",
+                                        "visible" => !Yii::$app->user->id
                                     ],
                                     [
                                         "label" => "Administracion",
@@ -127,7 +133,7 @@ AppAsset::register($this);
                                                 "url" => "/user/admin/index",
                                             ],
                                         ],
-                                        "visible" => Yii::$app->user->identity->isAdmin
+                                        "visible" => \Yii::$app->user->can('admin')
                                     ],
                                 ],
                             ]
@@ -167,27 +173,28 @@ AppAsset::register($this);
                     <div class="nav toggle">
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="">
-                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="http://placehold.it/128x128" alt=""> <?= Profile::getName(); ?>
-                                <span class=" fa fa-angle-down"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li>
-                                    <?= Html::a('Mi cuenta', ['/user/settings/profile'], []) ?>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">Ayuda</a>
-                                </li>
-                                <li>
-                                    <?= Html::a('<i class="fa fa-sign-out pull-right"></i> Salir', ['/user/security/logout'], ['data-method' => 'POST']) ?>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
+					
+					<?php 	if(Yii::$app->user->id){ ?>
+			                    <ul class="nav navbar-nav navbar-right">
+			                        <li class="">
+			                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			                                <img src="http://placehold.it/128x128" alt=""> <?= Profile::getName(); ?>
+			                                <span class=" fa fa-angle-down"></span>
+			                            </a>
+			                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+			                                <li>
+			                                    <?= Html::a('Mi cuenta', ['/user/settings/profile'], []) ?>
+			                                </li>
+			                                <li>
+			                                    <a href="javascript:;">Ayuda</a>
+			                                </li>
+			                                <li>
+			                                    <?= Html::a('<i class="fa fa-sign-out pull-right"></i> Salir', ['/user/security/logout'], ['data-method' => 'POST']) ?>
+			                                </li>
+			                            </ul>
+			                        </li>
+			                    </ul>
+	          		<?php 	} ?>
                 </nav>
             </div>
 
