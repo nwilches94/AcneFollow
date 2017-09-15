@@ -50,7 +50,7 @@ class FotoController extends BaseAdminController
                         'roles' => ['admin', 'paciente'],
                     ],
                     [
-                        'actions' => ['galeria'],
+                        'actions' => ['galeria', 'download'],
                         'allow' => true,
                         'roles' => ['admin', 'medico', 'paciente'],
                     ],
@@ -191,5 +191,15 @@ class FotoController extends BaseAdminController
         	return $this->redirect(['foto/galeria?id='.$id]);
 		else
 			return $this->redirect(['examen/view?id='.$id]);
+    }
+	
+	public function actionDownload($id)
+    {
+		$model = File::find()->where(['id' => $id])->andWhere(['model' => 'Foto'])->one();
+
+		header ("Content-Disposition: attachment; filename=".$model->name.".".$model->type);
+		header ("Content-Type: application/octet-stream");
+		header ("Content-Length: ".filesize($model->path));
+		readfile($model->path);
     }
 }

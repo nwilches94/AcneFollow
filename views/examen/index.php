@@ -4,22 +4,32 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\models\Paciente;
+use app\models\Examen;
 use dektrium\user\models\profile;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ExamenSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Examenes');
+if(\Yii::$app->user->can('paciente'))
+	$this->title = Yii::t('app', 'Exámenes');
+else
+	$this->title = Yii::t('app', 'Histórico de Exámenes');
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="examen-index">
 
+<div class="examen-index">
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+	<br>
     <p>
-        <?= Html::a(Yii::t('app', 'Cargar Examen'), ['create'], ['class' => 'btn btn-success']) ?>
+    	<?php	if(\Yii::$app->user->can('paciente'))
+        			echo Html::a(Yii::t('app', 'Cargar Examen'), ['create'], ['class' => 'btn btn-success']);
+				else
+					echo Html::a(Yii::t('app', 'Regresar'), ['paciente/view?id='.$_GET['id']], ['class' => 'btn btn-success']);
+		?>
     </p>
 	<?php Pjax::begin(); ?>    
 		<?= GridView::widget([
@@ -35,8 +45,23 @@ $this->params['breadcrumbs'][] = $this->title;
 							return Yii::$app->formatter->asDate($data->fecha, 'php: M, Y');
 					     }
 				    ],
+				    'tipo',
 		            'notas:ntext',
-		            ['class' => 'yii\grid\ActionColumn'],
+		            [
+						'class' => 'yii\grid\ActionColumn',
+				        'template' => '{view}{update}{delete}',
+				        "visible" => \Yii::$app->user->can('paciente')
+					],    						
+					[
+						'class' => 'yii\grid\ActionColumn',
+				        'template' => '{view}',
+				        'buttons' => [
+				        	'view' => function($url, $model){
+					            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['imagen', 'id' => $model->id]);
+					        },
+					    ],
+				        "visible" => \Yii::$app->user->can('medico')
+					],
 		        ],
 		    ]); 
 		?>

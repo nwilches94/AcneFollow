@@ -15,27 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="examen-view">
 
-    <h1><?= Html::encode('Ver Examen') ?></h1><br>
+    <h1><?= Html::encode('Ver Exámenes') ?></h1><br>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Regresar'), ['index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Regresar'), ['examen/index?id='.$_GET['id']], ['class' => 'btn btn-primary']) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            [
-		        'attribute' => 'fecha',
-		        'format' => 'text',
-		        'label' => 'Fecha del Examen',
-		        'value' => function ($data) {
-					return Yii::$app->formatter->asDate($data->fecha, 'php: M, Y');
-			     }
-		    ],
-		    'tipo',
-            'notas:ntext',
-        ],
-    ]) ?>
 
     <div class="bs-example" data-example-id="simple-thumbnails">
 		<div class="row"> 
@@ -57,11 +41,21 @@ $this->params['breadcrumbs'][] = $this->title;
 						    						src="/attachments/file/download?id='.$value['id'].'" data-holder-rendered="true">';
 										Modal::end();
 										
-							echo		'<p align="right">
+							if(\Yii::$app->user->can('paciente')){		
+								echo	'<p align="right">
 											<a type="button" data-toggle="modal" data-target="#w'.$value['id'].'" title="Ver" aria-label="Ver"><span class="glyphicon glyphicon-eye-open"></span></a>
-						    				<a href="/foto/delete?id='.$_GET['id'].'&foto='.$value['id'].'&type=Examen" title="Eliminar" aria-label="Eliminar" data-pjax="0" data-confirm="¿Está seguro de eliminar este elemento?" data-method="post"><span class="glyphicon glyphicon-trash"></span></a>
+						    				<a href="/foto/delete?id='.$_GET['id'].'&foto='.$value['id'].'&type=Foto" title="Eliminar" aria-label="Eliminar" data-pjax="0" data-confirm="¿Está seguro de eliminar este elemento?" data-method="post"><span class="glyphicon glyphicon-trash"></span></a>
+						    				<a href="/examen/download?id='.$value['id'].'" title="Descargar"><span class="glyphicon glyphicon-download"></span></a>
 						    			</p>
 							    	</div>';
+							}
+							else{
+								echo	'<p align="right">
+											<a type="button" data-toggle="modal" data-target="#w'.$value['id'].'" title="Ver" aria-label="Ver"><span class="glyphicon glyphicon-eye-open"></span></a>
+											<a href="/examen/download?id='.$value['id'].'" title="Descargar"><span class="glyphicon glyphicon-download"></span></a>
+						    			</p>
+							    	</div>';
+							}
 						}
 					}
 					else

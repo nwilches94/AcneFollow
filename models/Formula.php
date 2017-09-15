@@ -51,7 +51,7 @@ class Formula extends \yii\db\ActiveRecord
             'fecha' => 'Fecha',
             'dosis' => 'Dosis',
             'capsula' => 'Capsula',
-            'cajas' => 'Cajas',
+            'cajas' => 'Cajas Tomadas',
         ];
     }
 

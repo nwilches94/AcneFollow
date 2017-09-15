@@ -20,7 +20,7 @@ use dektrium\user\models\Profile;
 			<?php 	if(true && \Yii::$app->user->can('medico'))
 					{
 						if($listaPaciente)
-							echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione...'])->label('Seleccione el Paciente');
+							echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione el Paciente'])->label('Pacientes');
 						else
 						{
 							echo 	'<div class="form-group field-formula-dosis required">
@@ -39,9 +39,9 @@ use dektrium\user\models\Profile;
 						echo $form->field($model, 'paciente_id')->hiddenInput(['value' => $paciente['id']])->label(false);
 					}
 	    	?>
-		    <?= $form->field($model, 'dosis')->textInput(['value' => $model['dosis'], 'placeholder' => 'mg'])->label('Dosis (mg)') ?>
-		    <?= $form->field($model, 'capsula')->textInput(['value' => $model['capsula'], 'placeholder' => 'mg'])->label('Cápsula (mg)') ?>
-		    <?= $form->field($model, 'cajas')->textInput(['value' => $model['cajas'], 'placeholder' => 'Cajas']) ?> 
+	    	<?= $form->field($model, 'dosis')->dropDownList(['120' => '120', '135' => '135', '150' => '150', '200' => '200'], ['prompt'=>'Seleccione la dosis'])->label('Dosis (mg)'); ?>
+	    	<?= $form->field($model, 'capsula')->textInput(['value' => $model['capsula'], 'placeholder' => 'mg'])->label('Cápsula (mg)') ?>
+		    <?= $form->field($model, 'cajas')->textInput(['value' => $model['cajas'], 'placeholder' => '#']) ?> 
 	    </div>
 	    
 	    <div class="form-group">

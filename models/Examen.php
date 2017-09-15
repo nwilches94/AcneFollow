@@ -49,9 +49,9 @@ class Examen extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'updated_at', 'fecha'], 'safe'],
-            [['paciente_id', 'fecha'], 'required'],
+            [['paciente_id', 'fecha', 'tipo'], 'required'],
             [['paciente_id'], 'integer'],
-            [['notas'], 'string'],
+            [['tipo', 'notas'], 'string'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id']],
         ];
     }
@@ -68,6 +68,7 @@ class Examen extends \yii\db\ActiveRecord
             'paciente_id' => Yii::t('app', 'Paciente'),
             'fecha' => Yii::t('app', 'Fecha del Examen'),
             'notas' => Yii::t('app', 'Notas'),
+            'tipo' => Yii::t('app', 'Tipo de Examen')
         ];
     }
 

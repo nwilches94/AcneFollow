@@ -35,12 +35,12 @@ class ExamenController extends BaseAdminController
                 ],
                 'rules' => [
                 	[
-                        'actions' => ['view', 'create', 'update', 'delete'],
+                        'actions' => ['create', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['admin', 'paciente'],
                     ],
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'view', 'imagen', 'download'],
                         'allow' => true,
                         'roles' => ['admin', 'medico', 'paciente'],
                     ],
@@ -190,5 +190,32 @@ class ExamenController extends BaseAdminController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+	
+	public function actionImagen($id)
+    {
+    	$model = Examen::findOne($id);
+		
+		$query = File::find()->where(['in', 'itemId', $id])->andWhere(['model' => 'Examen']);
+        if($query){
+	        $dataProvider = new ActiveDataProvider([
+	            'query' => $query,
+	        ]);
+			$fotos=$query->all();
+		}
+
+        return $this->render('imagen', [
+            'model' => $model, 'dataProvider' => $dataProvider, 'fotos' => $fotos
+        ]);
+    }
+	
+	public function actionDownload($id)
+    {
+		$model = File::find()->where(['id' => $id])->andWhere(['model' => 'Examen'])->one();
+
+		header ("Content-Disposition: attachment; filename=".$model->name.".".$model->type);
+		header ("Content-Type: application/octet-stream");
+		header ("Content-Length: ".filesize($model->path));
+		readfile($model->path);
     }
 }

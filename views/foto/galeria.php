@@ -16,6 +16,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="foto-create">
 	
     <h1><?= Html::encode($this->title) ?></h1><br>
+    
+    <?php if(\Yii::$app->user->can('medico')) { ?>
+    	<?= Html::a(Yii::t('app', 'Regresar'), '/paciente/view?id='.$_GET['id'], ['class' => 'btn btn-primary']) ?>
+    <?php } else { ?>
+    	<?= Html::a(Yii::t('app', 'Regresar'), '/foto/create', ['class' => 'btn btn-primary']) ?>
+    <?php } ?>
+    
+     <br><br>
 	
     <div class="bs-example" data-example-id="simple-thumbnails">
 		<div class="row"> 
@@ -40,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							if(\Yii::$app->user->can('paciente')){		
 								echo	'<p align="right">
 											<a type="button" data-toggle="modal" data-target="#w'.$value['id'].'" title="Ver" aria-label="Ver"><span class="glyphicon glyphicon-eye-open"></span></a>
+						    				<a href="/foto/download?id='.$value['id'].'" title="Descargar"><span class="glyphicon glyphicon-download"></span></a>
 						    				<a href="/foto/delete?id='.$_GET['id'].'&foto='.$value['id'].'&type=Foto" title="Eliminar" aria-label="Eliminar" data-pjax="0" data-confirm="¿Está seguro de eliminar este elemento?" data-method="post"><span class="glyphicon glyphicon-trash"></span></a>
 						    			</p>
 							    	</div>';
@@ -47,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							else{
 								echo	'<p align="right">
 											<a type="button" data-toggle="modal" data-target="#w'.$value['id'].'" title="Ver" aria-label="Ver"><span class="glyphicon glyphicon-eye-open"></span></a>
+						    				<a href="/foto/download?id='.$value['id'].'" title="Descargar"><span class="glyphicon glyphicon-download"></span></a>
 						    			</p>
 							    	</div>';
 							}
@@ -63,12 +73,4 @@ $this->params['breadcrumbs'][] = $this->title;
 			?>  	
     	</div> 
     </div>
-    
-    <br><br>
-    
-    <?php if(\Yii::$app->user->can('medico')) { ?>
-    	<?= Html::a(Yii::t('app', 'Regresar'), '/paciente/view?id='.$_GET['id'], ['class' => 'btn btn-primary']) ?>
-    <?php } else { ?>
-    	<?= Html::a(Yii::t('app', 'Regresar'), '/foto/create', ['class' => 'btn btn-primary']) ?>
-    <?php } ?>
 </div>

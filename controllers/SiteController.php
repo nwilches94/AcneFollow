@@ -75,7 +75,7 @@ class SiteController extends Controller
         if (\Yii::$app->user->can('paciente')) {
             return $this->render('index-paciente');
         }
-        return $this->render('index');
+        return $this->redirect('/paciente/index');
     }
 
     /**
