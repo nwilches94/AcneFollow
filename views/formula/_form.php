@@ -20,7 +20,12 @@ use dektrium\user\models\Profile;
 			<?php 	if(true && \Yii::$app->user->can('medico'))
 					{
 						if($listaPaciente)
-							echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione el Paciente'])->label('Pacientes');
+						{
+							if(isset($_GET['id']))
+								echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione el Paciente', 'disabled' =>'disabled'])->label('Paciente');
+							else
+								echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione el Paciente', 'onclick'=>'getPeso()'])->label('Paciente');
+						}
 						else
 						{
 							echo 	'<div class="form-group field-formula-dosis required">
@@ -39,8 +44,9 @@ use dektrium\user\models\Profile;
 						echo $form->field($model, 'paciente_id')->hiddenInput(['value' => $paciente['id']])->label(false);
 					}
 	    	?>
-	    	<?= $form->field($model, 'dosis')->dropDownList(['120' => '120', '135' => '135', '150' => '150', '200' => '200'], ['prompt'=>'Seleccione la dosis'])->label('Dosis (mg)'); ?>
-	    	<?= $form->field($model, 'capsula')->textInput(['value' => $model['capsula'], 'placeholder' => 'mg'])->label('Cápsula (mg)') ?>
+	    	<?= $form->field($model, 'peso')->textInput(['value' => $model['peso'], 'placeholder' => 'Peso']); ?>
+	    	<?= $form->field($model, 'dosis')->dropDownList(['120' => '120', '135' => '135', '150' => '150', '200' => '200'], ['prompt'=>'Seleccione la dosis']); ?>
+	    	<?= $form->field($model, 'capsula')->textInput(['value' => $model['capsula'], 'placeholder' => 'mg']) ?>
 		    <?= $form->field($model, 'cajas')->textInput(['value' => $model['cajas'], 'placeholder' => '#']) ?> 
 	    </div>
 	    
@@ -54,3 +60,25 @@ use dektrium\user\models\Profile;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<div id="peso" style="display:none"></div>
+
+<script>
+	function getPeso()
+	{
+		var idPaciente= $('#formula-paciente_id').val();
+		
+		var server= '<?= $_SERVER['HTTP_HOST'] ?>';
+		var http = 'http://';
+			
+		if(idPaciente)
+		{
+			$("#peso").load(http+server+'/formula/peso?id='+idPaciente,
+			function(response, status, xhr)
+			{
+				if(status != "error")
+		    		$('#formula-peso').prop('value', response);
+			});
+		}
+	}
+</script>

@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Formula;
 use app\models\Paciente;
+use app\models\ControlCaja;
 use dektrium\user\models\Profile;
 use yii\data\ActiveDataProvider;
 use dektrium\user\controllers\AdminController as BaseAdminController;
@@ -25,7 +26,7 @@ class FormulaController extends BaseAdminController
                 ],
                 'rules' => [
                 	[
-                        'actions' => ['view', 'create', 'update', 'delete'],
+                        'actions' => ['view', 'create', 'update', 'delete', 'peso'],
                         'allow' => true,
                         'roles' => ['admin', 'medico'],
                     ],
@@ -80,10 +81,19 @@ class FormulaController extends BaseAdminController
 			if($model->validate()) {
 				$model->save();
 				
+				//Creo el control de cajas
+				$controlCajas = new ControlCaja();
+				$controlCajas->paciente_id=$model->paciente_id;
+				$controlCajas->doctor_id= Yii::$app->user->id;
+				$controlCajas->fecha=$model->fecha;
+				$controlCajas->cajaTomada=$model->cajas;
+				$controlCajas->dosisAcumulada=($model->cajas)*(30*$model->capsula);
+				$controlCajas->dosisRestante=(($model->peso*$model->dosis)-($controlCajas->dosisAcumulada));
+				$controlCajas->dosisCaja=(($model->peso*$model->dosis)/($model->capsula*30))-($model->cajas);
+				$controlCajas->save();
+				
 				return $this->redirect(['index']);
 			}
-			else
-				$model->getErrors();
         } 
 		
 		$listaPaciente=null;
@@ -149,5 +159,13 @@ class FormulaController extends BaseAdminController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+	
+	public function actionPeso($id)
+    {
+    	$paciente = Paciente::findOne($id);
+        $profile = Profile::findOne($paciente['user_id']);
+		
+		return $profile['peso'];
     }
 }

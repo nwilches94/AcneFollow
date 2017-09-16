@@ -18,11 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<h1><?= Html::encode($this->title) ?></h1><br>
 	
-	<!--<?php if(\Yii::$app->user->can('medico')){ ?>
+	<?php if(\Yii::$app->user->can('medico')){ ?>
 		<p>
 			<?= Html::a(Yii::t('app', 'Crear Fórmula'), ['create'], ['class' => 'btn btn-success']) ?>
 	 	</p>
-	<?php } ?>-->
+	<?php } ?>
 	
 	<br>
 	 
@@ -47,6 +47,12 @@ $this->params['breadcrumbs'][] = $this->title;
 					     },
 					     "visible" => \Yii::$app->user->can('medico')
 	                ],
+	                [
+				        'attribute' => 'peso',
+				        'format' => 'text',
+				        'label' => 'Peso',
+				        'value' => 'peso'
+				    ],
 				    [
 				        'attribute' => 'dosis',
 				        'format' => 'text',
@@ -54,16 +60,26 @@ $this->params['breadcrumbs'][] = $this->title;
 				        'value' => 'dosis'
 				    ],
 				    [
-				        'attribute' => 'capsula',
+				        'attribute' => 'caja',
 				        'format' => 'text',
-				        'label' => 'Cápsula (mg)',
-				        'value' => 'capsula'
+				        'label' => 'Dosis total (mg)',
+				        'value' => function ($data) {
+					    	return ($data->peso*$data->dosis);
+					     }
 				    ],
 				    [
 				        'attribute' => 'caja',
 				        'format' => 'text',
-				        'label' => 'Cajas',
-				        'value' => 'cajas'
+				        'label' => 'Dosis total cajas (mg)',
+				        'value' => function ($data) {
+					    	return number_format((($data->peso*$data->dosis)/($data->capsula*30)),0);
+					     }
+				    ],
+				    [
+				        'attribute' => 'capsula',
+				        'format' => 'text',
+				        'label' => 'mg Cápsula',
+				        'value' => 'capsula'
 				    ],
 				    [
 						'class' => 'yii\grid\ActionColumn',

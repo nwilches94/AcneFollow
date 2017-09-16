@@ -8,18 +8,21 @@ use dektrium\user\models\Profile;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Control de Cajas';
+if(\Yii::$app->user->can('medico'))
+	$this->title = 'Calcular Dosis';
+else
+	$this->title = 'Control de Cajas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="control-caja-index">
 
     <h1><?= Html::encode($this->title) ?></h1><br>
 	
-	<?php if(\Yii::$app->user->can('medico')){ ?>
+	<!--<?php if(\Yii::$app->user->can('medico')){ ?>
 		<p>
 			<?= Html::a('Crear Control de Caja', ['create'], ['class' => 'btn btn-success']) ?>
 	 	</p>
-	<?php } ?>
+	<?php } ?>-->
 	
 	<br>
 	
@@ -44,14 +47,35 @@ $this->params['breadcrumbs'][] = $this->title;
 			     "visible" => \Yii::$app->user->can('medico')
             ],
             'cajaTomada',
-            'dosisAcumulada',
-            'dosisRestante',
-            'dosisCaja',
             [
+		        'attribute' => 'dosisAcumulada',
+		        'format' => 'text',
+		        'value' => function ($data) {
+			    	return $data->dosisAcumulada;
+			    },
+		        "visible" => \Yii::$app->user->can('medico')
+		    ],
+		    [
+		        'attribute' => 'dosisRestante',
+		        'format' => 'text',
+		        'value' => function ($data) {
+			    	return $data->dosisRestante;
+			    },
+		        "visible" => \Yii::$app->user->can('medico')
+		    ],
+		    [
+		        'attribute' => 'dosisCaja',
+		        'format' => 'text',
+		        'value' => function ($data) {
+			    	return number_format($data->dosisCaja,0);
+			    },
+		        "visible" => \Yii::$app->user->can('medico')
+		    ],
+            /*[
 				'class' => 'yii\grid\ActionColumn',
 		        'template' => '{update}{delete}',
 		        "visible" => \Yii::$app->user->can('medico')
-			],
+			],*/
         ],
     ]); ?>
 </div>

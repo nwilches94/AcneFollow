@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use dektrium\user\models\Profile;
 /**
  * This is the model class for table "formula".
  *
@@ -32,8 +32,8 @@ class Formula extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['paciente_id', 'doctor_id', 'fecha', 'dosis', 'capsula', 'cajas'], 'required'],
-            [['paciente_id', 'doctor_id', 'dosis', 'capsula', 'cajas'], 'integer'],
+            [['paciente_id', 'doctor_id', 'fecha', 'peso', 'dosis', 'capsula', 'cajas'], 'required'],
+            [['paciente_id', 'doctor_id', 'peso', 'dosis', 'capsula', 'cajas'], 'integer'],
             [['fecha'], 'safe'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id']],
         ];
@@ -49,9 +49,10 @@ class Formula extends \yii\db\ActiveRecord
             'paciente_id' => 'Paciente',
             'doctor_id' => 'Doctor',
             'fecha' => 'Fecha',
-            'dosis' => 'Dosis',
-            'capsula' => 'Capsula',
-            'cajas' => 'Cajas Tomadas',
+            'peso' => 'Peso',
+            'dosis' => 'Dosis (mg)',
+            'capsula' => 'mg Cápsula',
+            'cajas' => '# Cajas Tomadas',
         ];
     }
 

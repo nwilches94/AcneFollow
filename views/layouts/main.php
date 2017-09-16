@@ -98,10 +98,16 @@ AppAsset::register($this);
                                         "visible" => \Yii::$app->user->can('paciente') || \Yii::$app->user->can('medico')
                                     ],
                                     [
+                                        "label" => "Calcular Dosis",
+                                        "url" => ["control-caja/index"],
+                                        "icon" => "medkit",
+                                        "visible" => \Yii::$app->user->can('medico')
+                                    ],
+                                    [
                                         "label" => "Control de Cajas",
                                         "url" => ["control-caja/index"],
                                         "icon" => "medkit",
-                                        "visible" => \Yii::$app->user->can('paciente') || \Yii::$app->user->can('medico')
+                                        "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [
                                         "label" => "Seguimiento de Periodo",

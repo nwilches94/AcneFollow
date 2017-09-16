@@ -33,7 +33,8 @@ class ControlCaja extends \yii\db\ActiveRecord
     {
         return [
             [['paciente_id', 'doctor_id', 'fecha', 'cajaTomada', 'dosisAcumulada', 'dosisRestante', 'dosisCaja'], 'required'],
-            [['paciente_id', 'doctor_id', 'cajaTomada', 'dosisAcumulada', 'dosisRestante', 'dosisCaja'], 'integer'],
+            [['paciente_id', 'doctor_id', 'cajaTomada'], 'integer'],
+            [['dosisAcumulada', 'dosisRestante', 'dosisCaja'], 'number'],
             [['fecha'], 'safe'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id']],
         ];
@@ -49,7 +50,7 @@ class ControlCaja extends \yii\db\ActiveRecord
             'paciente_id' => 'Paciente',
             'doctor_id' => 'Doctor',
             'fecha' => 'Fecha',
-            'cajaTomada' => 'Cajas Tomadas',
+            'cajaTomada' => '# Cajas Tomadas',
             'dosisAcumulada' => 'Dosis Acumuladas',
             'dosisRestante' => 'Dosis Restantes (mg)',
             'dosisCaja' => 'Dosis Restante de Cajas',
