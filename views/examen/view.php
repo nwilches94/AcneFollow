@@ -85,7 +85,6 @@ $this->params['breadcrumbs'][] = $this->title;
 						echo 	'<div class="form-group field-formula-dosis required">
 										<div class="col-sm-9">
 											<p style="color:#FF0000; padding-top:1%; padding-bottom:0px">No se han cargado imagenes del Examen</p>
-											<a href="/examen/download?id='.$value['id'].'" title="Descargar"><span class="glyphicon glyphicon-download"></span></a>
 										</div>
 									</div>';
 					}

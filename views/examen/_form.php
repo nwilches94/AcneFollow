@@ -35,7 +35,7 @@ use app\models\Paciente;
 	    
 		<?= $form->field($model, 'fecha')->widget(DatePicker::className()) ?>
 		
-		<?= $form->field($model, 'tipo')->dropDownList(['TGO' => 'TGO', 'TGP' => 'TGP', 'Colesterol o triglicéridos' => 'Colesterol o triglicéridos'], ['prompt'=>'Seleccione el Tipo de Examen'])->label('Tipo de Examen'); ?>
+		<?= $form->field($model, 'tipo')->dropDownList(['TGO' => 'TGO', 'TGP' => 'TGP', 'Colesterol' => 'Colesterol', 'Triglicéridos' => 'Triglicéridos'], ['prompt'=>'Seleccione el Tipo de Examen'])->label('Tipo de Examen'); ?>
 		
 	    <?= $form->field($model, 'notas')->textarea(['rows' => 4]) ?>
 		
