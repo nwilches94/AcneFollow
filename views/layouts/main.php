@@ -93,19 +93,19 @@ AppAsset::register($this);
                                     ],
                                     [
                                         "label" => "Fórmula",
-                                        "url" => ["formula/index"],
+                                        "url" => ["control-caja/index"],
                                         "icon" => "tachometer",
                                         "visible" => \Yii::$app->user->can('paciente') || \Yii::$app->user->can('medico')
                                     ],
                                     [
                                         "label" => "Calcular Dosis",
-                                        "url" => ["control-caja/index"],
+                                        "url" => ["formula/index"],
                                         "icon" => "medkit",
                                         "visible" => \Yii::$app->user->can('medico')
                                     ],
                                     [
                                         "label" => "Control de Cajas",
-                                        "url" => ["control-caja/index"],
+                                        "url" => ["formula/index"],
                                         "icon" => "medkit",
                                         "visible" => \Yii::$app->user->can('paciente')
                                     ],

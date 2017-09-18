@@ -8,10 +8,7 @@ use dektrium\user\models\Profile;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-if(\Yii::$app->user->can('medico'))
-	$this->title = 'Calcular Dosis';
-else
-	$this->title = 'Control de Cajas';
+$this->title = Yii::t('app', 'Fórmulas');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="control-caja-index">

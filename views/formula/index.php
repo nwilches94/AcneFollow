@@ -9,7 +9,10 @@ use dektrium\user\models\Profile;
 /* @var $this yii\web\View */
 /* @var $model app\models\Paciente */
 
-$this->title = Yii::t('app', 'Fórmulas');
+if(\Yii::$app->user->can('medico'))
+	$this->title = 'Calcular Dosis';
+else
+	$this->title = 'Control de Cajas';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Pacientes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

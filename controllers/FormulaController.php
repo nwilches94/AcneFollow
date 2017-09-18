@@ -84,12 +84,13 @@ class FormulaController extends BaseAdminController
 				//Creo el control de cajas
 				$controlCajas = new ControlCaja();
 				$controlCajas->paciente_id=$model->paciente_id;
+				$controlCajas->formula_id=$model->id;
 				$controlCajas->doctor_id= Yii::$app->user->id;
 				$controlCajas->fecha=$model->fecha;
 				$controlCajas->cajaTomada=$model->cajas;
 				$controlCajas->dosisAcumulada=($model->cajas)*(30*$model->capsula);
 				$controlCajas->dosisRestante=(($model->peso*$model->dosis)-($controlCajas->dosisAcumulada));
-				$controlCajas->dosisCaja=(($model->peso*$model->dosis)/($model->capsula*30))-($model->cajas);
+				$controlCajas->dosisCaja=((($model->peso*$model->dosis)/($model->capsula*30))-($model->cajas));
 				$controlCajas->save();
 				
 				return $this->redirect(['index']);
@@ -122,6 +123,18 @@ class FormulaController extends BaseAdminController
 
 			if($model->validate()) {
 				$model->save();
+				
+				//Creo el control de cajas
+				$controlCajas=ControlCaja::find()->where(['formula_id' => $model->id])->one();
+				$controlCajas->paciente_id=$model->paciente_id;
+				$controlCajas->formula_id=$model->id;
+				//$controlCajas->doctor_id= Yii::$app->user->id;
+				//$controlCajas->fecha=$model->fecha;
+				$controlCajas->cajaTomada=$model->cajas;
+				$controlCajas->dosisAcumulada=($model->cajas)*(30*$model->capsula);
+				$controlCajas->dosisRestante=(($model->peso*$model->dosis)-($controlCajas->dosisAcumulada));
+				$controlCajas->dosisCaja=((($model->peso*$model->dosis)/($model->capsula*30))-($model->cajas));
+				$controlCajas->save();
 				
 				return $this->redirect('index');
 			}
