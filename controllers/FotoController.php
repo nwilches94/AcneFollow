@@ -76,9 +76,12 @@ class FotoController extends BaseAdminController
 		
 		if(Yii::$app->request->post()) {
 			
+			$attributes = Yii::$app->request->post();
+			
 			$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
 			$model->paciente_id = $paciente['id'];
-			$model->fecha = date('Y-m-d');
+			$model->fecha = Yii::$app->formatter->asDate($attributes['Foto']['fecha'], 'php: Y-m-d');
+			$model->notas = $attributes['Foto']['notas'];
 			$model->save();
 
 			return $this->redirect('/foto/galeria?id='.$paciente['user_id']);
@@ -132,12 +135,14 @@ class FotoController extends BaseAdminController
 			\Yii::$app->getSession()->setFlash('success', 'Se ha cargado las Fotos');
 		}
 		
-		$ids=null;
+		$ids=null; $fechas=null; $notas=null;
 		if(\Yii::$app->user->can('medico')) {
 			$fotos=Foto::find()->where(['paciente_id' => $id])->all();
 			if($fotos){
 				foreach ($fotos as $key => $value) {
 					$ids[] = $value['id'];
+					$fechas[$value['id']] = Yii::$app->formatter->asDate($value['fecha'], 'php: d-m-Y');
+					$notas[$value['id']] = $value['notas'];
 				}
 			}
 		}
@@ -147,6 +152,8 @@ class FotoController extends BaseAdminController
 			if($fotos){
 				foreach ($fotos as $key => $value) {
 					$ids[] = $value['id'];
+					$fechas[$value['id']] = Yii::$app->formatter->asDate($value['fecha'], 'php: d-m-Y');
+					$notas[$value['id']] = $value['notas'];
 				}
 			}	
 		}
@@ -156,7 +163,7 @@ class FotoController extends BaseAdminController
 			$query = File::find()->where(['in', 'itemId', $ids])->andWhere(['model' => 'Foto']);
 	        if($query){
 		        $dataProvider = new ActiveDataProvider([
-		            'query' => $query,
+		            'query' => $query
 		        ]);
 				$fotos=$query->all();
 			}
@@ -166,9 +173,9 @@ class FotoController extends BaseAdminController
 			$dataProvider="";
 			$fotos="";
 		}
-
+		
         return $this->render('galeria', [
-            'model' => $model, 'dataProvider' => $dataProvider, 'fotos' => $fotos
+            'model' => $model, 'dataProvider' => $dataProvider, 'fotos' => $fotos, 'fechas' => $fechas, 'notas' => $notas
         ]);
     }
 	

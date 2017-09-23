@@ -19,6 +19,8 @@ use yii\db\Expression;
  */
 class Examen extends \yii\db\ActiveRecord
 {
+	public $valorE, $valorR;
+	
     /**
      * @inheritdoc
      */
@@ -50,6 +52,7 @@ class Examen extends \yii\db\ActiveRecord
         return [
             [['created_at', 'updated_at', 'fecha'], 'safe'],
             [['paciente_id', 'fecha', 'tipo'], 'required'],
+            [['fecha', 'tipo', 'valorE', 'valorR'], 'required', 'on' => ['grafica']],
             [['paciente_id'], 'integer'],
             [['tipo', 'notas'], 'string'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id']],

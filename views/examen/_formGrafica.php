@@ -37,6 +37,8 @@ use app\models\Paciente;
 		
 		<?= $form->field($model, 'tipo')->dropDownList(['TGO' => 'TGO', 'TGP' => 'TGP', 'Colesterol' => 'Colesterol', 'Triglicéridos' => 'Triglicéridos', 'Otro' => 'Otro'], ['prompt'=>'Seleccione el Tipo de Examen'])->label('Tipo de Examen'); ?>
 		
+	    <?= $form->field($model, 'notas')->textarea(['rows' => 4]) ?>
+		
 		<div class="form-group">
 			<div class="col-lg-offset-3 col-lg-9">
 			    <?= \nemmo\attachments\components\AttachmentsInput::widget([
@@ -52,10 +54,7 @@ use app\models\Paciente;
 			        ])
 			    ?>
 			</div>
-		</div>  
-		
-		<?= $form->field($model, 'notas')->textarea(['rows' => 4]) ?>
-		 
+		</div>   
 	
 	    <div class="form-group">
 			<div class="col-lg-offset-3 col-lg-9">

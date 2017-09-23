@@ -18,6 +18,8 @@ use Yii;
  */
 class Mensaje extends \yii\db\ActiveRecord
 {
+	public $buscar;
+	
     /**
      * @inheritdoc
      */
@@ -91,7 +93,7 @@ class Mensaje extends \yii\db\ActiveRecord
 			if($pacientes) {
 				foreach ($pacientes as $value) {
 					$user=Profile::find()->where(['user_id' => $value['user_id']])->one();
-					$listaPaciente[$value['id']] = $user['name'];
+					$listaPaciente[$value['id']] = $user['cedula']." - ".$user['name'];
 				}
 			}
 		}
@@ -99,23 +101,30 @@ class Mensaje extends \yii\db\ActiveRecord
 		return $listaPaciente;
 	}
 	
-	public function getDataProvider()
+	public function getDataProvider($search)
     {
+    	$buscar="";
+    	if($search)
+			$buscar = "AND (profile.user_id LIKE '$search' OR profile.cedula LIKE '$search' OR profile.name LIKE '%$search%')";
+    	
     	$query=null;
 		if(\Yii::$app->user->can('medico'))
 		{
-			$sql =	"SELECT * 
+			$sql =	"SELECT mensaje.* 
 					FROM mensaje
-					WHERE origen='paciente' AND doctor_id=".Yii::$app->user->id." AND id IN (
+					JOIN paciente ON paciente.id = mensaje.paciente_id 
+					JOIN profile ON profile.user_id = paciente.user_id
+					WHERE mensaje.origen='paciente' AND mensaje.doctor_id=".Yii::$app->user->id." AND mensaje.id IN (
 						SELECT MAX(id) AS id 
 						FROM mensaje
 						WHERE origen='paciente' AND doctor_id=".Yii::$app->user->id." 
 						GROUP BY doctor_id, paciente_id
 						ORDER BY doctor_id, paciente_id
 					)
-					GROUP BY doctor_id, paciente_id
-					ORDER BY doctor_id, paciente_id";
-
+					".$buscar."
+					GROUP BY mensaje.doctor_id, mensaje.paciente_id
+					ORDER BY mensaje.doctor_id, mensaje.paciente_id";
+					
             $query = Mensaje::findBySql($sql);
 		}
 		else
@@ -124,17 +133,20 @@ class Mensaje extends \yii\db\ActiveRecord
 			
 			if($paciente)
 			{
-				$sql =	"SELECT * 
+				$sql =	"SELECT mensaje.* 
 						FROM mensaje
-						WHERE origen='medico' AND paciente_id=".$paciente['id']." AND id IN (
+						JOIN paciente ON paciente.id = mensaje.paciente_id 
+						JOIN profile ON profile.user_id = paciente.doctor_id
+						WHERE mensaje.origen='medico' AND mensaje.paciente_id=".$paciente['id']." AND mensaje.id IN (
 							SELECT MAX(id) AS id 
 							FROM mensaje
 							WHERE origen='medico' AND paciente_id=".$paciente['id']." 
 							GROUP BY doctor_id, paciente_id
 							ORDER BY doctor_id, paciente_id
 						)
-						GROUP BY doctor_id, paciente_id
-						ORDER BY doctor_id, paciente_id";
+						".$buscar."
+						GROUP BY mensaje.doctor_id, mensaje.paciente_id
+						ORDER BY mensaje.doctor_id, mensaje.paciente_id";
 						
 				$query = Mensaje::findBySql($sql);
 			}

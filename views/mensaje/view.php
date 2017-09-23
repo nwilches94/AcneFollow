@@ -14,8 +14,10 @@ $this->title = Yii::t('app', 'Historial de Mensajes');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?= $this->render('@vendor/dektrium/yii2-user/views/_alert', ['module' => Yii::$app->getModule('user'),]) ?>
+
 <h3><?= Html::encode('Historial de Mensajes') ?></h3><br>
-	    
+    
 <?php Pjax::begin(); ?>    
 	<?= GridView::widget([
 	        'dataProvider' => $dataProvider,
@@ -52,6 +54,15 @@ $this->params['breadcrumbs'][] = $this->title;
 			        'value'=> 'mensaje',
 			        'value' => function ($data) {
 						return Html::encode($data->mensaje);
+				     }
+			    ],
+			    [
+			        'attribute' => 'fecha',
+			        'format' => 'text',
+			        'label' => 'Fecha y Hora',
+			        'headerOptions' => ['width' => '20%'],
+			        'value' => function ($data) {
+						return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y h:i:s ').$data->ampm;
 				     }
 			    ],
 	        ],

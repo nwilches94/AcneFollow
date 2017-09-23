@@ -34,6 +34,7 @@ use app\models\Examen;
 use app\models\Mensaje;
 use nemmo\attachments\models\File;
 use yii\data\ActiveDataProvider;
+	
 /**
  * PacienteController implements the CRUD actions for Paciente model.
  */
@@ -247,8 +248,12 @@ class PacienteController extends BaseAdminController
 		else
 			$dataProviderPeriodo = '';
 		
+		$examen = new Examen();
+		$examen->scenario = 'grafica';
+		
         return $this->render('view', [
-            'model' => $this->findModel($id), 'dataProvider' => $dataProvider, 'dataProviderPeriodo' => $dataProviderPeriodo
+            'model' => $this->findModel($id), 'dataProvider' => $dataProvider, 
+             'dataProviderPeriodo' => $dataProviderPeriodo, 'examen' => $examen
         ]);
     }
 

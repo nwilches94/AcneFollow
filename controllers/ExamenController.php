@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Examen;
 use app\models\ExamenSearch;
+use app\models\Grafica;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -68,10 +69,10 @@ class ExamenController extends BaseAdminController
     {
         $searchModel = new ExamenSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		
+
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -196,16 +197,32 @@ class ExamenController extends BaseAdminController
     {
     	$model = Examen::findOne($id);
 		
+		$fotos = array();
 		$query = File::find()->where(['in', 'itemId', $id])->andWhere(['model' => 'Examen']);
-        if($query){
-	        $dataProvider = new ActiveDataProvider([
-	            'query' => $query,
-	        ]);
+        if($query)
 			$fotos=$query->all();
-		}
+		
+		/*$examen = new Examen();
+		$examen->scenario = 'grafica';
+		
+		if($examen->load(Yii::$app->request->post())) {
+			$model->fecha = Examen::changeDate($model->fecha, 0);
+			$model->save();
+			
+			$examen = new Examen();
+        }
+		
+		$queryG=Grafica::find();
+		$dataProvider = new ActiveDataProvider([
+            'query' => $queryG
+        ]);*/
+		
+		/*($fotos);
+		die;*/
 
         return $this->render('imagen', [
-            'model' => $model, 'dataProvider' => $dataProvider, 'fotos' => $fotos
+            'model' => $model, 'fotos' => $fotos, /*'dataProvider' => $dataProvider, 
+            'examen' => $examen*/
         ]);
     }
 	

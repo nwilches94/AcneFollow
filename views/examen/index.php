@@ -42,7 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
 				        'format' => 'text',
 				        'label' => 'Fecha',
 				        'value' => function ($data) {
-							return Yii::$app->formatter->asDate($data->fecha, 'php: M, Y');
+				        	\Yii::$app->language = 'es-ES';
+							
+				        	$formatter = \Yii::$app->formatter;
+				        	$formatter->locale='es-ES';
+				        	return $formatter->asDate($data->fecha, 'php: F Y');
 					     }
 				    ],
 				    'tipo',
@@ -57,7 +61,10 @@ $this->params['breadcrumbs'][] = $this->title;
 				        'template' => '{view}',
 				        'buttons' => [
 				        	'view' => function($url, $model){
-					            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['imagen', 'id' => $model->id]);
+				        		if($model->tipo == 'Otro')
+									return '';
+								else
+					            	return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['imagen', 'id' => $model->id]);
 					        },
 					    ],
 				        "visible" => \Yii::$app->user->can('medico')

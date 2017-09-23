@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 use Yii;
+use yii\helpers\Html;
 use yii\web\Controller;
 use app\models\Mensaje;
 use app\models\Paciente;
@@ -49,17 +50,32 @@ class MensajeController extends BaseAdminController
     {
     	$model = new Mensaje();
 		
+		$search=null;
+		if($model->load(Yii::$app->request->get())) {
+			
+			$attributes = Yii::$app->request->get();
+			
+			if($attributes['Mensaje']['buscar'])
+			{
+				$search = $attributes['Mensaje']['buscar'];
+				$query = Mensaje::getDataProvider($attributes['Mensaje']['buscar']);
+			}
+		}
+		
 		if($model->load(Yii::$app->request->post())) {
+			
 			if(\Yii::$app->user->can('medico'))
 				$model->origen='medico';
 			else
     			$model->origen='paciente';
 			$model->leido = 0;
-			$model->fecha = date('Y-m-d');
-
+			$model->fecha = date('Y-m-d h:i:s');
+			$model->ampm = date('A');
+			
 			if($model->validate()) {
 				$model->save();
 				
+				\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'El Mensaje se ha enviado'));
 				$model = new Mensaje();
 			}
 			else
@@ -69,9 +85,12 @@ class MensajeController extends BaseAdminController
 		//Obtengo Listado de Pacientes
 		$listaPaciente = Mensaje::getListaPaciente();
 		
+		if(!$search)
+			$query = Mensaje::getDataProvider(null);
+			
 		//Obtengo la data
 		$dataProvider = new ActiveDataProvider([
-			'query' => Mensaje::getDataProvider()
+			'query' => $query
 		]);
 		
 		//Contador de mensajes nuevos
@@ -103,11 +122,13 @@ class MensajeController extends BaseAdminController
 			else
     			$model->origen='paciente';
 			$model->leido = 0;
-			$model->fecha = date('Y-m-d');
+			$model->fecha = date('Y-m-d h:i:s');
+			$model->ampm = date('A');
 
 			if($model->validate()) {
 				$model->save();
 				
+				\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'El Mensaje se ha enviado'));
 				$model = new Mensaje();
 			}
 			else
@@ -125,7 +146,7 @@ class MensajeController extends BaseAdminController
 		
 		//Obtengo la data
 		$dataProviderMensaje = new ActiveDataProvider([
-			'query' => Mensaje::getDataProvider()
+			'query' => Mensaje::getDataProvider(null)
 		]);
 		
 		return $this->render('view', [

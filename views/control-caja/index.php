@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\Paciente;
+use app\models\Formula;
 use dektrium\user\models\Profile;
 
 /* @var $this yii\web\View */
@@ -43,6 +44,14 @@ $this->params['breadcrumbs'][] = $this->title;
 			     },
 			     "visible" => \Yii::$app->user->can('medico')
             ],
+            [
+		        'attribute' => 'capsula',
+		        'format' => 'text',
+		        'label' => 'mg Cápsula',
+		        'value' => function ($data) {
+			    	return Formula::findOne($data->formula_id)->capsula;
+			    },
+		    ],
             'cajaTomada',
             [
 		        'attribute' => 'dosisAcumulada',
@@ -67,6 +76,15 @@ $this->params['breadcrumbs'][] = $this->title;
 			    	return number_format($data->dosisCaja,0);
 			    },
 		        "visible" => \Yii::$app->user->can('medico')
+		    ],
+		    [
+		        'attribute' => 'caja',
+		        'format' => 'text',
+		        'label' => 'Total Cajas',
+		        'value' => function ($data) {
+		        	$datos=Formula::findOne($data->formula_id);
+			    	return number_format((($datos->peso*$datos->dosis)/($datos->capsula*30)),0);
+			     }
 		    ],
             /*[
 				'class' => 'yii\grid\ActionColumn',

@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\widgets\Pjax;
 use yii\widgets\DetailView;
 use app\models\Paciente;
 use dektrium\user\models\profile;
@@ -15,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="examen-view">
 
-    <h1><?= Html::encode('Ver Exámenes') ?></h1><br>
+    <h1><?= Html::encode('Exámenes') ?></h1><br>
 
     <p>
         <?= Html::a(Yii::t('app', 'Regresar'), ['examen/index?id='.$_GET['id']], ['class' => 'btn btn-primary']) ?>

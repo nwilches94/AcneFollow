@@ -15,22 +15,26 @@ use app\models\Paciente;
 <div class="foto-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
-    <?= \nemmo\attachments\components\AttachmentsInput::widget([
-            'id' => 'file-input', // Optional
-            'model' => $model,
-            'options' => [ // Options of the Kartik's FileInput widget
-                'multiple' => true, // If you want to allow multiple upload, default to false
-            ],
-            'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
-            	'allowedFileExtensions'=>['jpg','gif','png'],
-                'maxFileCount' => 10 // Client max files
-            ]
-        ])
-    ?>
+    	
+    	<?= $form->field($model, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['changeMonth' => true,  'yearRange' => '-70:+0', 'changeYear' => true]])->textInput(['placeholder' => 'Clic para seleccionar la Fecha'])->label('Fecha') ?>
+    	
+	    <?= \nemmo\attachments\components\AttachmentsInput::widget([
+	            'id' => 'file-input', // Optional
+	            'model' => $model,
+	            'options' => [ // Options of the Kartik's FileInput widget
+	                'multiple' => true, // If you want to allow multiple upload, default to false
+	            ],
+	            'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
+	            	'allowedFileExtensions'=>['jpg','gif','png'],
+	                'maxFileCount' => 10 // Client max files
+	            ]
+	        ])
+	    ?>
+	    
+	    <?= $form->field($model, 'notas')->textarea(['rows' => 4]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', [
+        <?= Html::submitButton($model->isNewRecord ? 'Cargar la Foto' : 'Actualizar la Foto', [
 			'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
 			'onclick' => "$('#file-input').fileinput('upload');"
 		]) ?>

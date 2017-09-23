@@ -15,7 +15,7 @@ use dektrium\user\models\Profile;
 	
 	<div class="alert alert-info">
         <?= Yii::t('user', 'Credentials will be sent to the user by email') ?>.
-        <?= Yii::t('user', 'A password will be generated automatically if not provided') ?>.
+        <!--<?= Yii::t('user', 'A password will be generated automatically if not provided') ?>.-->
     </div>
                 
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>

@@ -1,4 +1,5 @@
 <?php
+use app\models\Paciente;
 
 /* @var $this yii\web\View */
 
@@ -45,30 +46,32 @@ $this->title = 'Acne Follow';
 		</div>
 	</div>	
 	
-	<div class="row">
-	    <div class="col-md-12">
-	        <div class="panel panel-default">
-	            <div class="panel-body">
-					<blockquote>
-						<div class="col-xs-12 col-md-12" align="center">
-							<h3>RECOMENDACIONES PARA LA TOMA DE ISOTRETINOINA:</h3>
-							<h5>(NOMBRES COMERCIALES: ROACCUTAN, ISOFACE, REYTRIN, TRETINEX O ATRETIN)</h5>
-						</div>
-						<div class="col-xs-6 col-md-12">
-							<p class="textB textP">El <strong>ACNÉ</strong> es una enfermedad muy frecuente, que se presenta principalmente en adolescentes, pero también puede afectar a hombres y mujeres de cualquier edad. </p>
-							<p class="textB textP">Se produce porque hay inflamación de las glándulas que producen la grasa. Tiene varias <strong>causas</strong>, entre las que se encuentran: Herencia, cambios hormonales y estrés.</p>
-					  		<p class="textB textP">Se puede presentar con espinillas, granos rojos o amarillos, quistes, manchas y cicatrices residuales. Puede afectar la cara, pecho y espalda.</p>
-					  		<p class="textB textP">Existen múltiples <strong>tratamientos</strong> para el acné, como tópicos o aplicados, peeling, y tomados como antibióticos, hormonales o anticonceptivos en mujeres y la ISOTRETINOINA.</p>
-					  		<p class="textB textP">La <strong>ISOTRETINOINA</strong> es un medicamento que reduce el tamaño de las glándulas sebáceas, disminuyendo de esta forma las lesiones de acné y la producción de grasa.</p>
-					  	</div>
-					  	<div class="col-xs-6 col-md-12">
-					  		<img src="/img/recomendacion_4.jpg" class="img-responsive center-block">
-				  		</div>
-				  	</blockquote>
-				</div>
-			</div>	
+	<?php if(Paciente::viewMenu()){ ?>
+		<div class="row">
+		    <div class="col-md-12">
+		        <div class="panel panel-default">
+		            <div class="panel-body">
+						<blockquote>
+							<div class="col-xs-12 col-md-12" align="center">
+								<h3>RECOMENDACIONES PARA LA TOMA DE ISOTRETINOINA:</h3>
+								<h5>(NOMBRES COMERCIALES: ROACCUTAN, ISOFACE, REYTRIN, TRETINEX O ATRETIN)</h5>
+							</div>
+							<div class="col-xs-6 col-md-12">
+								<p class="textB textP">El <strong>ACNÉ</strong> es una enfermedad muy frecuente, que se presenta principalmente en adolescentes, pero también puede afectar a hombres y mujeres de cualquier edad. </p>
+								<p class="textB textP">Se produce porque hay inflamación de las glándulas que producen la grasa. Tiene varias <strong>causas</strong>, entre las que se encuentran: Herencia, cambios hormonales y estrés.</p>
+						  		<p class="textB textP">Se puede presentar con espinillas, granos rojos o amarillos, quistes, manchas y cicatrices residuales. Puede afectar la cara, pecho y espalda.</p>
+						  		<p class="textB textP">Existen múltiples <strong>tratamientos</strong> para el acné, como tópicos o aplicados, peeling, y tomados como antibióticos, hormonales o anticonceptivos en mujeres y la ISOTRETINOINA.</p>
+						  		<p class="textB textP">La <strong>ISOTRETINOINA</strong> es un medicamento que reduce el tamaño de las glándulas sebáceas, disminuyendo de esta forma las lesiones de acné y la producción de grasa.</p>
+						  	</div>
+						  	<div class="col-xs-6 col-md-12">
+						  		<img src="/img/recomendacion_4.jpg" class="img-responsive center-block">
+					  		</div>
+					  	</blockquote>
+					</div>
+				</div>	
+			</div>
 		</div>
-	</div>
+	<?php } ?>
 	
 	<div class="row">
 	    <div class="col-md-12">
@@ -147,24 +150,25 @@ $this->title = 'Acne Follow';
 		</div>
 	</div>
 	
-	<div class="row">
-	    <div class="col-md-12">
-	        <div class="panel panel-default">
-	            <div class="panel-body">
-					<blockquote>
-						<div class="col-xs-12 col-md-12" align="center">
-							<h3>Si Eres Mujer Tomando Isotretinoina Ten En Cuenta:</h3>
-						</div>
-						<div class="col-xs-6 col-md-12">
-							<p class="textB textP">➔ No puedes quedar en <strong>embarazo</strong> durante el tratamiento ni 3 meses después de terminarlo, porque este medicamento puede producir malformaciones en tu bebé.</p>
-							<p class="textB textP">➔ Si estas <strong>lactando</strong> no puedes tomar este medicamento.</p>
-							<p class="textB textP">➔ Recuerda planificar durante todo el tratamiento, ojalá con preservativo y otro método (idealmente anticonceptivos orales que también pueden ayudarte a mejorar el acné). Si no sabes bien cual método de planificación usar pregúntame y te puedo orientar.</p>
-						</div>
-				  	</blockquote>
-				</div>
-			</div>	
+	<?php if(Paciente::viewMenu()){ ?>
+		<div class="row">
+		    <div class="col-md-12">
+		        <div class="panel panel-default">
+		            <div class="panel-body">
+						<blockquote>
+							<div class="col-xs-12 col-md-12" align="center">
+								<h3>Si Eres Mujer Tomando Isotretinoina Ten En Cuenta:</h3>
+							</div>
+							<div class="col-xs-6 col-md-12">
+								<p class="textB textP">➔ No puedes quedar en <strong>embarazo</strong> durante el tratamiento ni 3 meses después de terminarlo, porque este medicamento puede producir malformaciones en tu bebé.</p>
+								<p class="textB textP">➔ Si estas <strong>lactando</strong> no puedes tomar este medicamento.</p>
+								<p class="textB textP">➔ Recuerda planificar durante todo el tratamiento, ojalá con preservativo y otro método (idealmente anticonceptivos orales que también pueden ayudarte a mejorar el acné). Si no sabes bien cual método de planificación usar pregúntame y te puedo orientar.</p>
+							</div>
+					  	</blockquote>
+					</div>
+				</div>	
+			</div>
 		</div>
-	</div>
-			
+	<?php } ?>		
 </div>
 <br>
