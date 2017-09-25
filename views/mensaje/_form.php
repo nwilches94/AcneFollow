@@ -49,7 +49,7 @@ use dektrium\user\models\Profile;
 					echo $form->field($model, 'paciente_id')->hiddenInput(['value' => $paciente['id']])->label(false);
 					echo $form->field($model, 'doctor_id')->hiddenInput(['value' => $paciente['doctor_id']])->label(false);
 					echo $form->field($model, 'origen')->hiddenInput(['value' => 'paciente'])->label(false);
-					echo '<label class="control-label" for="mensaje-mensaje">Medico: </label> '.$profile['name']."<br><br>";
+					echo '<label class="control-label" for="mensaje-mensaje">Médico: </label> '.$profile['name']."<br><br>";
 				}
 	    ?>
 	    

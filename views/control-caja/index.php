@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		    [
 		        'attribute' => 'caja',
 		        'format' => 'text',
-		        'label' => 'Total Cajas',
+		        'label' => 'Total de Cajas',
 		        'value' => function ($data) {
 		        	$datos=Formula::findOne($data->formula_id);
 			    	return number_format((($datos->peso*$datos->dosis)/($datos->capsula*30)),0);

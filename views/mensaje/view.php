@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	        	[
 			        'attribute' => 'origen',
 			        'format' => 'raw',
-			        'headerOptions' => ['width' => '10%'],
+			        'headerOptions' => ['width' => '15%'],
 			        'value' => function ($data) {
 			        	
 						if(\Yii::$app->user->can('medico')){
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			        'attribute' => 'fecha',
 			        'format' => 'text',
 			        'label' => 'Fecha y Hora',
-			        'headerOptions' => ['width' => '20%'],
+			        'headerOptions' => ['width' => '15%'],
 			        'value' => function ($data) {
 						return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y h:i:s ').$data->ampm;
 				     }
