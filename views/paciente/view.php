@@ -5,7 +5,6 @@ use yii\widgets\DetailView;
 use dektrium\user\models\Profile;
 use dektrium\user\models\User;
 use app\models\Paciente;
-
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
@@ -77,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="form-group">
 			<div class="col-sm-6 col-lg-12">	
 				
-				<h2><?= Html::encode('Datos del Paciente') ?></h2>
+				<br><h2><?= Html::encode('Datos del Paciente') ?></h2>
 				
 			    <?= DetailView::widget([
 			        'model' => $model,
@@ -143,6 +142,26 @@ $this->params['breadcrumbs'][] = $this->title;
 						     }
 			            ] 
 			        ],
+			    ]) ?>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-3 col-lg-6">
+				<h2><?= Html::encode('Calcular Dosis') ?></h2>
+				
+				<?= $this->render('/formula/_form', [
+			        'model' => $formula
+			    ]) ?>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-3 col-lg-6">
+				<h2><?= Html::encode('Fórmulas') ?></h2>
+				
+				<?= $this->render('/control-caja/index', [
+			        'dataProvider' => $controlCaja
 			    ]) ?>
 			</div>
 		</div>
