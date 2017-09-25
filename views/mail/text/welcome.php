@@ -29,12 +29,14 @@ use dektrium\user\models\profile;
 		$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
 ?>
 
-Bienvenido a Acnefollow<br><br>
+Bienvenido a Acnefollow,<br><br>
 
-Su dermatologo <?= $profile['name'] ?> a creado su cuenta en la aplicacion para que le sirva de apoyo en su tratamiento contra el acne.<br>
+Su dermatologo <?= $profile['name'] ?> a creado su cuenta en la aplicacion para que le sirva de apoyo en su tratamiento contra el acne.<br><br>
+
 Su usuario es : <?= $user->email ?><br>
-Su contraseña es: <?= $user->password ?><br>
-Para poder acceder a la aplicacion ingrese al siguiente link: <a href="acnefollow.tk">Acnefollow.tk</a><br><br>
+Su contraseña es: <?= $user->password ?><br><br>
+
+Para poder acceder a la aplicacion ingrese al siguiente link: <a href="acnefollow.tk">Acnefollow.tk</a><br>
 Recuerda ser constante con el tratamiento y verás los cambios.
 
 <?php if ($token !== null): ?>
