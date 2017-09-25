@@ -14,7 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="control-caja-index">
 
-    <h1><?= Html::encode($this->title) ?></h1><br>
+	<?php if(\Yii::$app->user->can('paciente')){ ?>
+    		<h1><?= Html::encode($this->title) ?></h1><br>
+    <?php } ?>
 	
 	<!--<?php if(\Yii::$app->user->can('medico')){ ?>
 		<p>
@@ -35,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y');
 			     }
 		    ],
-            [
+            /*[
                 'label' => 'Paciente',
 			    'value' => function ($data) {
 			    	$paciente=Paciente::find()->where(['id' => $data->paciente_id])->one();
@@ -43,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					return $profile['name'];
 			     },
 			     "visible" => \Yii::$app->user->can('medico')
-            ],
+            ],*/
             [
 		        'attribute' => 'capsula',
 		        'format' => 'text',

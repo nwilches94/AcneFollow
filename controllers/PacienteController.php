@@ -26,7 +26,8 @@ use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use dektrium\user\controllers\AdminController as BaseAdminController;
-
+use app\models\Formula;
+use app\models\ControlCaja;
 use app\models\Paciente;
 use app\models\Periodo;
 use app\models\Foto;
@@ -248,12 +249,42 @@ class PacienteController extends BaseAdminController
 		else
 			$dataProviderPeriodo = '';
 		
+		$formula = new Formula();
+		if($formula->load(Yii::$app->request->post())) {
+			
+			$formula->fecha = Yii::$app->formatter->asDate($formula->fecha, 'php: Y-m-d');
+
+			if($formula->validate()) {
+				$formula->save();
+				
+				//Creo el control de cajas
+				$controlCajas = new ControlCaja();
+				$controlCajas->paciente_id=$formula->paciente_id;
+				$controlCajas->formula_id=$formula->id;
+				$controlCajas->doctor_id= Yii::$app->user->id;
+				$controlCajas->fecha=$formula->fecha;
+				$controlCajas->cajaTomada=$formula->cajas;
+				$controlCajas->dosisAcumulada=($formula->cajas)*(30*$formula->capsula);
+				$controlCajas->dosisRestante=(($formula->peso*$formula->dosis)-($controlCajas->dosisAcumulada));
+				$controlCajas->dosisCaja=((($formula->peso*$formula->dosis)/($formula->capsula*30))-($formula->cajas));
+				$controlCajas->save();
+			}
+        } 
+		
+		
 		$examen = new Examen();
 		$examen->scenario = 'grafica';
 		
+		$formula = new Formula();
+		
+        $controlCaja = new ActiveDataProvider([
+            'query' => ControlCaja::find()->where(['doctor_id' => Yii::$app->user->id, 'paciente_id' => $_GET['id']])
+        ]);
+		
         return $this->render('view', [
             'model' => $this->findModel($id), 'dataProvider' => $dataProvider, 
-             'dataProviderPeriodo' => $dataProviderPeriodo, 'examen' => $examen
+            'dataProviderPeriodo' => $dataProviderPeriodo, 'examen' => $examen,
+            'formula' => $formula, 'controlCaja' => $controlCaja
         ]);
     }
 

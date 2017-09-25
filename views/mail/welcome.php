@@ -1,5 +1,8 @@
 <?php
 
+use app\models\Paciente;
+use dektrium\user\models\profile;
+
 /*
  * This file is part of the Dektrium project.
  *
@@ -9,39 +12,35 @@
  * file that was distributed with this source code.
  */
 
-use yii\helpers\Html;
-
 /**
- * @var dektrium\user\Module $module
- * @var dektrium\user\models\User $user
- * @var dektrium\user\models\Token $token
- * @var bool $showPassword
+ * @var dektrium\user\models\User
  */
 ?>
-<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    <?= Yii::t('user', 'Hello') ?>,
-</p>
+<!--<? Yii::t('user', 'Hello') ?>,
 
-<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    <?= Yii::t('user', 'Your account on {0} has been created', Yii::$app->name) ?>.
-    <?php if ($showPassword || $module->enableGeneratingPassword): ?>
-        <?= Yii::t('user', 'We have generated a password for you') ?>: <strong><?= $user->password ?></strong>
-    <?php endif ?>
+<? Yii::t('user', 'Your account on {0} has been created', Yii::$app->name) ?>.-->
 
-</p>
+<!--<?php if ($module->enableGeneratingPassword): ?>
+	<? Yii::t('user', 'We have generated a password for you') ?>:
+	<? $user->password ?>
+<?php endif ?>-->
+
+<?php 	$paciente=Paciente::find()->where(['doctor_id' => Yii::$app->user->id])->one();
+		$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
+?>
+
+Bienvenido a Acnefollow<br><br>
+
+Su dermatologo <?= $profile['name'] ?> a creado su cuenta en la aplicacion para que le sirva de apoyo en su tratamiento contra el acne.<br>
+Su usuario es : <?= $user->email ?><br>
+Su contraseña es: <?= $user->password ?><br>
+Para poder acceder a la aplicacion ingrese al siguiente link: <a href="acnefollow.tk">Acnefollow.tk</a><br><br>
+Recuerda ser constante con el tratamiento y verás los cambios.
 
 <?php if ($token !== null): ?>
-    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-        <?= Yii::t('user', 'In order to complete your registration, please click the link below') ?>.
-    </p>
-    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-        <?= Html::a(Html::encode($token->url), $token->url); ?>
-    </p>
-    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-        <?= Yii::t('user', 'If you cannot click the link, please try pasting the text into your browser') ?>.
-    </p>
+	<?= Yii::t('user', 'In order to complete your registration, please click the link below') ?>.
+	<?= $token->url ?>
+	<?= Yii::t('user', 'If you cannot click the link, please try pasting the text into your browser') ?>.
 <?php endif ?>
 
-<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    <?= Yii::t('user', 'If you did not make this request you can ignore this email') ?>.
-</p>
+<!--<? Yii::t('user', 'If you did not make this request you can ignore this email') ?>.-->
