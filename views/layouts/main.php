@@ -68,44 +68,44 @@ AppAsset::register($this);
                                     ["label" => "Principal", "url" => "/", "icon" => "home"],
                                     [
                                         "label" => "Pacientes",
-                                        "url" => ["paciente/index"],
+                                        "url" => ["/paciente/index"],
                                         "icon" => "user-md",
                                         "visible" => \Yii::$app->user->can('medico')
                                     
                                     ],
                                     [
                                         "label" => "Examenes",
-                                        "url" => ["examen/index"],
+                                        "url" => ["/examen/index"],
                                         "icon" => "heartbeat",
                                         "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [
                                         "label" => "Fórmula",
-                                        "url" => ["control-caja/index"],
+                                        "url" => ["/control-caja/index"],
                                         "icon" => "tachometer",
                                         "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [
                                         "label" => "Seguimiento de Periodo",
-                                        "url" => ["periodo/index"],
+                                        "url" => ["/periodo/index"],
                                         "icon" => "heart-o",
                                         "visible" => Paciente::viewMenu(),
                                     ],
                                     [
                                         "label" => "Fotos",
-                                        "url" => ["foto/create"],
+                                        "url" => ["/foto/create"],
                                         "icon" => "camera",
                                         "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [
                                         "label" => "Recomendaciones",
-                                        "url" => ["site/recomendaciones"],
+                                        "url" => ["/site/recomendaciones"],
                                         "icon" => "eye",
                                         "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [
                                         "label" => "Buzón de Mensajes",
-                                        "url" => ["mensaje/index"],
+                                        "url" => ["/mensaje/index"],
                                         "icon" => "envelope",
 										"badge" => Mensaje::getCount()." nuevo",
                                         "badgeOptions" => ["class" => "label-success"] ,
@@ -177,7 +177,7 @@ AppAsset::register($this);
 			                            </a>
 			                            <ul class="dropdown-menu dropdown-usermenu pull-right">
 			                                <li>
-			                                    <?= Html::a('Mi cuenta', ['/user/settings/profile'], []) ?>
+			                                    <?= Html::a('Mi cuenta', ['/user/settings/account'], []) ?>
 			                                </li>
 			                                <!--<li>
 			                                    <a href="javascript:;">Ayuda</a>

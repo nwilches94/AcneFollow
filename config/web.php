@@ -61,7 +61,8 @@ $config = [
                 'pathMap' => [
                     '@dektrium/user/views/admin' => '@app/views/admin',
                     '@dektrium/user/views/security' => '@app/views/security',
-                    '@dektrium/user/views/mail' => '@app/views/mail'
+                    '@dektrium/user/views/mail' => '@app/views/mail',
+                    '@dektrium/user/views/settings' => '@app/views/settings'
                 ],
             ],
         ],
