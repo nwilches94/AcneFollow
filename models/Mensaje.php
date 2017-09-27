@@ -110,21 +110,18 @@ class Mensaje extends \yii\db\ActiveRecord
     	$query=null;
 		if(\Yii::$app->user->can('medico'))
 		{
-			if($search)
-				$buscar = " WHERE (profile.user_id LIKE '$search' OR profile.cedula LIKE '$search' OR profile.name LIKE '%$search%')";
-    	
 			$sql =	"SELECT
-					IF(MAX(mensaje.id) , MAX(mensaje.id) , 0) AS id,
-					IF(mensaje.paciente_id,  mensaje.paciente_id, paciente.id) AS paciente_id,
-					IF(mensaje.doctor_id,  mensaje.doctor_id, paciente.doctor_id) AS doctor_id,
-					mensaje.mensaje, mensaje.leido, mensaje.origen,  mensaje.fecha, mensaje.ampm
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.id) , 0) FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS id,
+					paciente.id AS paciente_id,
+					paciente.doctor_id,
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.mensaje) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS mensaje,
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.leido) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS leido,
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.origen) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS origen,
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.fecha) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS fecha,
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.ampm) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS ampm
 					FROM paciente
-					LEFT OUTER JOIN mensaje ON mensaje.paciente_id = paciente.id AND mensaje.origen='paciente' AND mensaje.doctor_id=".Yii::$app->user->id."
-					LEFT OUTER JOIN profile ON profile.user_id = paciente.user_id
-					".$buscar."
-					GROUP BY mensaje.doctor_id, mensaje.paciente_id
-					ORDER BY mensaje.doctor_id, mensaje.paciente_id";
-					
+					JOIN profile ON profile.user_id = paciente.user_id
+					WHERE paciente.doctor_id = ".Yii::$app->user->id.$buscar;
             $query = Mensaje::findBySql($sql);
 		}
 		else

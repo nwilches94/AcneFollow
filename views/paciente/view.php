@@ -154,7 +154,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <br>
 
-<? //$this->render('_grafica', ['examen' => $examen]) ?>
+<!--<? $this->render('_grafica', ['examen' => $examen]) ?>-->
 
 <?php $this->registerJsFile('@web/js/bootstrap-datepicker.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 
