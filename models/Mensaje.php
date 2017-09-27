@@ -119,7 +119,7 @@ class Mensaje extends \yii\db\ActiveRecord
 					IF(mensaje.doctor_id,  mensaje.doctor_id, paciente.doctor_id) AS doctor_id,
 					mensaje.mensaje, mensaje.leido, mensaje.origen,  mensaje.fecha, mensaje.ampm
 					FROM paciente
-					LEFT OUTER JOIN mensaje ON mensaje.paciente_id = paciente.id AND mensaje.origen='paciente' AND mensaje.doctor_id=2
+					LEFT OUTER JOIN mensaje ON mensaje.paciente_id = paciente.id AND mensaje.origen='paciente' AND mensaje.doctor_id=".Yii::$app->user->id."
 					LEFT OUTER JOIN profile ON profile.user_id = paciente.user_id
 					".$buscar."
 					GROUP BY mensaje.doctor_id, mensaje.paciente_id
