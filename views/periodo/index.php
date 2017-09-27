@@ -10,6 +10,12 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app', 'Seguimiento de Periodo');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Pacientes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerCssFile("@web/css/bootstrap-datepicker.standalone.min.css", [
+    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+    'media' => 'print',
+], 'css-print-theme');
+
 ?>
 <div class="p-create">
 
@@ -21,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <br>
     
+    <br><h2><?= Html::encode('Histórico de Seguimiento de Periodos') ?></h2>
+    
     <?php Pjax::begin(); ?>
 	    <?= GridView::widget([
 	            'dataProvider' => $dataProvider,
@@ -28,25 +36,30 @@ $this->params['breadcrumbs'][] = $this->title;
 	                [
 				        'attribute' => 'fecha',
 				        'format' => 'text',
-				        'label' => 'Año',
+				        'label' => 'Fecha de Inicio de Periodo',
 				        'value' => function ($data) {
-							return Yii::$app->formatter->asDate($data->fecha, 'php: Y');
+							return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y');
 					     }
 				    ],
 				    [
 				        'attribute' => 'fecha',
 				        'format' => 'text',
-				        'label' => 'Mes',
+				        'label' => 'Fecha de Fin de Periodo',
 				        'value' => function ($data) {
-							return Yii::$app->formatter->asDate($data->fecha, 'php: m');
+							return Yii::$app->formatter->asDate($data->fechaFin, 'php: d-m-Y');
 					     }
 				    ],
 				    [
 				        'attribute' => 'fecha',
 				        'format' => 'text',
-				        'label' => 'Día',
+				        'label' => 'Fecha Aproximada de Periodo',
 				        'value' => function ($data) {
-							return Yii::$app->formatter->asDate($data->fecha, 'php: d');
+				        	
+							$fecha = $data->fecha;
+							$proximoPeriodo = strtotime('+28 day', strtotime($fecha));
+							$proximoPeriodo = date('d-m-Y', $proximoPeriodo);
+			
+							return $proximoPeriodo;
 					     }
 				    ],
 	            ],
@@ -55,3 +68,5 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php Pjax::end(); ?>
 
 </div>
+
+<br>

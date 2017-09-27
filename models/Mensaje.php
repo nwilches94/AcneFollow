@@ -105,22 +105,22 @@ class Mensaje extends \yii\db\ActiveRecord
     {
     	$buscar="";
     	if($search)
-			$buscar = "AND (profile.user_id LIKE '$search' OR profile.cedula LIKE '$search' OR profile.name LIKE '%$search%')";
+			$buscar = " AND (profile.user_id LIKE '$search' OR profile.cedula LIKE '$search' OR profile.name LIKE '%$search%')";
     	
     	$query=null;
 		if(\Yii::$app->user->can('medico'))
 		{
-			$sql =	"SELECT mensaje.* 
-					FROM mensaje
-					JOIN paciente ON paciente.id = mensaje.paciente_id 
-					JOIN profile ON profile.user_id = paciente.user_id
-					WHERE mensaje.origen='paciente' AND mensaje.doctor_id=".Yii::$app->user->id." AND mensaje.id IN (
-						SELECT MAX(id) AS id 
-						FROM mensaje
-						WHERE origen='paciente' AND doctor_id=".Yii::$app->user->id." 
-						GROUP BY doctor_id, paciente_id
-						ORDER BY doctor_id, paciente_id
-					)
+			if($search)
+				$buscar = " WHERE (profile.user_id LIKE '$search' OR profile.cedula LIKE '$search' OR profile.name LIKE '%$search%')";
+    	
+			$sql =	"SELECT
+					IF(MAX(mensaje.id) , MAX(mensaje.id) , 0) AS id,
+					IF(mensaje.paciente_id,  mensaje.paciente_id, paciente.id) AS paciente_id,
+					IF(mensaje.doctor_id,  mensaje.doctor_id, paciente.doctor_id) AS doctor_id,
+					mensaje.mensaje, mensaje.leido, mensaje.origen,  mensaje.fecha, mensaje.ampm
+					FROM paciente
+					LEFT OUTER JOIN mensaje ON mensaje.paciente_id = paciente.id AND mensaje.origen='paciente' AND mensaje.doctor_id=2
+					LEFT OUTER JOIN profile ON profile.user_id = paciente.user_id
 					".$buscar."
 					GROUP BY mensaje.doctor_id, mensaje.paciente_id
 					ORDER BY mensaje.doctor_id, mensaje.paciente_id";

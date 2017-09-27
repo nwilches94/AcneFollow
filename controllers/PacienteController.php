@@ -271,7 +271,6 @@ class PacienteController extends BaseAdminController
 			}
         } 
 		
-		
 		$examen = new Examen();
 		$examen->scenario = 'grafica';
 		
@@ -281,10 +280,36 @@ class PacienteController extends BaseAdminController
             'query' => ControlCaja::find()->where(['doctor_id' => Yii::$app->user->id, 'paciente_id' => $_GET['id']])
         ]);
 		
+		
+		
+		$modelP = new Periodo();
+		$paciente=Paciente::find()->where(['id' => $_GET['id']])->one();
+		$query = Periodo::find()->where(['paciente_id' => $paciente['id']])->orderBy(['fecha' => SORT_DESC]);
+		$proximoPeriodo = null;
+		if($query)
+		{
+			$paciente=$query->one();
+			
+			$fecha = $paciente['fecha'];
+			if($fecha)
+			{
+				$proximoPeriodo = strtotime('+28 day', strtotime($fecha));
+				$proximoPeriodo = date('d-m-Y', $proximoPeriodo);
+			}
+		}
+		
+		$periodos = Periodo::find()->where(['paciente_id' => $paciente['paciente_id']])->orderBy(['fecha' => SORT_DESC])->one();
+		if($periodos)
+		{
+			$modelP->fechaI=$periodos['fecha'];
+			$modelP->fechaF=$periodos['fechaFin'];
+			$modelP->fechaA=Yii::$app->formatter->asDate($proximoPeriodo, 'php: Y-m-d');
+		}
+		
         return $this->render('view', [
             'model' => $this->findModel($id), 'dataProvider' => $dataProvider, 
             'dataProviderPeriodo' => $dataProviderPeriodo, 'examen' => $examen,
-            'formula' => $formula, 'controlCaja' => $controlCaja
+            'formula' => $formula, 'controlCaja' => $controlCaja, 'modelP' => $modelP
         ]);
     }
 

@@ -46,7 +46,7 @@ use app\models\Paciente;
 			                'multiple' => true, // If you want to allow multiple upload, default to false
 			            ],
 			            'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
-			            	'allowedFileExtensions'=>['jpg','gif','png', 'doc', 'docx', 'pdf'],
+			            	'allowedFileExtensions'=>['jpg', 'jpeg', 'jpe', 'gif', 'png', 'doc', 'docx', 'pdf'],
 			                'maxFileCount' => 10 // Client max files
 			            ]
 			        ])

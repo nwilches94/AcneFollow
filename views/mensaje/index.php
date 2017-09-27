@@ -95,7 +95,8 @@ $this->params['breadcrumbs'][] = $this->title;
 				        'value'=> 'mensaje',
 				        'headerOptions' => ['width' => '40%'],
 				        'value' => function ($data) {
-							return "<span style='".Mensaje::nuevoMensaje($data->id)."'>".substr($data->mensaje, 0, 50)."</span>";
+				        	if(Mensaje::nuevoMensaje($data->id))
+								return "<span style='".Mensaje::nuevoMensaje($data->id)."'>".substr($data->mensaje, 0, 50)."</span>";
 						}
 				    ],
 					[
@@ -104,8 +105,11 @@ $this->params['breadcrumbs'][] = $this->title;
 				        'label' => 'Fecha y Hora',
 				        'headerOptions' => ['width' => '15%'],
 				        'value' => function ($data) {
-							return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y h:i:s ').$data->ampm;
-					     }
+				        	if($data->fecha)
+								return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y h:i:s ').$data->ampm;
+							else
+								return Yii::$app->formatter->asDate(date('d-m-Y h:i:s A'), 'php: d-m-Y h:i:s A');
+						}
 				    ],
 				    [
 						'class' => 'yii\grid\ActionColumn',

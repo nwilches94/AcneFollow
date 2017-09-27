@@ -49,7 +49,7 @@ class Formula extends \yii\db\ActiveRecord
             'paciente_id' => 'Paciente',
             'doctor_id' => 'Doctor',
             'fecha' => 'Fecha',
-            'peso' => 'Peso',
+            'peso' => 'Peso (kg)',
             'dosis' => 'Dosis (mg)',
             'capsula' => 'mg Cápsula',
             'cajas' => '# Cajas Tomadas',

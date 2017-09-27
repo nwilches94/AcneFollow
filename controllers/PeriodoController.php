@@ -52,6 +52,7 @@ class PeriodoController extends BaseAdminController
 		if($model->load(Yii::$app->request->post()))
         {
 			$model->fecha=Yii::$app->formatter->asDate($model->fecha, 'php: Y-m-d');
+			$model->fechaFin=Yii::$app->formatter->asDate($model->fechaFin, 'php: Y-m-d');
 			$model->paciente_id=$paciente['id'];
 			
             if($model->validate())
@@ -69,14 +70,25 @@ class PeriodoController extends BaseAdminController
 			$paciente=$query->one();
 			
 			$fecha = $paciente['fecha'];
-			$proximoPeriodo = strtotime('+28 day', strtotime($fecha));
-			$proximoPeriodo = date('d-m-Y', $proximoPeriodo);
+			if($fecha)
+			{
+				$proximoPeriodo = strtotime('+28 day', strtotime($fecha));
+				$proximoPeriodo = date('d-m-Y', $proximoPeriodo);
+			}
 		}
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query
 		]);
 		
+		$periodos = Periodo::find()->where(['paciente_id' => $paciente['paciente_id']])->orderBy(['fecha' => SORT_DESC])->one();
+		if($periodos)
+		{
+			$model->fechaI=$periodos['fecha'];
+			$model->fechaF=$periodos['fechaFin'];
+			$model->fechaA=Yii::$app->formatter->asDate($proximoPeriodo, 'php: Y-m-d');
+		}
+
        	return $this->render('index', [
             'dataProvider' => $dataProvider, 'model' => $model, 'proximoPeriodo' => $proximoPeriodo
         ]);

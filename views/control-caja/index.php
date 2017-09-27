@@ -47,6 +47,22 @@ $this->params['breadcrumbs'][] = $this->title;
 			     "visible" => \Yii::$app->user->can('medico')
             ],*/
             [
+		        'attribute' => 'peso',
+		        'format' => 'text',
+		        'label' => 'Peso (kg)',
+		        'value' => function ($data) {
+			    	return Formula::findOne($data->formula_id)->peso;
+			    },
+		    ],
+		    [
+		        'attribute' => 'dosis',
+		        'format' => 'text',
+		        'label' => 'Dosis (mg)',
+		        'value' => function ($data) {
+			    	return Formula::findOne($data->formula_id)->dosis;
+			    },
+		    ],
+            [
 		        'attribute' => 'capsula',
 		        'format' => 'text',
 		        'label' => 'mg Cápsula',

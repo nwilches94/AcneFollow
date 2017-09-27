@@ -15,6 +15,8 @@ use Yii;
  */
 class Periodo extends \yii\db\ActiveRecord
 {
+	public $fechaI, $fechaF, $fechaA;
+	
     /**
      * @inheritdoc
      */
@@ -29,7 +31,7 @@ class Periodo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['paciente_id', 'fecha'], 'required'],
+            [['paciente_id', 'fecha', 'fechaFin'], 'required'],
             [['paciente_id'], 'integer'],
             [['fecha'], 'safe'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id']],
@@ -44,7 +46,8 @@ class Periodo extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'paciente_id' => 'Paciente ID',
-            'fecha' => 'Fecha',
+            'fecha' => 'Fecha Inicio de Periodo',
+            'fechaFin' => 'Fecha Fin de Periodo',
         ];
     }
 
