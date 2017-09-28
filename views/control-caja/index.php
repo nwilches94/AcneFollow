@@ -62,6 +62,23 @@ $this->params['breadcrumbs'][] = $this->title;
 			    	return Formula::findOne($data->formula_id)->dosis;
 			    },
 		    ],
+		    [
+		        'attribute' => 'dosis',
+		        'format' => 'text',
+		        'label' => 'Dosis Total (mg)',
+		        'value' => function ($data) {
+			    	return (Formula::findOne($data->formula_id)->peso * Formula::findOne($data->formula_id)->dosis);
+			    },
+		    ],
+		    [
+		        'attribute' => 'caja',
+		        'format' => 'text',
+		        'label' => 'Total de Cajas',
+		        'value' => function ($data) {
+		        	$datos=Formula::findOne($data->formula_id);
+			    	return number_format((($datos->peso*$datos->dosis)/($datos->capsula*30)),0);
+			     }
+		    ],
             [
 		        'attribute' => 'capsula',
 		        'format' => 'text',
@@ -94,15 +111,6 @@ $this->params['breadcrumbs'][] = $this->title;
 			    	return number_format($data->dosisCaja,0);
 			    },
 		        "visible" => \Yii::$app->user->can('medico')
-		    ],
-		    [
-		        'attribute' => 'caja',
-		        'format' => 'text',
-		        'label' => 'Total de Cajas',
-		        'value' => function ($data) {
-		        	$datos=Formula::findOne($data->formula_id);
-			    	return number_format((($datos->peso*$datos->dosis)/($datos->capsula*30)),0);
-			     }
 		    ],
             /*[
 				'class' => 'yii\grid\ActionColumn',
