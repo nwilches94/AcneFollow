@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode('Exámenes') ?></h1><br>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Regresar'), ['examen/index?id='.$_GET['id']], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Regresar'), ['examen/index?id='.$_GET['paciente_id']], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <div class="bs-example" data-example-id="simple-thumbnails">

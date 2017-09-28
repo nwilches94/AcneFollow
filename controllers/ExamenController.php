@@ -67,11 +67,19 @@ class ExamenController extends BaseAdminController
      */
     public function actionIndex()
     {
-        $searchModel = new ExamenSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    	if(isset($_GET['id'])){
+			$query = Examen::find()->where(['paciente_id' => $_GET['id']]);
+			
+			$dataProvider = new ActiveDataProvider([
+				'query' => $query
+			]);
+		}
+		else {
+			$searchModel = new ExamenSearch();
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		}		
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider
         ]);
     }
