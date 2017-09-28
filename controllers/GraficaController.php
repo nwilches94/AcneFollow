@@ -23,12 +23,7 @@ class GraficaController extends BaseAdminController
                 ],
                 'rules' => [
                 	[
-                        'actions' => ['index', 'view', 'create', 'update'],
-                        'allow' => true,
-                        'roles' => ['admin', 'medico', 'paciente'],
-                    ],
-                    [
-                        'actions' => ['delete'],
+                        'actions' => ['index'],
                         'allow' => true,
                         'roles' => ['admin', 'medico'],
                     ],
@@ -48,11 +43,6 @@ class GraficaController extends BaseAdminController
         ];
     }
 
-    public function actionCreate()
-    {
-        return $this->render('create');
-    }
-
     public function actionIndex()
     {
     	$model = new Grafica();
@@ -68,15 +58,4 @@ class GraficaController extends BaseAdminController
 
         return $this->render('index', ['model' => $model]);
     }
-
-    public function actionUpdate()
-    {
-        return $this->render('update');
-    }
-
-    public function actionView()
-    {
-        return $this->render('view');
-    }
-
 }
