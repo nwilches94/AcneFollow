@@ -11,7 +11,7 @@ use yii\bootstrap\Modal;
 /* @var $this yii\web\View */
 /* @var $model app\models\Examen */
 
-$this->title = $model->id;
+$this->title = 'Examenes';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Examens'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -86,5 +86,16 @@ $this->params['breadcrumbs'][] = $this->title;
 					}
 			?>  	
     	</div> 
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+            	<h1><?= Html::encode('Generar Estadísticas') ?></h1>
+    			<?= $this->render('/grafica/_form', ['model' => $grafica]) ?>
+            </div>
+        </div>
     </div>
 </div>

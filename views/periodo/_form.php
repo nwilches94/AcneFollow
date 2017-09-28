@@ -58,7 +58,6 @@ use yii\jui\DatePicker;
     
 </div>
 
-
 <?php $this->registerJsFile('@web/js/bootstrap-datepicker.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 
 <script>

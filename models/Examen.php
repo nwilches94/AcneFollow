@@ -107,8 +107,19 @@ class Examen extends \yii\db\ActiveRecord
 				return $f[1]."-".$mesesNum[$f[0]]."-01";
 			}
 			else {
-				$f=explode("-", $fecha);
-				return $numMeses[$f[1]]." ".$f[0];
+				
+				if($option == 1) {
+					$f=explode("-", $fecha);
+					return $numMeses[$f[1]]." ".$f[0];
+				}
+				else
+				{
+					$numMeses = ['01'=>'Ene', '02'=>'Feb', '03'=>'Mar', '04'=>'Abr', '05'=>'May', '06'=>'Jun', 
+							     '07'=>'Jul', '08'=>'Ago', '09'=>'Sep', '10'=>'Oct', '11'=>'Nov', '12'=>'Dic'];
+					
+					$f=explode("-", $fecha);
+					return $numMeses[$f[1]];
+				}
 			}
 		}
 		

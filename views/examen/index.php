@@ -64,8 +64,8 @@ $this->params['breadcrumbs'][] = $this->title;
 				        		if($model->tipo == 'Otro')
 									return '';
 								else
-					            	return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['imagen', 'id' => $model->id]);
-					        },
+					            	return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['imagen', 'id' => $model->id, 'paciente_id' => $_GET['id']]);
+					        }
 					    ],
 				        "visible" => \Yii::$app->user->can('medico')
 					],

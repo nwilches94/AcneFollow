@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
     	
 	    <div class="form-group">
 			<div class="col-lg-offset-0 col-lg-9">
-				<?= Html::a(Yii::t('app', 'Ver Galería'), ['foto/galeria?id='.$_GET['id']], ['class' => 'btn btn-success']) ?>
-		    	<?= Html::a(Yii::t('app', 'Ver Exámenes'), ['examen/index?id='.$_GET['id']], ['class' => 'btn btn-success']) ?>
+				<?= Html::a(Yii::t('app', 'Ver Galería'), ['/foto/galeria?id='.$_GET['id']], ['class' => 'btn btn-success']) ?>
+		    	<?= Html::a(Yii::t('app', 'Ver Exámenes'), ['/examen/index?id='.$_GET['id']], ['class' => 'btn btn-success']) ?>
 		    	<?= Html::a(Yii::t('app', 'Regresar'), ['index'], ['class' => 'btn btn-primary']) ?>
 			</div>
 		</div>
@@ -154,7 +154,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <br>
 
-<!--<? $this->render('_grafica', ['examen' => $examen]) ?>-->
+<?php if($graficas){ ?>
+	<?= $this->render('_grafica', ['model' => $graficas]) ?>
+<?php } ?>
 
 <?php $this->registerJsFile('@web/js/bootstrap-datepicker.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 
@@ -169,8 +171,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 		var fechaA= $('#periodo-fechaa').val();
 		var fechasA=fechaA.split('-');
-		
-		console.log(fechasI);
 		
 		$('#datepicker').datepicker({multidate: false, autoclose: true});
 		$('#datepicker').datepicker('setDates', [new Date(fechasI[0], fechasI[1], fechasI[2]), new Date(fechasF[0], fechasF[1], fechasF[2]), new Date(fechasA[0], fechasA[1], fechasA[2])]);

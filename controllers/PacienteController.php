@@ -33,6 +33,7 @@ use app\models\Periodo;
 use app\models\Foto;
 use app\models\Examen;
 use app\models\Mensaje;
+use app\models\Grafica;
 use nemmo\attachments\models\File;
 use yii\data\ActiveDataProvider;
 	
@@ -271,17 +272,19 @@ class PacienteController extends BaseAdminController
 			}
         } 
 		
+		//Examenes
 		$examen = new Examen();
 		$examen->scenario = 'grafica';
 		
+		//Formula
 		$formula = new Formula();
 		
+		//Control dosis
         $controlCaja = new ActiveDataProvider([
             'query' => ControlCaja::find()->where(['doctor_id' => Yii::$app->user->id, 'paciente_id' => $_GET['id']])
         ]);
 		
-		
-		
+		//Periodo
 		$modelP = new Periodo();
 		$paciente=Paciente::find()->where(['id' => $_GET['id']])->one();
 		$query = Periodo::find()->where(['paciente_id' => $paciente['id']])->orderBy(['fecha' => SORT_DESC]);
@@ -306,10 +309,26 @@ class PacienteController extends BaseAdminController
 			$modelP->fechaA=Yii::$app->formatter->asDate($proximoPeriodo, 'php: Y-m-d');
 		}
 		
+		//Graficas
+		$graficas=null;
+		$modelG = Grafica::find()->where(['paciente_id' => $_GET['id']])->all();
+		if($modelG)
+		{
+			foreach($modelG as $key => $value) 
+			{
+				$graficas[$value['examen_id']]['examen_id'][$value['tipo']][] = $value['examen_id'];
+				$graficas[$value['examen_id']]['tipo'][$value['tipo']] = $value['tipo'];
+				$graficas[$value['examen_id']]['fecha'][$value['tipo']][] = Examen::changeDate($value['fecha'], 2);
+				$graficas[$value['examen_id']]['valorExamen'][$value['tipo']][] = $value['valorExamen'];
+				$graficas[$value['examen_id']]['valorReferencia'][$value['tipo']][] = $value['valorReferencia'];
+			}
+		}
+		
         return $this->render('view', [
             'model' => $this->findModel($id), 'dataProvider' => $dataProvider, 
             'dataProviderPeriodo' => $dataProviderPeriodo, 'examen' => $examen,
-            'formula' => $formula, 'controlCaja' => $controlCaja, 'modelP' => $modelP
+            'formula' => $formula, 'controlCaja' => $controlCaja, 'modelP' => $modelP,
+            'graficas' => $graficas
         ]);
     }
 

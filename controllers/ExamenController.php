@@ -219,10 +219,12 @@ class ExamenController extends BaseAdminController
 		
 		/*($fotos);
 		die;*/
+		
+		$grafica = new Grafica();
 
         return $this->render('imagen', [
             'model' => $model, 'fotos' => $fotos, /*'dataProvider' => $dataProvider, 
-            'examen' => $examen*/
+            'examen' => $examen*/ 'grafica' => $grafica
         ]);
     }
 	
