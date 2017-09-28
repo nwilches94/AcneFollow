@@ -4,8 +4,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\widgets\DetailView;
-use app\models\Paciente;
-use dektrium\user\models\profile;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
@@ -94,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel panel-default">
             <div class="panel-body">
             	<h1><?= Html::encode('Generar Estadísticas') ?></h1>
-    			<?= $this->render('/grafica/_form', ['model' => $grafica]) ?>
+    			<?= $this->render('/grafica/_form', ['model' => $grafica, 'dataProvider' => $dataProvider]) ?>
             </div>
         </div>
     </div>

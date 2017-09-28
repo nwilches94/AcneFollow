@@ -23,7 +23,7 @@ class GraficaController extends BaseAdminController
                 ],
                 'rules' => [
                 	[
-                        'actions' => ['index'],
+                        'actions' => ['index', 'delete'],
                         'allow' => true,
                         'roles' => ['admin', 'medico'],
                     ],
@@ -53,9 +53,25 @@ class GraficaController extends BaseAdminController
 			$model->fecha = Examen::changeDate($model->fecha, 0);
 			$model->save();
 			
-			return $this->redirect(['paciente/view', 'id' => $_GET['paciente_id']]);
+			return $this->redirect(['/paciente/view', 'id' => $_GET['paciente_id']]);
 		}
 
         return $this->render('index', ['model' => $model]);
+    }	
+	
+	public function actionDelete($id)
+    {
+		$this->findModel($_GET['grafica'])->delete();
+			
+		return $this->redirect(['/examen/imagen?id='.$_GET['id'].'&paciente_id='.$_GET['paciente_id']]);
+    }
+	
+	protected function findModel($id)
+    {
+        if (($model = Grafica::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

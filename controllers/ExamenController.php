@@ -36,12 +36,12 @@ class ExamenController extends BaseAdminController
                 ],
                 'rules' => [
                 	[
-                        'actions' => ['create', 'update', 'delete'],
+                        'actions' => ['create', 'update'],
                         'allow' => true,
                         'roles' => ['admin', 'paciente'],
                     ],
                     [
-                        'actions' => ['index', 'view', 'imagen', 'download'],
+                        'actions' => ['index', 'view',  'delete', 'imagen', 'download'],
                         'allow' => true,
                         'roles' => ['admin', 'medico', 'paciente'],
                     ],
@@ -203,36 +203,28 @@ class ExamenController extends BaseAdminController
 	
 	public function actionImagen($id)
     {
+    	
     	$model = Examen::findOne($id);
 		
+		$grafica = new Grafica();
+		$grafica->tipo = $model->tipo;
+		
+		//Fotos
 		$fotos = array();
 		$query = File::find()->where(['in', 'itemId', $id])->andWhere(['model' => 'Examen']);
         if($query)
 			$fotos=$query->all();
 		
-		/*$examen = new Examen();
-		$examen->scenario = 'grafica';
 		
-		if($examen->load(Yii::$app->request->post())) {
-			$model->fecha = Examen::changeDate($model->fecha, 0);
-			$model->save();
-			
-			$examen = new Examen();
-        }
-		
-		$queryG=Grafica::find();
+		//Graficas
+		$graficas = array();
+		$graficas = Grafica::find()->where(['examen_id' => $id])->orderBy(['tipo' => SORT_ASC, 'fecha' => SORT_DESC]);
 		$dataProvider = new ActiveDataProvider([
-            'query' => $queryG
-        ]);*/
+			'query' => $graficas
+		]);
 		
-		/*($fotos);
-		die;*/
-		
-		$grafica = new Grafica();
-
         return $this->render('imagen', [
-            'model' => $model, 'fotos' => $fotos, /*'dataProvider' => $dataProvider, 
-            'examen' => $examen*/ 'grafica' => $grafica
+            'model' => $model, 'fotos' => $fotos, 'grafica' => $grafica, 'dataProvider' => $dataProvider
         ]);
     }
 	

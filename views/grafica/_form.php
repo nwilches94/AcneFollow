@@ -1,10 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\widgets\Pjax;
 use yii\bootstrap\ActiveForm;
 use yii\jui\DatePicker;
-use app\models\Paciente;
-use dektrium\user\models\Profile;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Paciente */
@@ -43,3 +43,63 @@ use dektrium\user\models\Profile;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php if($dataProvider) { ?>
+	
+	<div class="garfica-create">
+		
+		<br>
+		<h1><?= Html::encode('Histórico de Estadísticas') ?></h1>
+		
+	    <?php Pjax::begin(); ?>
+		    <?= GridView::widget([
+		            'dataProvider' => $dataProvider,
+		            'columns' => [
+					    [
+					        'attribute' => 'tipo',
+					        'format' => 'text',
+					        'label' => 'Tipo de Examen',
+					        'value' => 'tipo'
+					    ],
+					    [
+					        'attribute' => 'fecha',
+					        'format' => 'text',
+					        'label' => 'Fecha',
+					        'value' => function ($data) {
+						    	\Yii::$app->language = 'es-ES';
+								
+					        	$formatter = \Yii::$app->formatter;
+					        	$formatter->locale='es-ES';
+					        	return $formatter->asDate($data->fecha, 'php: F Y');
+						     }
+					    ],
+					    [
+					        'attribute' => 'valorExamen',
+					        'format' => 'text',
+					        'label' => 'Valor del Examen',
+					        'value' => 'valorExamen'
+					    ],
+					    [
+					        'attribute' => 'valorReferencia',
+					        'format' => 'text',
+					        'label' => 'Valor de Referencia',
+					        'value' => 'valorReferencia'
+					    ],
+					    [
+							'class' => 'yii\grid\ActionColumn',
+					        'template' => '{delete}',
+					        'buttons' => [
+					        	'delete' => function($url, $model){
+					        		return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/grafica/delete', 'id' => $_GET['id'], 'paciente_id' => $_GET['paciente_id'], 'grafica' => $model->id], 
+					        		['title' => 'Eliminar', 'aria-label' => 'Eliminar', 'data-pjax' => '0', 'data-confirm' => '¿Está seguro de eliminar este elemento?', 'data-method' => 'post']);
+						        }
+						    ],
+						],
+		            ],
+		        ]);
+		    ?>
+		<?php Pjax::end(); ?>
+		
+	</div>
+	
+<?php } ?>

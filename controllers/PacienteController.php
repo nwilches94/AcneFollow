@@ -311,7 +311,11 @@ class PacienteController extends BaseAdminController
 		
 		//Graficas
 		$graficas=null;
-		$modelG = Grafica::find()->where(['paciente_id' => $_GET['id']])->all();
+		$modelG = Grafica::find()->where(['paciente_id' => $_GET['id']])->orderBy(['tipo' => SORT_ASC, 'fecha' => SORT_ASC])->all();
+		
+		/*print_r($modelG);
+		die;*/
+		
 		if($modelG)
 		{
 			foreach($modelG as $key => $value) 
