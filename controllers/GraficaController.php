@@ -23,7 +23,7 @@ class GraficaController extends BaseAdminController
                 ],
                 'rules' => [
                 	[
-                        'actions' => ['index', 'delete'],
+                        'actions' => ['index', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['admin', 'medico'],
                     ],
@@ -58,6 +58,21 @@ class GraficaController extends BaseAdminController
 
         return $this->render('index', ['model' => $model]);
     }	
+	
+	public function actionUpdate($id)
+    {
+		$model = $this->findModel($_GET['grafica']);
+		$model->fecha = Examen::changeDate($model->fecha, 1);
+		
+		if($model->load(Yii::$app->request->post())) {
+			$model->fecha = Examen::changeDate($model->fecha, 0);
+			$model->save();
+			
+			return $this->redirect(['/examen/imagen?id='.$_GET['id'].'&paciente_id='.$_GET['paciente_id']]);
+		}
+
+		return $this->render('update', ['model' => $model]);
+	}
 	
 	public function actionDelete($id)
     {

@@ -125,4 +125,14 @@ class Examen extends \yii\db\ActiveRecord
 		
 		return;
 	}
+
+	public function changeDateEspanol($fecha)
+	{
+		$IngEsp = ['January'=>'Enero', 'February'=>'Febreo', 'March'=>'Marzo', 'April'=>'Abril', 'May'=>'Mayo', 'June '=>'Junio', 'July'=>'Julio',
+				   'August'=>'Agosto', 'September'=>'Septiembre', 'October'=>'Octubre', 'November'=>'Noviembre', 'December'=>'Diciembre'];
+
+		$f=explode(" ", $fecha);
+		
+		return $IngEsp[$f[1]]." ".$f[2];
+	}
 }

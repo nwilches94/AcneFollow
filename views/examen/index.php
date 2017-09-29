@@ -6,6 +6,7 @@ use app\models\Paciente;
 use app\models\Examen;
 use dektrium\user\models\profile;
 use yii\bootstrap\Modal;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ExamenSearch */
@@ -40,11 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			        'format' => 'text',
 			        'label' => 'Fecha',
 			        'value' => function ($data) {
-			        	\Yii::$app->language = 'es-ES';
-						
-			        	$formatter = \Yii::$app->formatter;
-			        	$formatter->locale='es-ES';
-			        	return $formatter->asDate($data->fecha, 'php: F Y');
+			        	return Examen::changeDateEspanol(\Yii::$app->formatter->asDate($data->fecha, 'php: F Y'));
 				     }
 			    ],
 			    'tipo',

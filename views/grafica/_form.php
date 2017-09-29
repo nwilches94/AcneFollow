@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\bootstrap\ActiveForm;
 use yii\jui\DatePicker;
+use app\models\Examen;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Paciente */
@@ -66,11 +67,7 @@ use yii\jui\DatePicker;
 					        'format' => 'text',
 					        'label' => 'Fecha',
 					        'value' => function ($data) {
-						    	\Yii::$app->language = 'es-ES';
-								
-					        	$formatter = \Yii::$app->formatter;
-					        	$formatter->locale='es-ES';
-					        	return $formatter->asDate($data->fecha, 'php: F Y');
+					        	return Examen::changeDateEspanol(\Yii::$app->formatter->asDate($data->fecha, 'php: F Y'));
 						     }
 					    ],
 					    [
@@ -87,8 +84,11 @@ use yii\jui\DatePicker;
 					    ],
 					    [
 							'class' => 'yii\grid\ActionColumn',
-					        'template' => '{delete}',
+					        'template' => '{view}{delete}',
 					        'buttons' => [
+					        	'view' => function($url, $model){
+					        		return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/grafica/update', 'id' => $_GET['id'], 'paciente_id' => $_GET['paciente_id'], 'grafica' => $model->id]);
+						        },
 					        	'delete' => function($url, $model){
 					        		return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/grafica/delete', 'id' => $_GET['id'], 'paciente_id' => $_GET['paciente_id'], 'grafica' => $model->id], 
 					        		['title' => 'Eliminar', 'aria-label' => 'Eliminar', 'data-pjax' => '0', 'data-confirm' => '¿Está seguro de eliminar este elemento?', 'data-method' => 'post']);
