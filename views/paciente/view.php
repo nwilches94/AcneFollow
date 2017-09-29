@@ -33,13 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 		<?php	$form = ActiveForm::begin();
 					echo $form->field($modelP, 'fechaI')->hiddenInput(['value' => $modelP['fechaI']])->label(false);
-					echo $form->field($modelP, 'fechaF')->hiddenInput(['value' => $modelP['fechaF']])->label(false);
+					echo $form->field($modelP, 'fechaFC')->hiddenInput(['value' => $modelP['fechaFC']])->label(false);
 					echo $form->field($modelP, 'fechaA')->hiddenInput(['value' => $modelP['fechaA']])->label(false);
 				ActiveForm::end(); 
 		?>
 		
 		<?php	if($dataProviderPeriodo && Paciente::getSexo()){
-					$sm=4; $lg=9;
+					$sm=3; $lg=6;
 				}
 				else {
 					$sm=6; $lg=12;
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			            ],
 						[
 							'attribute' => 'cedula',
-			                'label' => 'Cedula',
+			                'label' => 'Cédula',
 						    'value' => function ($model) {
 								$profile=Profile::find()->where(['user_id' => $model->user_id])->one();
 								return $profile['cedula'];
@@ -120,11 +120,14 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 		<?php	if($dataProviderPeriodo && Paciente::getSexo()){ ?>
 						<div class="form-group">
-							<div class="col-sm-3 col-lg-3">
+							<div class="col-sm-3 col-lg-6">
 								<?php  if($dataProviderPeriodo && Paciente::getSexo()) { ?>
-											<br><h2><?= Html::encode('Ciclo Menstrual') ?></h2>
-											<div id="datepicker"></div>
-											<br><br><br><br>
+											<?php $this->registerJsFile('@web/js/moment.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
+											<?php $this->registerJsFile('@web/js/fullcalendar.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
+											<?php $this->registerJsFile('@web/js/locale-all.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
+											<?php $this->registerJsFile('@web/js/calendario.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
+
+											<div id='calendar'></div>
 								<?php 	} ?>
 							</div>
 						</div>

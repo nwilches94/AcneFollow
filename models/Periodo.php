@@ -15,7 +15,7 @@ use Yii;
  */
 class Periodo extends \yii\db\ActiveRecord
 {
-	public $fechaI, $fechaF, $fechaA;
+	public $fechaI, $fechaF, $fechaFC, $fechaA;
 	
     /**
      * @inheritdoc

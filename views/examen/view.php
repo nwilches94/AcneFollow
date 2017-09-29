@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'format' => 'text',
 		        'label' => 'Fecha del Examen',
 		        'value' => function ($data) {
-					return Yii::$app->formatter->asDate($data->fecha, 'php: M, Y');
+					return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y');
 			     }
 		    ],
 		    'tipo',

@@ -86,6 +86,8 @@ class PeriodoController extends BaseAdminController
 		{
 			$model->fechaI=$periodos['fecha'];
 			$model->fechaF=$periodos['fechaFin'];
+			$model->fechaFC = strtotime('+1 day', strtotime($periodos['fechaFin']));
+			$model->fechaFC = date('Y-m-d', $model->fechaFC);
 			$model->fechaA=Yii::$app->formatter->asDate($proximoPeriodo, 'php: Y-m-d');
 		}
 

@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 		<div class="form-group">
 			<div class="col-lg-offset-0 col-lg-4" style="padding-left:0px">
-				<?= $form->field($model, 'buscar')->textInput(['placeholder' => "Busqueda por: ID / Cedula / Nombres"])->label(false); ?>
+				<?= $form->field($model, 'buscar')->textInput(['placeholder' => "Búsqueda por: ID / Cédula / Nombres"])->label(false); ?>
 			</div>
 		</div>	
 		
@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						    'value' => 'id'
 		                ],
 						[
-		                    'label' => 'Cedula',
+		                    'label' => 'Cédula',
 						    'value' => function ($model) {
 								$profile=Profile::find()->where(['user_id' => $model->user_id])->one();
 								return $profile['cedula'];

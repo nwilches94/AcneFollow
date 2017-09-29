@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			        'format' => 'text',
 			        'label' => 'Fecha',
 			        'value' => function ($data) {
-			        	return Examen::changeDateEspanol(\Yii::$app->formatter->asDate($data->fecha, 'php: F Y'));
+			        	return \Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y');
 				     }
 			    ],
 			    'tipo',

@@ -306,6 +306,8 @@ class PacienteController extends BaseAdminController
 		{
 			$modelP->fechaI=$periodos['fecha'];
 			$modelP->fechaF=$periodos['fechaFin'];
+			$modelP->fechaFC = strtotime('+1 day', strtotime($periodos['fechaFin']));
+			$modelP->fechaFC = date('Y-m-d', $modelP->fechaFC);
 			$modelP->fechaA=Yii::$app->formatter->asDate($proximoPeriodo, 'php: Y-m-d');
 		}
 		

@@ -19,10 +19,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        'css/bootstrap-datepicker.standalone.min.css'
+		'css/fullcalendar.min.css',
+		
+    ];
+	public $js = [
+        'js/datePicker.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapAsset'
     ];
 }

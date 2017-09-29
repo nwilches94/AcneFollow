@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 		<div class="form-group">
 			<div class="col-lg-offset-0 col-lg-4" style="padding-left:0px">
-				<?= $form->field($model, 'buscar')->textInput(['placeholder' => "Busqueda por: ID / Cedula / Paciente"])->label(false); ?>
+				<?= $form->field($model, 'buscar')->textInput(['placeholder' => "Búsqueda por: ID / Cédula / Paciente"])->label(false); ?>
 			</div>
 		</div>	
 		
@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	            	[
 				        'attribute' => 'cedula',
 				        'format' => 'text',
-				        'label' => 'Cedula',
+				        'label' => 'Cédula',
 				        'value' => function ($data) {
 							$paciente=Paciente::find()->where(['id' => $data->paciente_id])->one();
 							$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();

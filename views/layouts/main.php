@@ -74,7 +74,7 @@ AppAsset::register($this);
                                     
                                     ],
                                     [
-                                        "label" => "Examenes",
+                                        "label" => "Exámenes",
                                         "url" => ["/examen/index"],
                                         "icon" => "heartbeat",
                                         "visible" => \Yii::$app->user->can('paciente')

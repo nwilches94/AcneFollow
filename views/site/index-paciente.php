@@ -12,7 +12,7 @@ $this->title = 'Acne Follow';
 		
 		<p>Recuerde que esta aplicaci&oacute;n le ayudar&aacute; con el tratamiento que el dermat&oacute;logo le recomend&oacute;, siga las recomendaciones indicadas para que tenga &eacute;xito.</p>
 		
-		<p>No olvide que esta aplicaci&oacute;n es una ayuda y nunca reemplazar&aacute; a su dermat&oacute;logo, cualquier inquietud puede preguntar directamente en la opci&oacute;n &ldquo;BUZON&rdquo;.</p>
+		<p>No olvide que esta aplicaci&oacute;n es una ayuda y nunca reemplazar&aacute; a su dermat&oacute;logo, cualquier inquietud puede preguntar directamente en la opci&oacute;n &ldquo;Buzón de Mensajes&rdquo;.</p>
 		
 		<p>El &eacute;xito del tratamiento depende de su responsabilidad con la toma del medicamento y con su estilo de vida.</p>
 		

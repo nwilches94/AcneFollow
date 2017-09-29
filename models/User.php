@@ -66,7 +66,7 @@ class User extends BaseUser
     public function attributeLabels()
     {
         return [
-            'cedula'         	=> \Yii::t('user', 'Cedula'),
+            'cedula'         	=> \Yii::t('user', 'Cédula'),
             'name'         		=> \Yii::t('user', 'Nombres'),
             'sexo'              => \Yii::t('user', 'Sexo'),
             'peso'              => \Yii::t('user', 'Peso'),

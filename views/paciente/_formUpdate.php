@@ -24,7 +24,7 @@ use dektrium\user\models\Profile;
 			<?= $form->field($profile, 'name')->textInput(['value' => $profile['name'], 'placeholder' => 'Nombres'])->label('Nombres'); ?>
 			<?php 	if(!Yii::$app->user->identity->isAdmin)
 					{ ?>
-						<?= $form->field($profile, 'cedula')->textInput(['value' => $profile['cedula'], 'placeholder' => 'Cedula'])->label('Cedula'); ?>
+						<?= $form->field($profile, 'cedula')->textInput(['value' => $profile['cedula'], 'placeholder' => 'Cédula'])->label('Cédula'); ?>
 						<?= $form->field($profile, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione el Sexo'])->label('Sexo'); ?>
 						<?= $form->field($profile, 'peso')->textInput(['value' => $profile['peso'], 'placeholder' => 'Kg']) ?>
 						<?= $form->field($profile, 'telefono')->textInput(['value' => $profile['telefono'], 'placeholder' => 'Teléfono']) ?>

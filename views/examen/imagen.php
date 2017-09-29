@@ -9,7 +9,7 @@ use yii\bootstrap\Modal;
 /* @var $this yii\web\View */
 /* @var $model app\models\Examen */
 
-$this->title = 'Examenes';
+$this->title = 'Exámenes';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Examens'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

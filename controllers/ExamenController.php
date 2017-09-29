@@ -137,7 +137,7 @@ class ExamenController extends BaseAdminController
 		}
 
 		if($model->load(Yii::$app->request->post())) {
-			$model->fecha = Examen::changeDate($model->fecha, 0);
+			$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'php: Y-m-d');
 			$model->save();
 			
             return $this->redirect(['view', 'id' => $model->id]);
@@ -158,10 +158,10 @@ class ExamenController extends BaseAdminController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-		$model->fecha = Examen::changeDate($model->fecha, 1);
+		$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'php: d-m-Y');
 
         if ($model->load(Yii::$app->request->post())) {
-			$model->fecha = Examen::changeDate($model->fecha, 0);
+			$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'php: Y-m-d');
 			$model->save();
 			
             return $this->redirect(['view', 'id' => $model->id]);
