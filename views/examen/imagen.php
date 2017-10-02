@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="row"> 
     		<?php 	if($fotos) {
 			    		foreach ($fotos as $value) {
-				    		echo 	'<div class="col-xs-6 col-md-3">';
+				    		echo 	'<div class="col-xs-12 col-md-3">';
 							
 									if($value['type'] == 'jpg' || $value['type'] == 'png'|| $value['type'] == 'gif'){
 						    			echo 	'<a class="thumbnail" style="margin-bottom: 5px;" type="button" data-toggle="modal" data-target="#w'.$value['id'].'"> 
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
             	<h1><?= Html::encode('Generar Estadísticas') ?></h1>

@@ -98,4 +98,56 @@ blockquote footer, blockquote small, blockquote .small {
 
 .label {
     font-size: 70%;
- }
+}
+ 
+.space_all {
+	padding-top: 10%;
+	display: none;
+}
+
+.space_all2 {
+	padding-top: 25%;
+	display: none;
+}
+
+.periodo {
+	vertical-align:middle;
+	padding-left:0px; 
+	width: 42%;
+}
+
+@media (max-width: 320px) {
+	.space_all {
+		display: block;
+	}
+	
+	.space_all2 {
+		display: block;
+	}
+	
+	.periodo {
+		width: 100%;
+	}
+	
+	.panel-body {
+    	padding: 0px;
+	}
+
+	.nav-sm footer {
+    	margin-left: 0px;
+	}
+	
+	.nav-sm .nav.side-menu li a {
+	    font-size: 8px;
+	}
+	
+	h1, .h1 {
+    	font-size: 24px;
+	}
+	
+	h3, .h3 {
+    	font-size: 17px;
+	}
+}
+
+

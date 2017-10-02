@@ -22,7 +22,8 @@
         "yiister/yii2-gentelella": "~1.0",
         "dektrium/yii2-user": "^0.9.12",
         "dektrium/yii2-rbac": "^0.3.0",
-        "nemmo/yii2-attachments": "@dev"
+        "nemmo/yii2-attachments": "@dev",
+        "kartik-v/yii2-grid": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -12,7 +12,7 @@ use dektrium\user\models\Profile;
 ?>
 
 <div class="formula-form">
-
+	
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
 		
 		<div class="form-group">
@@ -29,7 +29,7 @@ use dektrium\user\models\Profile;
 	    </div>
 	    
 	    <div class="form-group">
-			<div class="col-lg-offset-3 col-lg-9">
+			<div class="col-lg-offset-3 col-sm-12 col-lg-9">
 	        	<?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => 'btn btn-success']) ?>
 	    	</div>
 		</div>

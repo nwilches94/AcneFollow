@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="row"> 
     		<?php 	if($fotos) {
 			    		foreach ($fotos as $key => $value) {
-				    		echo 	'<div class="col-xs-3 col-md-3" style="padding-left: 1%; padding-right: 1%;">
+				    		echo 	'<div class="col-xs-12 col-md-3" style="padding-left: 1%; padding-right: 1%;">
 				    					<div class="thumbnail" style="height: 100%">
 				    						<p align="left">'.$fechas[$value['itemId']].'</p>
 						    				<a class="thumbnail" style="margin-bottom: 5px;" type="button" data-toggle="modal" data-target="#w'.$value['id'].'"> 

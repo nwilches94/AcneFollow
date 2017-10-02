@@ -100,7 +100,10 @@ $config = [
                 'maxSize' => 1024 * 1024 * 10 // 1 MB
             ],
             'tableName' => '{{%attachments}}' // Optional, default to 'attach_file'
-        ]
+        ],
+		'gridview' =>  [
+        	'class' => '\kartik\grid\Module'
+    	]
     ],
     'params' => $params,
 ];

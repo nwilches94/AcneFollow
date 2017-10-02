@@ -23,9 +23,9 @@ $this->registerJsFile('@web/js/exporting.js', ['position' => View::POS_BEGIN]);
 						$valorE = $model['valorExamen'][$tipoE];
 						$valorR = $model['valorReferencia'][$tipoE];
 		?>
-						<div class="col-sm-3 col-lg-6">
+						<div class="col-sm-12 col-lg-6">
 							<br><br>
-							<div id="container_<?= $i ?>" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							<div id="container_<?= $i ?>" style="min-width: 230px; height: 400px; margin: 0 auto"></div>
 							<input type="hidden" id='myChart_<?= $i ?>' name='myChart[]' value='Tipo de Examen: <?= $tipoE ?>' />
 							<input type="hidden" id='tipo_<?= $i ?>' name='tipo[]' value='<?= $tipoE ?>' />
 							<input type="hidden" id='mes_<?= $i ?>' name='mes[]' value='<?= json_encode($mes) ?>' />

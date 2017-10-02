@@ -4,8 +4,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-use yii\grid\GridView;
 use yii\widgets\Pjax;
+use kartik\grid\GridView;
 use dektrium\user\models\Profile;
 use dektrium\user\models\User;
 
@@ -22,19 +22,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin(['method' => 'get', 'action' => Url::toRoute('paciente/index')]); ?>
 	
 		<div class="form-group">
-			<div class="col-lg-offset-0 col-lg-4" style="padding-left:0px">
+			<div class="col-lg-offset-0 col-xs-12 col-lg-4" style="padding-left:0px">
 				<?= $form->field($model, 'buscar')->textInput(['placeholder' => "Búsqueda por: ID / Cédula / Nombres"])->label(false); ?>
 			</div>
 		</div>	
 		
 		<div class="form-group">
-			<div class="col-lg-offset-0 col-lg-1">
+			<div class="col-lg-offset-0 col-xs-4 col-lg-1">
 				<?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
 			</div>
 		</div>
 		
 		<div class="form-group">
-			<div class="col-lg-offset-0 col-lg-4">
+			<div class="col-lg-offset-0 col-xs-4 col-lg-4">
 		        <?php
 			        if(!Yii::$app->user->identity->isAdmin){
 			           echo Html::a(Yii::t('app', 'Crear Paciente'), ['paciente/create'], ['class' => 'btn btn-success']);
@@ -51,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?php Pjax::begin(); ?>
 		    <?= GridView::widget([
 		            'dataProvider' => $dataProvider,
+		            'responsive' => true,
 		            'columns' => [
 		            	[
 		                    'label' => 'Paciente ID',

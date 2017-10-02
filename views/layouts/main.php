@@ -101,6 +101,10 @@ AppAsset::register($this);
                                         "label" => "Recomendaciones",
                                         "url" => ["/site/recomendaciones"],
                                         "icon" => "eye",
+         								'options' => [
+											'class' => "recomendaciones",
+											'id' => "recomendaciones",
+										],
                                         "visible" => \Yii::$app->user->can('paciente')
                                     ],
                                     [

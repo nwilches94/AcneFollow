@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use app\models\Paciente;
 use app\models\Formula;
 use dektrium\user\models\Profile;
@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'responsive' => true,
         'columns' => [
             [
 		        'attribute' => 'fecha',

@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 use dektrium\user\models\Profile;
 use dektrium\user\models\User;
 use app\models\Paciente;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use yii\widgets\ActiveForm;
 
@@ -23,9 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row"> 
     	
 	    <div class="form-group">
-			<div class="col-lg-offset-0 col-lg-9">
+			<div class="col-lg-offset-0 col-xs-12 col-lg-9">
 				<?= Html::a(Yii::t('app', 'Ver Galería'), ['/foto/galeria?id='.$_GET['id']], ['class' => 'btn btn-success']) ?>
 		    	<?= Html::a(Yii::t('app', 'Ver Exámenes'), ['/examen/index?id='.$_GET['id']], ['class' => 'btn btn-success']) ?>
+		    	<div class="space_all"></div>
 		    	<?= Html::a(Yii::t('app', 'Regresar'), ['index'], ['class' => 'btn btn-primary']) ?>
 			</div>
 		</div>
@@ -134,7 +135,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?php 	} ?>
 				
 		<div class="form-group">
-			<div class="col-sm-2 col-lg-4">
+			<div class="col-sm-12 col-lg-4">
+				<div class="space_all"></div>
 				<h2><?= Html::encode('Calcular Dosis') ?></h2>
 				
 				<?= $this->render('/formula/_form', [
@@ -144,7 +146,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>
 		
 		<div class="form-group">
-			<div class="col-sm-4 col-lg-8">
+			<div class="col-sm-12 col-lg-8">
+				<div class="space_all"></div>
 				<h2><?= Html::encode('Fórmulas') ?></h2>
 				
 				<?= $this->render('/control-caja/index', [

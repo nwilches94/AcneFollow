@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use yii\jui\DatePicker;
 
@@ -24,15 +24,15 @@ use yii\jui\DatePicker;
 			
 			<div class="col-sm-6 col-lg-6" style="vertical-align:middle; padding-left:0px">
 				
-				 <h2><?= Html::encode('Crear un Seguimiento de Periodos') ?></h2>
+				<h2><?= Html::encode('Crear un Seguimiento de Periodos') ?></h2>
 				 
 				<div class="col-sm-6 col-lg-12" style="vertical-align:middle; padding-left:0px">			
-					<div class="col-sm-2 col-lg-5" style="vertical-align:middle; padding-left:0px; width: 42%">
+					<div class="col-sm-3 col-lg-5 periodo">
 						<?= $form->field($model, 'fecha')->widget(DatePicker::className(), [
 						    'language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['multidate' => false, 'autoclose' => true, 'changeMonth' => true, 'changeYear' => true]
 						])->textInput(['placeholder' => 'Fecha Inicio de Periodo'])->label(false); ?>
 					</div>
-					<div class="col-sm-2 col-lg-5" style="vertical-align:middle; padding-left:0px; width: 42%">
+					<div class="col-sm-3 col-lg-5 periodo">
 						<?= $form->field($model, 'fechaFin')->widget(DatePicker::className(), [
 						    'language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['multidate' => false, 'autoclose' => true, 'changeMonth' => true, 'changeYear' => true]
 						])->textInput(['placeholder' => 'Fecha Fin de Periodo'])->label(false); ?>
@@ -41,12 +41,14 @@ use yii\jui\DatePicker;
 			        	<?= Html::submitButton(Yii::t('app', 'Generar'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 			    	</div>
 			    </div>
-
+			    
 				<br><br><br>
+				<div class="space_all2"></div>
 			    <br><h2><?= Html::encode('Histórico de Seguimiento de Periodos') ?></h2>
 			    <?php Pjax::begin(); ?>
 				    <?= GridView::widget([
 				            'dataProvider' => $dataProvider,
+				            'responsive' => true,
 				            'columns' => [
 				                [
 							        'attribute' => 'fecha',
