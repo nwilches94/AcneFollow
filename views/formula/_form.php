@@ -13,7 +13,7 @@ use dektrium\user\models\Profile;
 
 <div class="formula-form">
 	
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
+    <?php $form = ActiveForm::begin(['id' => 'formula_paciente', 'layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
 		
 		<div class="form-group">
 			<?php 	$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();

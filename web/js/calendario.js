@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 	var fechaI = jQuery.parseJSON($('#periodo-fechai').val());
 	var fechaF = jQuery.parseJSON($('#periodo-fechafc').val());
 	var fechaA = jQuery.parseJSON($('#periodo-fechaa').val());
@@ -55,6 +54,6 @@ $(document).ready(function(){
 	$('#locale-selector').on('change', function(){
 		if(this.value){
 			$('#calendar').fullCalendar('option', 'locale', this.value);
-			}
-		});
+		}
 	});
+});

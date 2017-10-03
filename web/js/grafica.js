@@ -1,7 +1,7 @@
 var i=0;
 $('input[name^=\"myChart[]\"]').each(function()
 {
-	grafica(i, $('#myChart_' + i).val(), $('#tipo_' + i).val(), $('#mes_' + i).val(), $('#valorE_' + i).val(), $('#valorR_' + i).val());
+	grafica($('#nameContainer_' + i).val(), $('#myChart_' + i).val(), $('#tipo_' + i).val(), $('#mes_' + i).val(), $('#valorE_' + i).val(), $('#valorR_' + i).val());
 	i++;
 });
      
@@ -36,7 +36,7 @@ function grafica(id, name, tipo, mes, valorExamen, valorReferencia)
 		};
 	}	
 	
-	Highcharts.chart('container_' + id, {
+	Highcharts.chart(id, {
 		colors: ['#FFFFFF'],
 	    chart: {
 	        type: 'line',
@@ -111,6 +111,22 @@ function grafica(id, name, tipo, mes, valorExamen, valorReferencia)
 		series: [{
 	        name: 'Gráfica - ' + tipo,
 	        data: data,
-	    }]
+	    }],
 	});
 }
+
+$('#menu_toggle').on('click', function(){
+	
+	var widht;
+	if($('body').hasClass('nav-md'))
+        widht = 230;
+    else
+        widht = 300;
+
+	var i=0; 
+	$('input[name^=\"myChart[]\"]').each(function()
+	{
+		$('#containerR_' + i).css('width', widht + 'px');
+		i++;
+	});
+});

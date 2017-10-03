@@ -3,6 +3,7 @@ html,
 body {
     height: 100%;
     background: #614051;
+    overflow-x: hidden;
 }
 
 .left_col{
@@ -116,6 +117,22 @@ blockquote footer, blockquote small, blockquote .small {
 	width: 42%;
 }
 
+#fechaN {
+	display: block;
+}
+	
+#fechaC {
+	display: none;
+}	
+
+#grafica {
+	display: block;
+}
+
+#grafica_responsive {
+	display: none;
+}
+
 @media (max-width: 320px) {
 	.space_all {
 		display: block;
@@ -148,6 +165,40 @@ blockquote footer, blockquote small, blockquote .small {
 	h3, .h3 {
     	font-size: 17px;
 	}
+	
+	.nav-md #fechaN {
+		display: block;
+	}
+	
+	.nav-sm #fechaN {
+		display: none;
+	}
+	
+	.nav-md #fechaC {
+		display: none;
+	}
+	
+	.nav-sm #fechaC {
+		display: block;
+	}
+	
+	.nav-md #control_paciente-container{
+		width: 300px;
+	}
+		
+	.nav-sm #control_paciente-container{
+		width: 230px;
+	}
+	
+	#formula_paciente {
+		padding-right: 20%;
+	}
+	
+	#grafica {
+		display: none;
+	}
+	
+	#grafica_responsive {
+		display: block;
+	}
 }
-
-
