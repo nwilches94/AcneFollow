@@ -15,10 +15,10 @@ use yii\jui\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 		
-		<?php 	echo $form->field($model, 'fechaI')->hiddenInput(['value' => $model['fechaI']])->label(false);
-				echo $form->field($model, 'fechaF')->hiddenInput(['value' => $model['fechaF']])->label(false);
-				echo $form->field($model, 'fechaFC')->hiddenInput(['value' => $model['fechaFC']])->label(false);
-				echo $form->field($model, 'fechaA')->hiddenInput(['value' => $model['fechaA']])->label(false);
+		<?php 	echo $form->field($model, 'fechaI')->hiddenInput(['value' => json_encode($model['fechaI'])])->label(false);
+				echo $form->field($model, 'fechaF')->hiddenInput(['value' => json_encode($model['fechaF'])])->label(false);
+				echo $form->field($model, 'fechaFC')->hiddenInput(['value' => json_encode($model['fechaFC'])])->label(false);
+				echo $form->field($model, 'fechaA')->hiddenInput(['value' => json_encode($model['fechaA'])])->label(false);
 		?>
 		<div class="form-group">
 			

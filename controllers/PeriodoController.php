@@ -81,16 +81,20 @@ class PeriodoController extends BaseAdminController
 			'query' => $query
 		]);
 		
-		$periodos = Periodo::find()->where(['paciente_id' => $paciente['paciente_id']])->orderBy(['fecha' => SORT_DESC])->one();
+		$periodos = Periodo::find()->where(['paciente_id' => $paciente['paciente_id']])->orderBy(['fecha' => SORT_DESC])->all();
 		if($periodos)
 		{
-			$model->fechaI=$periodos['fecha'];
-			$model->fechaF=$periodos['fechaFin'];
-			$model->fechaFC = strtotime('+1 day', strtotime($periodos['fechaFin']));
-			$model->fechaFC = date('Y-m-d', $model->fechaFC);
-			$model->fechaA=Yii::$app->formatter->asDate($proximoPeriodo, 'php: Y-m-d');
+			foreach($periodos as $key => $value) {
+				$model->fechaI[$key] = $value['fecha'];
+				$model->fechaF[$key] = $value['fechaFin'];
+				$model->fechaFC[$key] = strtotime('+1 day', strtotime($value['fechaFin']));
+				$model->fechaFC[$key] = date('Y-m-d', $model->fechaFC[$key]);
+				$proximoP = strtotime('+28 day', strtotime($value['fecha']));
+				$proximoP = date('d-m-Y', $proximoP);
+				$model->fechaA[$key] = Yii::$app->formatter->asDate($proximoP, 'php: Y-m-d');
+			}
 		}
-
+		
        	return $this->render('index', [
             'dataProvider' => $dataProvider, 'model' => $model, 'proximoPeriodo' => $proximoPeriodo
         ]);

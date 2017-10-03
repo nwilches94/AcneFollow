@@ -33,9 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		<br><br>
 		
 		<?php	$form = ActiveForm::begin();
-					echo $form->field($modelP, 'fechaI')->hiddenInput(['value' => $modelP['fechaI']])->label(false);
-					echo $form->field($modelP, 'fechaFC')->hiddenInput(['value' => $modelP['fechaFC']])->label(false);
-					echo $form->field($modelP, 'fechaA')->hiddenInput(['value' => $modelP['fechaA']])->label(false);
+					echo $form->field($modelP, 'fechaI')->hiddenInput(['value' => json_encode($modelP['fechaI'])])->label(false);
+					echo $form->field($modelP, 'fechaFC')->hiddenInput(['value' => json_encode($modelP['fechaFC'])])->label(false);
+					echo $form->field($modelP, 'fechaA')->hiddenInput(['value' => json_encode($modelP['fechaA'])])->label(false);
 				ActiveForm::end(); 
 		?>
 		
@@ -163,22 +163,3 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php if($graficas){ ?>
 	<?= $this->render('_grafica', ['model' => $graficas]) ?>
 <?php } ?>
-
-<?php $this->registerJsFile('@web/js/bootstrap-datepicker.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
-
-<script>
-	window.onload=function()
-	{
-		var fechaI = $('#periodo-fechai').val();
-		var fechasI=fechaI.split('-');
-		
-		var fechaF = $('#periodo-fechaf').val();
-		var fechasF=fechaF.split('-');
-		
-		var fechaA= $('#periodo-fechaa').val();
-		var fechasA=fechaA.split('-');
-		
-		$('#datepicker').datepicker({multidate: false, autoclose: true});
-		$('#datepicker').datepicker('setDates', [new Date(fechasI[0], fechasI[1], fechasI[2]), new Date(fechasF[0], fechasF[1], fechasF[2]), new Date(fechasA[0], fechasA[1], fechasA[2])]);
-	};
-</script>

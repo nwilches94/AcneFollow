@@ -301,14 +301,18 @@ class PacienteController extends BaseAdminController
 			}
 		}
 		
-		$periodos = Periodo::find()->where(['paciente_id' => $paciente['paciente_id']])->orderBy(['fecha' => SORT_DESC])->one();
+		$periodos = Periodo::find()->where(['paciente_id' => $paciente['paciente_id']])->orderBy(['fecha' => SORT_DESC])->all();
 		if($periodos)
 		{
-			$modelP->fechaI=$periodos['fecha'];
-			$modelP->fechaF=$periodos['fechaFin'];
-			$modelP->fechaFC = strtotime('+1 day', strtotime($periodos['fechaFin']));
-			$modelP->fechaFC = date('Y-m-d', $modelP->fechaFC);
-			$modelP->fechaA=Yii::$app->formatter->asDate($proximoPeriodo, 'php: Y-m-d');
+			foreach($periodos as $key => $value) {
+				$modelP->fechaI[$key] = $value['fecha'];
+				$modelP->fechaF[$key] = $value['fechaFin'];
+				$modelP->fechaFC[$key] = strtotime('+1 day', strtotime($value['fechaFin']));
+				$modelP->fechaFC[$key] = date('Y-m-d', $modelP->fechaFC[$key]);
+				$proximoP = strtotime('+28 day', strtotime($value['fecha']));
+				$proximoP = date('d-m-Y', $proximoP);
+				$modelP->fechaA[$key] = Yii::$app->formatter->asDate($proximoP, 'php: Y-m-d');
+			}
 		}
 		
 		//Graficas
