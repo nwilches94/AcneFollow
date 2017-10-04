@@ -4,7 +4,19 @@ $('input[name^=\"myChart[]\"]').each(function()
 	grafica($('#nameContainer_' + i).val(), $('#myChart_' + i).val(), $('#tipo_' + i).val(), $('#mes_' + i).val(), $('#valorE_' + i).val(), $('#valorR_' + i).val());
 	i++;
 });
-     
+
+$('input[name^=\"myChart_320[]\"]').each(function()
+{
+	grafica($('#nameContainer_' + i).val(), $('#myChart_320_' + i).val(), $('#tipo_' + i).val(), $('#mes_' + i).val(), $('#valorE_' + i).val(), $('#valorR_' + i).val());
+	i++;
+});
+
+$('input[name^=\"myChart_360[]\"]').each(function()
+{
+	grafica($('#nameContainer_' + i).val(), $('#myChart_360_' + i).val(), $('#tipo_' + i).val(), $('#mes_' + i).val(), $('#valorE_' + i).val(), $('#valorR_' + i).val());
+	i++;
+});
+ 
 function grafica(id, name, tipo, mes, valorExamen, valorReferencia) 
 {
 	var TGO = ['rgba(75, 192, 192, 0.6)', 'rgba(75, 192, 192, 0.9)'];
@@ -34,7 +46,7 @@ function grafica(id, name, tipo, mes, valorExamen, valorReferencia)
 	        }
 			data[i] = datas;      
 		};
-	}	
+	}
 	
 	Highcharts.chart(id, {
 		colors: ['#FFFFFF'],
@@ -117,16 +129,31 @@ function grafica(id, name, tipo, mes, valorExamen, valorReferencia)
 
 $('#menu_toggle').on('click', function(){
 	
-	var widht;
-	if($('body').hasClass('nav-md'))
-        widht = 230;
-    else
-        widht = 300;
+	var widht_320, widht_360;
+	if($('body').hasClass('nav-md')){
+        widht_320 = 230; widht_360 = 270;
+    }
+    else{
+        widht_320 = 300; widht_360 = 340;
+    }
 
 	var i=0; 
 	$('input[name^=\"myChart[]\"]').each(function()
 	{
-		$('#containerR_' + i).css('width', widht + 'px');
+		i++;
+	});
+	
+	$('input[name^=\"myChart_320[]\"]').each(function()
+	{
+		$('#container320_' + i).css('width', widht_320 + 'px');
+		i++;
+	});
+	
+	$('input[name^=\"myChart_360[]\"]').each(function()
+	{
+		console.log('#container360_' + i);
+		
+		$('#container360_' + i).css('width', widht_360 + 'px');
 		i++;
 	});
 });

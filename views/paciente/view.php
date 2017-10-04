@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-//use kartik\detail\DetailView;
 use yii\widgets\DetailView;
 use dektrium\user\models\Profile;
 use dektrium\user\models\User;
@@ -54,15 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<br><h2><?= Html::encode('Datos del Paciente') ?></h2>
 				
 			    <?= DetailView::widget([
-			        'model' => $model,/*
-			        'responsive' => true,
-			        'enableEditMode' => false,
-			        'condensed' => true,
-    				'hover' => true,
-			        'panel' => [
-						'heading' => 'Pacientes',
-						'type' => 'view'
-					],*/
+			        'model' => $model,
 			        'attributes' => [
 			        	[
 			            	'label' => 'Paciente ID',

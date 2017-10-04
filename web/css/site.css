@@ -129,7 +129,11 @@ blockquote footer, blockquote small, blockquote .small {
 	display: block;
 }
 
-#grafica_responsive {
+#grafica_320 {
+	display: none;
+}
+
+#grafica_360 {
 	display: none;
 }
 
@@ -198,7 +202,85 @@ blockquote footer, blockquote small, blockquote .small {
 		display: none;
 	}
 	
-	#grafica_responsive {
+	#grafica_320 {
+		display: block;
+	}
+	
+	#grafica_360 {
+		display: none;
+	}
+}
+
+@media (min-width: 321px) and (max-width: 360px) {
+	.space_all {
+		display: block;
+	}
+	
+	.space_all2 {
+		display: block;
+	}
+	
+	.periodo {
+		width: 100%;
+	}
+	
+	.panel-body {
+    	padding: 0px;
+	}
+
+	.nav-sm footer {
+    	margin-left: 0px;
+	}
+	
+	.nav-sm .nav.side-menu li a {
+	    font-size: 8px;
+	}
+	
+	h1, .h1 {
+    	font-size: 24px;
+	}
+	
+	h3, .h3 {
+    	font-size: 17px;
+	}
+	
+	.nav-md #fechaN {
+		display: block;
+	}
+	
+	.nav-sm #fechaN {
+		display: none;
+	}
+	
+	.nav-md #fechaC {
+		display: none;
+	}
+	
+	.nav-sm #fechaC {
+		display: block;
+	}
+	
+	.nav-md #control_paciente-container{
+		width: 340px;
+	}
+		
+	.nav-sm #control_paciente-container{
+		width: 270px;
+	}
+	
+	#formula_paciente {
+		padding-right: 30%;
+	}
+	
+	#grafica {
+		display: none;
+	}
+	
+	#grafica_320 {
+		display: none;
+	}
+	
+	#grafica_360 {
 		display: block;
 	}
 }
