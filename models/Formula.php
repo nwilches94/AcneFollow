@@ -33,7 +33,7 @@ class Formula extends \yii\db\ActiveRecord
     {
         return [
             [['paciente_id', 'doctor_id', 'fecha', 'peso', 'dosis', 'capsula', 'cajas'], 'required'],
-            [['paciente_id', 'doctor_id', 'peso', 'dosis', 'capsula', 'cajas'], 'integer'],
+            [['paciente_id', 'doctor_id', 'dosis', 'capsula', 'cajas'], 'integer'],
             [['fecha'], 'safe'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id']],
         ];

@@ -25,9 +25,7 @@ use dektrium\user\models\profile;
 	<? $user->password ?>
 <?php endif ?>-->
 
-<?php 	$paciente=Paciente::find()->where(['doctor_id' => Yii::$app->user->id])->one();
-		$profile=Profile::find()->where(['user_id' => $paciente['user_id']])->one();
-?>
+<?php $profile=Profile::find()->where(['user_id' => Yii::$app->user->id])->one(); ?>
 
 Bienvenido a Acnefollow,<br><br>
 
@@ -36,7 +34,7 @@ Su dermatólogo <?= $profile['name'] ?> a creado su cuenta en la aplicación par
 Su usuario es : <?= $user->email ?><br>
 Su contraseña es: <?= $user->password ?><br><br>
 
-Para poder acceder a la aplicación ingrese al siguiente link: <a href="acnefollow.tk">Acnefollow.tk</a><br>
+Para poder acceder a la aplicación ingrese al siguiente link: <a href="http://acnefollow.tk">Acnefollow.tk</a><br>
 Recuerda ser constante con el tratamiento y verás los cambios.
 
 <?php if ($token !== null): ?>

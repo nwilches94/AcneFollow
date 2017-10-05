@@ -81,6 +81,8 @@ class FormulaController extends BaseAdminController
 			if($model->validate()) {
 				$model->save();
 				
+				$model->peso = str_replace(" Kg", "", $model->peso);
+				
 				//Creo el control de cajas
 				$controlCajas = new ControlCaja();
 				$controlCajas->paciente_id=$model->paciente_id;

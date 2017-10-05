@@ -77,10 +77,24 @@ class ExamenController extends BaseAdminController
 		else {
 			$searchModel = new ExamenSearch();
 			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		}		
-
+		}	
+		
+		$grafica = new Grafica();
+		
+		//Graficas
+		$graficas = array();
+		
+		if(isset($_GET['id']))
+			$graficas = Grafica::find()->where(['paciente_id' => $_GET['id']])->orderBy(['tipo' => SORT_ASC, 'fecha' => SORT_DESC]);
+		
+		$dataProviderG = new ActiveDataProvider([
+			'query' => $graficas
+		]);	
+		
+		$dataProvider->pagination->pageSize=5;
+		
         return $this->render('index', [
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider, 'grafica' => $grafica, 'dataProviderG' => $dataProviderG
         ]);
     }
 
@@ -203,11 +217,7 @@ class ExamenController extends BaseAdminController
 	
 	public function actionImagen($id)
     {
-    	
     	$model = Examen::findOne($id);
-		
-		$grafica = new Grafica();
-		$grafica->tipo = $model->tipo;
 		
 		//Fotos
 		$fotos = array();
@@ -215,16 +225,8 @@ class ExamenController extends BaseAdminController
         if($query)
 			$fotos=$query->all();
 		
-		
-		//Graficas
-		$graficas = array();
-		$graficas = Grafica::find()->where(['examen_id' => $id])->orderBy(['tipo' => SORT_ASC, 'fecha' => SORT_DESC]);
-		$dataProvider = new ActiveDataProvider([
-			'query' => $graficas
-		]);
-		
         return $this->render('imagen', [
-            'model' => $model, 'fotos' => $fotos, 'grafica' => $grafica, 'dataProvider' => $dataProvider
+            'model' => $model, 'fotos' => $fotos
         ]);
     }
 	

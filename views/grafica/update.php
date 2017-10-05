@@ -29,7 +29,7 @@ use app\models\Examen;
 
 <div class="grafica-form">
 	
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'action' => '/grafica/update?id='.$_GET['id'].'&paciente_id='.$_GET['paciente_id'].'&grafica='.$_GET['grafica'], 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'action' => '/grafica/update?id='.$_GET['id'].'&grafica='.$_GET['grafica'], 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
 		
 		<div class="form-group">
 			<?= $form->field($model, 'fecha')->widget(DatePicker::className()) ?>

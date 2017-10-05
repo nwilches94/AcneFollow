@@ -151,8 +151,6 @@ $('#menu_toggle').on('click', function(){
 	
 	$('input[name^=\"myChart_360[]\"]').each(function()
 	{
-		console.log('#container360_' + i);
-		
 		$('#container360_' + i).css('width', widht_360 + 'px');
 		i++;
 	});

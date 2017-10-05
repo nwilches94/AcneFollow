@@ -1,12 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use kartik\grid\GridView;
 use app\models\Paciente;
 use app\models\Examen;
 use dektrium\user\models\profile;
 use yii\bootstrap\Modal;
 use yii\jui\DatePicker;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ExamenSearch */
@@ -35,13 +35,16 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?= GridView::widget([
 	        'dataProvider' => $dataProvider,
 	        'responsive' => true,
+	        'striped'=>true,
+    		'hover'=>true,
+    		'panel'=>['type' => 'primary', 'heading' => 'Listado de Exámenes'],
 	        'columns' => [
-            	['class' => 'yii\grid\SerialColumn'],
+            	['class' => 'kartik\grid\SerialColumn'],
 				[
 			        'attribute' => 'fecha',
 			        'format' => 'text',
 			        'label' => 'Fecha',
-			        'value' => function ($data) {
+			        'value' => function ($data){
 			        	return \Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y');
 				     }
 			    ],
@@ -68,5 +71,17 @@ $this->params['breadcrumbs'][] = $this->title;
 	        ],
 	    ]); 
 	?>
-
 </div>
+
+<?php if(Yii::$app->user->can('medico')){ ?>
+		<div class="row">
+		    <div class="col-xs-12 col-md-12">
+		        <div class="panel panel-default">
+		            <div class="panel-body">
+		            	<h1><?= Html::encode('Generar Estadísticas') ?></h1>
+		    			<?= $this->render('/grafica/_form', ['model' => $grafica, 'dataProvider' => $dataProviderG]) ?>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+<?php } ?>

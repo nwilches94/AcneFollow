@@ -50,11 +50,10 @@ class Paciente extends \yii\db\ActiveRecord
             'doctor_id' => Yii::t('app', 'Doctor'),
             'user_id' => Yii::t('app', 'User'),
             'buscar' => Yii::t('app', 'Buscar'),
-         
 			'cedula' 	=> Yii::t('app','Cedula'),
             'name'     	=> Yii::t('app', 'Nombre'),
         	'sexo'    	=> Yii::t('app', 'Sexo'),
-        	'peso'    	=> Yii::t('app', 'Peso'),
+        	'peso'    	=> Yii::t('app', 'Peso (kg)'),
         	'telefono' 	=> Yii::t('app', 'Teléfono'),
         	'fecha'   	=> Yii::t('app','Fecha de Nacimiento'),
         ];

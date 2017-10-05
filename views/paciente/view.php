@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
-use dektrium\user\models\Profile;
-use dektrium\user\models\User;
+use app\models\Profile;
+use app\models\User;
 use app\models\Paciente;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
@@ -55,10 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			    <?= DetailView::widget([
 			        'model' => $model,
 			        'attributes' => [
-			        	[
+			        	/*[
 			            	'label' => 'Paciente ID',
 							'attribute' => 'id'
-			            ],
+			            ],*/
 			        	[
 							'attribute' => 'name',
 			                'label' => 'Nombres',
@@ -87,8 +87,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			            ],
 			            [
 							'attribute' => 'fecha',
-			                'label' => '<span id="fechaN">Fecha de Nacimiento</span><span id="fechaC">Fecha Nac.</span>',
-						    'value' => Yii::$app->formatter->asDate(Profile::find()->where(['user_id' => $model->user_id])->one()->fecha, 'php: d-m-Y') 
+			                'label' => 'Edad',
+						    'value' => Profile::getEdad(Profile::find()->where(['user_id' => $model->user_id])->one()->fecha)
 			            ],
 			            [
 							'attribute' => 'id',

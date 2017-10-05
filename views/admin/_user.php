@@ -34,7 +34,7 @@ use app\models\Profile;
 		{ ?>
 			<?= $form->field($user, 'cedula')->textInput(['maxlength' => 255, 'placeholder' => 'Cédula']) ?>
 			<?= $form->field($user, 'sexo')->dropDownList(['Hombre' => 'Hombre', 'Mujer' => 'Mujer'], ['prompt'=>'Seleccione el Sexo'])->label('Sexo'); ?>
-			<?= $form->field($user, 'peso')->textInput(['maxlength' => 255, 'placeholder' => 'Kg']) ?>
+			<?= $form->field($user, 'peso')->textInput(['maxlength' => 255, 'placeholder' => 'Kg'])->label('Peso (kg)') ?>
 			<?= $form->field($user, 'telefono')->textInput(['maxlength' => 255, 'placeholder' => 'Teléfono']) ?>
 			<?= $form->field($user, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['changeMonth' => true,  'yearRange' => '-70:+0', 'changeYear' => true]])->textInput(['placeholder' => 'Clic para seleccionar la Fecha de Nacimiento'])->label('Fecha de Nacimiento') ?>
 <?php 	} ?>

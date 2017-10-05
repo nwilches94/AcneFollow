@@ -326,7 +326,7 @@ class PacienteController extends BaseAdminController
 		{
 			foreach($modelG as $key => $value) 
 			{
-				$graficas['examen_id'][$value['tipo']][] = $value['examen_id'];
+				/*$graficas['examen_id'][$value['tipo']][] = $value['examen_id'];*/
 				$graficas['tipo'][$value['tipo']] = $value['tipo'];
 				$graficas['fecha'][$value['tipo']][] = Examen::changeDate($value['fecha'], 2);
 				$graficas['valorExamen'][$value['tipo']][] = $value['valorExamen'];

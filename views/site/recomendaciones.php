@@ -23,11 +23,11 @@ $this->title = 'Acne Follow';
 					  	</div>
 					  	<div class="col-xs-12 col-md-6">
 					  		<footer class="textB">Algunos pacientes pueden sentir <strong>dolores musculares,</strong> si son suaves continua con la toma del medicamento y evita esfuerzos grandes o ejercicios de alto impacto.</footer>
-					  		<footer class="textB">Si estas con náuseas, vómito o diarrea, no tomes la cápsula por que la vas a eliminar. Pero si estos síntomas son ocasionados por el medicamento es mejor que consultes con la Dra. Vanessa.</footer>
+					  		<footer class="textB">Si estas con náuseas, vómito o diarrea, no tomes la cápsula por que la vas a eliminar. Pero si estos síntomas son ocasionados por el medicamento es mejor que consultes con tu Dermatólogo.</footer>
 					  		<footer class="textB">Asiste a los controles de Dermatología con exámenes de laboratorio (Colesterol total, Triglicéridos, TGO, TGP).</footer>
 					  	</div>
 					  	<div class="col-xs-12 col-md-12">
-					  		<footer class="textB"><strong><span style="color:#73879C">SUSPENDE</span></strong> la toma del medicamento si presentas: dolor de cabeza muy fuerte, dolores musculares fuertes, dolor abdominal o alguna reacción que te preocupe y consúltame.</footer>
+					  		<footer class="textB"><strong><span style="color:#73879C">SUSPENDE</span></strong> la toma del medicamento si presentas: dolor de cabeza muy fuerte, dolores musculares fuertes, dolor abdominal o alguna reacción que te preocupe y consulta con tu Dermatólogo.</footer>
 					  	</div>
 					  	<div class="col-xs-12 col-md-12">
 					  		<div class="col-xs-4 col-md-4">
@@ -83,8 +83,8 @@ $this->title = 'Acne Follow';
 							<h3>ES IMPORTANTE PARA EVITAR COMPLICACIONES SEGUIR LAS SIGUIENTES INDICACIONES:</h3>
 						</div>
 						<div class="col-xs-12 col-md-6">
-							<footer class="textB">Recuerda tomar la <strong>dosis indicada</strong> por la Dra. Vanessa Giraldo (una o dos) cápsulas todos los días o los días que fueron formulados.</footer>
-							<footer class="textB">Toma la cápsula con el <strong>estómago lleno (INMEDIATAMENTE después de la comida principal)</strong> para que pueda absorberse mejor y con un vaso de agua.</footer>
+							<footer class="textB">Recuerda tomar la <strong>dosis indicada</strong> por tu Dermatólogo (una o dos) cápsulas todos los días o los días que fueron formulados.</footer>
+							<footer class="textB">Toma la cápsula con el <strong>estómago lleno</strong> (<strong>INMEDIATAMENTE</strong> después de la comida principal) para que pueda absorberse mejor y con un vaso de agua.</footer>
 					  		<footer class="textB"><strong>No muerdas,</strong> ni mastiques, ni tritures la cápsula. No saques la cápsula del empaque si no la vas a tomar inmediatamente, y no la dejes expuesta al sol porque esto hace que pierda su efecto. </footer>
 					  		<footer class="textB">Si un día olvidas tomarla, no tomes al otro día doble de la dosis, continua tomándola igual.</footer>
 					  		<footer class="textB">Durante el <strong>primer mes</strong> de tratamiento puede <strong>EMPEORAR</strong> el acné (no <strong>SUSPENDAS</strong> el tratamiento por esto), mientras el medicamento empieza a tener efecto, desde el segundo mes se empieza a ver la piel más limpia, pero lo más importante es completar la dosis formulada para obtener buenos resultados.</footer>
@@ -93,7 +93,7 @@ $this->title = 'Acne Follow';
 					  		<footer class="textB">No tomes el medicamento si no ha sido formulado ni por más tiempo del recomendado.</footer>
 					  		<footer class="textB">No puedes consumir nada de <strong>bebidas alcohólicas</strong> durante el tratamiento ni dos meses después de terminarlo.</footer>
 					  		<footer class="textB">No debes consumir <strong>multivitamínicos,</strong> ni proteína de gimnasio que contengan vitamina A porque puedes incrementar la dosis del medicamento y aumentar los efectos adversos.  </footer>
-					  		<footer class="textB">Evita tomar otros medicamentos como <strong>antibióticos</strong> o que no sean formulados. Si estas con alguna infección consulta con la Dra. Vanessa Giraldo si es necesario suspender el medicamento por el tiempo que te formularon el antibiótico.</footer>
+					  		<footer class="textB">Evita tomar otros medicamentos como <strong>antibióticos</strong> o que no sean formulados. Si estas con alguna infección consulta con tu Dermatólogo si es necesario suspender el medicamento por el tiempo que te formularon el antibiótico.</footer>
 					  		<footer class="textB">Ten una dieta balanceada, evita consumir fritos, grasas, paquetes, embutidos, huevo, lácteos enteros, chocolate y salsas.</footer>
 					  	</div>
 					  	<div class="col-xs-12 col-md-12">
@@ -114,14 +114,14 @@ $this->title = 'Acne Follow';
 							<h3>El medicamento puede producir estos efectos que son normales PARA QUE LOS TENGAS EN CUENTA:</h3>
 						</div>
 						<div class="col-xs-12 col-md-6">
-							<footer class="textB">Vas a sentir toda la piel seca, incluyendo los <strong>LABIOS,</strong> por lo que debes aplicar varias veces al día barra labial humectante (Eucerin, Sunstop o Labie) durante todo el tiempo que tomes el medicamento. Tomar agua te puede ayudar.</footer>
-							<footer class="textB">Puedes sentir molestias en los <strong>OJOS</strong> debido a que también se secan, como ardor, rasquiña o disminución de la visión, para lo cual puedes aplicar lágrimas artificiales (Siccafluid, tearsoft) 1 gota en cada ojo  3 veces al día.</footer>
+							<footer class="textB">Vas a sentir toda la piel seca, incluyendo los <strong>LABIOS,</strong> por lo que debes aplicar varias veces al día barra labial humectante durante todo el tiempo que tomes el medicamento. Tomar agua te puede ayudar.</footer>
+							<footer class="textB">Puedes sentir molestias en los <strong>OJOS</strong> debido a que también se secan, como ardor, rasquiña o disminución de la visión, para lo cual puedes aplicar lágrimas artificiales 1 gota en cada ojo  3 veces al día. </footer>
 							<footer class="textB">Si usas <strong>LENTES DE CONTACTO</strong> aplica lagrimas para hidratar los ojos y evitar irritación, pero puede que no toleres su uso durante el tratamiento.</footer>
 							<footer class="textB">Si te molesta la <strong>NARIZ,</strong> la sientes seca, con costras o te sangra con facilidad, aplica suero fisiológico 2 o 3 veces al día.</footer>
 						</div>
 					  	<div class="col-xs-12 col-md-6">
 					  		<footer class="textB">Te recomiendo <strong>NO REALIZARTE PROCEDIMIENTOS</strong> como dermoabrasiones, láser, tatuajes, piercing o cirugías estéticas durante el tratamiento por que puede verse alterada un poco la cicatrización por lo seca que va a estar tu piel.</footer>
-							<footer class="textB">Si es una <strong>CIRUGÍA OBLIGATORIA</strong> o de urgencias, es preferible que suspendas la toma del medicamento por 1 semana o pregúntale a la Dra. Vanessa si tienes dudas.</footer>
+							<footer class="textB">Si es una <strong>CIRUGÍA OBLIGATORIA</strong> o de urgencias, es preferible que suspendas la toma del medicamento por 1 semana o pregúntale a tu Dermatólogo si tienes dudas.</footer>
 							<footer class="textB">No te depiles con <strong>CERA CALIENTE</strong> ni apliques productos calientes directamente en tu piel como para masajes, porque esto puede ocasionar quemaduras. Puedes usar cremas depilatorias o máquina de afeitar.</footer>
 							<footer class="textB">Evita la exposición solar por que la piel está muy sensible y se puede quemar con facilidad, tampoco debes usar cámaras de bronceo.</footer>
 					  	</div>
@@ -143,7 +143,7 @@ $this->title = 'Acne Follow';
 							<p class="textB textP"><strong>1.</strong> Aplica tu <strong>PROTECTOR SOLAR en gel, emulsión o fluido</strong> en la cara y las zonas expuestas al sol (orejas, cuello, manos), todos los días después del baño y repetirlo más o menos cada 3 horas (7am – 11pm - 3pm). Adicional puedes usar cachucha, sombrero o sombrilla si está haciendo mucho sol, y evita el sol más fuerte que es el de 11am – 3pm.</p>
 							<p class="textB textP"><strong>2.</strong> Recuerda que en las noches debes <strong>LIMPIAR O LAVAR TU CARA</strong> con algo suave para no irritar la piel.</p>
 							<p class="textB textP"><strong>3.</strong> <strong>HIDRATA LA PIEL</strong> de la cara con productos en emulsión para no engrasar la piel, y en el cuerpo también debes usar humectantes mañana y noche.</p>
-							<p class="textB textP"><strong>4.</strong> Usa <strong>JABONES NEUTROS SUAVES</strong> (como Johnsons o Dove blanco) para tu baño diario, no restriegues tu piel con estropajo, esponjas ni guantes, ten baños cortos con agua tibia, y aplica jabón principalmente en axilas, genitales y pies.</p>
+							<p class="textB textP"><strong>4.</strong> Usa <strong>JABONES NEUTROS SUAVES</strong> para tu baño diario, no restriegues tu piel con estropajo, esponjas ni guantes, ten baños cortos con agua tibia, y aplica jabón principalmente en axilas, genitales y pies.</p>
 						</div>
 				  	</blockquote>
 				</div>
@@ -163,7 +163,7 @@ $this->title = 'Acne Follow';
 							<div class="col-xs-12 col-md-12">
 								<p class="textB textP">➔ No puedes quedar en <strong>embarazo</strong> durante el tratamiento ni 3 meses después de terminarlo, porque este medicamento puede producir malformaciones en tu bebé.</p>
 								<p class="textB textP">➔ Si estas <strong>lactando</strong> no puedes tomar este medicamento.</p>
-								<p class="textB textP">➔ Recuerda planificar durante todo el tratamiento, ojalá con preservativo y otro método (idealmente anticonceptivos orales que también pueden ayudarte a mejorar el acné). Si no sabes bien cual método de planificación usar pregúntame y te puedo orientar.</p>
+								<p class="textB textP">➔ Recuerda planificar durante todo el tratamiento, ojalá con preservativo y otro método (idealmente anticonceptivos orales que también pueden ayudarte a mejorar el acné). Si no sabes bien cual método de planificación usar pregúntale a tu Dermatólogo y te puede orientar.</p>
 							</div>
 					  	</blockquote>
 					</div>

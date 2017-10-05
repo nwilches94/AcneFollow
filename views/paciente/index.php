@@ -51,7 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?php Pjax::begin(); ?>
 		    <?= GridView::widget([
 		            'dataProvider' => $dataProvider,
-		            'responsive' => true,
+			        'responsive' => true,
+			        'striped'=>true,
+		    		'hover'=>true,
+		    		'panel'=>['type' => 'primary', 'heading' => 'Listado de Pacientes'],
 		            'columns' => [
 		            	[
 		                    'label' => 'Paciente ID',
@@ -95,3 +98,5 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?php Pjax::end(); ?>
 	<?php } ?>
 </div>
+
+<br>

@@ -29,7 +29,6 @@ class Profile extends BaseUser
 			$rules['cedulaRequired'] = ['cedula', 'integer'];
 			$rules['cedulaPattern'] = ['cedula', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['sexo'] = ['sexo', 'required', 'on' => ['register', 'create', 'update']];
-			$rules['pesoRequired'] = ['peso', 'integer'];
 			$rules['pesoPattern'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['telefono'] = ['telefono', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['fecha'] = ['fecha', 'required', 'on' => ['register', 'create', 'update']];
@@ -44,7 +43,7 @@ class Profile extends BaseUser
             'cedula'         	=> \Yii::t('user', 'Cédula'),
             'name'         		=> \Yii::t('user', 'Nombres'),
             'sexo'              => \Yii::t('user', 'Sexo'),
-            'peso'              => \Yii::t('user', 'Peso'),
+            'peso'              => \Yii::t('user', 'Peso Kg'),
             'telefono'          => \Yii::t('user', 'Teléfono'),
             'fecha'         	=> \Yii::t('user', 'Fecha de Nacimiento'),
         ];
@@ -57,4 +56,18 @@ class Profile extends BaseUser
 		
 		return 'Usuario';
     }
+	
+	public function getEdad($fecha)
+	{
+		list($anyo,$mes,$dia) = explode("-",$fecha);
+		
+		$anyo_dif = date("Y") - $anyo;
+		$mes_dif  = date("m") - $mes;
+		$dia_dif  = date("d") - $dia;
+		
+		if($dia_dif < 0 || $mes_dif < 0) 
+			$anyo_dif--;
+		
+		return $anyo_dif." años"; 
+	}
 }

@@ -11,7 +11,7 @@ use app\models\Paciente;
 use app\models\Mensaje;
 use dektrium\user\models\profile;
 
-$this->title = Yii::t('app', 'Buzón de Mensajes');
+$this->title = Yii::t('app', 'Buzón de Mensajes ');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -44,6 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?= GridView::widget([
 		        'dataProvider' => $dataProvider,
 		        'responsive' => true,
+		        'striped'=>true,
+	    		'hover'=>true,
+	    		'panel'=>['type' => 'primary', 'heading' => 'Listado de Mensajes'],
 		        'columns' => [
 	            	[
 				        'attribute' => 'id',

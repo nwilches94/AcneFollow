@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Button;
 
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use app\models\Paciente;
 use dektrium\user\models\profile;
@@ -21,6 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php Pjax::begin(); ?>    
 	<?= GridView::widget([
 	        'dataProvider' => $dataProvider,
+	        'responsive' => true,
+	        'striped'=>true,
+    		'hover'=>true,
+    		'panel'=>['type' => 'primary', 'heading' => 'Historial'],
 	        'columns' => [
 	        	[
 			        'attribute' => 'origen',

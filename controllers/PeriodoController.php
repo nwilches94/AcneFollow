@@ -24,7 +24,7 @@ class PeriodoController extends BaseAdminController
                 ],
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['admin', 'paciente'],
                     ],
@@ -98,5 +98,51 @@ class PeriodoController extends BaseAdminController
        	return $this->render('index', [
             'dataProvider' => $dataProvider, 'model' => $model, 'proximoPeriodo' => $proximoPeriodo
         ]);
+    }
+
+	public function actionUpdate($id)
+    {
+    	$model = $this->findModel($id);
+		
+		if($model->load(Yii::$app->request->post()))
+        {
+			$model->fecha=Yii::$app->formatter->asDate($model->fecha, 'php: Y-m-d');
+			$model->fechaFin=Yii::$app->formatter->asDate($model->fechaFin, 'php: Y-m-d');
+			$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
+			$model->paciente_id=$paciente['id'];
+			
+            if($model->validate())
+			{
+                $model->save();
+				
+				return $this->redirect('index');
+			}
+            else
+                $model->getErrors();
+        }
+		
+		$model->fecha=Yii::$app->formatter->asDate($model->fecha, 'php: d-m-Y');
+		$model->fechaFin=Yii::$app->formatter->asDate($model->fechaFin, 'php: d-m-Y');
+		
+		return $this->render('update', [
+            'model' => $model
+        ]);
+
+    }
+	
+	public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+	
+	protected function findModel($id)
+    {
+        if (($model = Periodo::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

@@ -26,7 +26,7 @@ use app\models\Examen;
 
 <div class="grafica-form">
 	     
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'action' => '/grafica/index?id='.$_GET['id'].'&paciente_id='.$_GET['paciente_id'], 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'action' => '/grafica/index?id='.$_GET['id'], 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
 		
 		<div class="form-group">
 			<?= $form->field($model, 'fecha')->widget(DatePicker::className()) ?>
@@ -55,7 +55,10 @@ use app\models\Examen;
 	    <?php Pjax::begin(); ?>
 		    <?= GridView::widget([
 		            'dataProvider' => $dataProvider,
-		            'responsive' => true,
+			        'responsive' => true,
+			        'striped'=>true,
+		    		'hover'=>true,
+		    		'panel'=>['type' => 'primary', 'heading' => 'Histórico'],
 		            'columns' => [
 					    [
 					        'attribute' => 'tipo',
@@ -88,10 +91,10 @@ use app\models\Examen;
 					        'template' => '{view}{delete}',
 					        'buttons' => [
 					        	'view' => function($url, $model){
-					        		return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/grafica/update', 'id' => $_GET['id'], 'paciente_id' => $_GET['paciente_id'], 'grafica' => $model->id]);
+					        		return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/grafica/update', 'id' => $_GET['id'], 'grafica' => $model->id]);
 						        },
 					        	'delete' => function($url, $model){
-					        		return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/grafica/delete', 'id' => $_GET['id'], 'paciente_id' => $_GET['paciente_id'], 'grafica' => $model->id], 
+					        		return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/grafica/delete', 'id' => $_GET['id'], 'grafica' => $model->id], 
 					        		['title' => 'Eliminar', 'aria-label' => 'Eliminar', 'data-pjax' => '0', 'data-confirm' => '¿Está seguro de eliminar este elemento?', 'data-method' => 'post']);
 						        }
 						    ],

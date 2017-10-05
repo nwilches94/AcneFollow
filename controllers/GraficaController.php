@@ -48,12 +48,11 @@ class GraficaController extends BaseAdminController
     	$model = new Grafica();
 		
 		if($model->load(Yii::$app->request->post())) {
-			$model->paciente_id = $_GET['paciente_id'];
-			$model->examen_id = $_GET['id'];
+			$model->paciente_id = $_GET['id'];
 			$model->fecha = Examen::changeDate($model->fecha, 0);
 			$model->save();
 			
-			return $this->redirect(['/paciente/view', 'id' => $_GET['paciente_id']]);
+			return $this->redirect(['/paciente/view', 'id' => $_GET['id']]);
 		}
 
         return $this->render('index', ['model' => $model]);
@@ -68,7 +67,7 @@ class GraficaController extends BaseAdminController
 			$model->fecha = Examen::changeDate($model->fecha, 0);
 			$model->save();
 			
-			return $this->redirect(['/examen/imagen?id='.$_GET['id'].'&paciente_id='.$_GET['paciente_id']]);
+			return $this->redirect(['/examen/index?id='.$_GET['id']]);
 		}
 
 		return $this->render('update', ['model' => $model]);

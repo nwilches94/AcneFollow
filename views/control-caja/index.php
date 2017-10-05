@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
     	'id' => 'control_paciente',
         'dataProvider' => $dataProvider,
         'responsive' => true,
+        'striped'=>true,
+		'hover'=>true,
+		'panel'=>['type' => 'primary', 'heading' => 'Listado de Fórmulas'],
         'columns' => [
             [
 		        'attribute' => 'fecha',
@@ -39,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			    	return Formula::findOne($data->formula_id)->peso;
 			    },
 		    ],
-		    [
+		    /*[
 		        'attribute' => 'dosis',
 		        'label' => 'Dosis (mg)',
 		        'value' => function ($data) {
@@ -60,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		        	$datos=Formula::findOne($data->formula_id);
 			    	return number_format((($datos->peso*$datos->dosis)/($datos->capsula*30)),0);
 			     }
-		    ],
+		    ],*/
             [
 		        'attribute' => 'capsula',
 		        'label' => 'mg Cápsula',

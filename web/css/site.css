@@ -137,6 +137,42 @@ blockquote footer, blockquote small, blockquote .small {
 	display: none;
 }
 
+#periodo-fecha{
+	width: 100%; 	
+}
+
+#periodo-fechafin{
+	width: 100%; 	
+}
+
+body .container.body .right_col {
+    background: #FFFFFF;
+}
+
+.panel-primary > .panel-heading {
+    background-color: #614051;
+    border-color: #614051;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #614051;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #614051;
+    border-color: #614051;
+}
+
+.panel-primary {
+    border-color: #614051;
+}
+
+.alert-info {
+    color: #E9EDEF;
+    background-color: #614051;
+    border-color: #614051;
+}
+
 @media (max-width: 320px) {
 	.space_all {
 		display: block;
@@ -208,6 +244,14 @@ blockquote footer, blockquote small, blockquote .small {
 	
 	#grafica_360 {
 		display: none;
+	}
+	
+	#periodo-fecha{
+		width: 100%; 	
+	}
+	
+	#periodo-fechafin{
+		width: 100%; 	
 	}
 }
 
@@ -282,5 +326,13 @@ blockquote footer, blockquote small, blockquote .small {
 	
 	#grafica_360 {
 		display: block;
+	}
+	
+	#periodo-fecha{
+		width: 100%; 	
+	}
+	
+	#periodo-fechafin{
+		width: 100%; 	
 	}
 }

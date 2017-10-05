@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "grafica".
  *
  * @property integer $id
- * @property integer $examen_id
  * @property string $fecha
  * @property string $tipo
  * @property string $valorExamen
@@ -30,8 +29,8 @@ class Grafica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['paciente_id', 'examen_id', 'fecha', 'tipo', 'valorExamen', 'valorReferencia'], 'required'],
-            [['paciente_id', 'examen_id'], 'integer'],
+            [['paciente_id', 'fecha', 'tipo', 'valorExamen', 'valorReferencia'], 'required'],
+            [['paciente_id'], 'integer'],
             [['fecha'], 'safe'],
             [['tipo', 'valorExamen', 'valorReferencia'], 'string', 'max' => 255],
         ];
@@ -45,7 +44,6 @@ class Grafica extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'paciente_id' => 'Paciente ID',
-            'examen_id' => 'Examen ID',
             'fecha' => 'Fecha',
             'tipo' => 'Tipo',
             'valorExamen' => 'Valor Examen',
