@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			            ], 
 			            [
 							'attribute' => 'peso',
-			                'label' => 'Peso',
+			                'label' => 'Peso (Kg)',
 						    'value' => Profile::find()->where(['user_id' => $model->user_id])->one()->peso
 			            ], 
 			            [

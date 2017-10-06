@@ -66,13 +66,13 @@ AppAsset::register($this);
                             [
                                 "items" => [
                                     ["label" => "Principal", "url" => "/", "icon" => "home"],
-                                    [
+                                    /*[
                                         "label" => "Pacientes",
                                         "url" => ["/paciente/index"],
                                         "icon" => "user-md",
                                         "visible" => \Yii::$app->user->can('medico')
                                     
-                                    ],
+                                    ],*/
                                     [
                                         "label" => "Exámenes",
                                         "url" => ["/examen/index"],
