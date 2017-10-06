@@ -47,6 +47,7 @@ class Profile extends BaseUser
             'peso'              => \Yii::t('user', 'Peso Kg'),
             'telefono'          => \Yii::t('user', 'Teléfono'),
             'fecha'         	=> \Yii::t('user', 'Fecha de Nacimiento'),
+            'password'			=> \Yii::t('user', 'Contraseña')
         ];
     }
 

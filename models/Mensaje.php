@@ -114,11 +114,11 @@ class Mensaje extends \yii\db\ActiveRecord
 					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.id) , 0) FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS id,
 					paciente.id AS paciente_id,
 					paciente.doctor_id,
-					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.mensaje) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS mensaje,
-					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.leido) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS leido,
-					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.origen) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS origen,
-					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.fecha) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS fecha,
-					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.ampm) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id) AS ampm
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.mensaje) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id AND mensaje.origen ='paciente') AS mensaje,
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.leido) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id AND mensaje.origen ='paciente') AS leido,
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.origen) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id AND mensaje.origen ='paciente') AS origen,
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.fecha) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id AND mensaje.origen ='paciente') AS fecha,
+					(SELECT IF(MAX(mensaje.id) , MAX(mensaje.ampm) , '') FROM mensaje WHERE mensaje.doctor_id = ".Yii::$app->user->id." AND mensaje.paciente_id = paciente.id AND mensaje.origen ='paciente') AS ampm
 					FROM paciente
 					JOIN profile ON profile.user_id = paciente.user_id
 					WHERE paciente.doctor_id = ".Yii::$app->user->id.$buscar;

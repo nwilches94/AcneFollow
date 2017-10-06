@@ -42,5 +42,5 @@ use app\models\Profile;
 <?= $form->field($user, 'email')->textInput(['maxlength' => 255, 'placeholder' => 'Email']) ?>
 
 <?php if(Yii::$app->user->identity->isAdmin){ ?>
-	<?= $form->field($user, 'password')->passwordInput(['placeholder' => 'Contraseña']) ?>-->
+	<?= $form->field($user, 'password')->passwordInput(['placeholder' => 'Contraseña']) ?>
 <?php } ?>
