@@ -54,6 +54,7 @@ class User extends BaseUser
 			$rules['cedulaRequired'] = ['cedula', 'integer'];
 			$rules['cedulaPattern'] = ['cedula', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['sexo'] = ['sexo', 'required', 'on' => ['register', 'create', 'update']];
+			$rules['pesoRequired'] = ['peso', 'integer'];
 			$rules['pesoPattern'] = ['peso', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['telefono'] = ['telefono', 'required', 'on' => ['register', 'create', 'update']];
 			$rules['fecha'] = ['fecha', 'required', 'on' => ['register', 'create', 'update']];
