@@ -130,21 +130,18 @@ class Mensaje extends \yii\db\ActiveRecord
 			
 			if($paciente)
 			{
-				$sql =	"SELECT mensaje.* 
-						FROM mensaje
-						JOIN paciente ON paciente.id = mensaje.paciente_id 
-						JOIN profile ON profile.user_id = paciente.doctor_id
-						WHERE mensaje.origen='medico' AND mensaje.paciente_id=".$paciente['id']." AND mensaje.id IN (
-							SELECT MAX(id) AS id 
-							FROM mensaje
-							WHERE origen='medico' AND paciente_id=".$paciente['id']." 
-							GROUP BY doctor_id, paciente_id
-							ORDER BY doctor_id, paciente_id
-						)
-						".$buscar."
-						GROUP BY mensaje.doctor_id, mensaje.paciente_id
-						ORDER BY mensaje.doctor_id, mensaje.paciente_id";
-						
+				$sql =	"SELECT
+						(SELECT IF(MAX(mensaje.id) , MAX(mensaje.id) , 0) FROM mensaje WHERE mensaje.doctor_id = paciente.doctor_id AND mensaje.paciente_id = paciente.id) AS id,
+						paciente.id AS paciente_id,
+						paciente.doctor_id,
+						(SELECT IF(MAX(mensaje.id) , MAX(mensaje.mensaje) , '') FROM mensaje WHERE mensaje.doctor_id = paciente.doctor_id AND mensaje.paciente_id = paciente.id AND mensaje.origen ='medico') AS mensaje,
+						(SELECT IF(MAX(mensaje.id) , MAX(mensaje.leido) , '') FROM mensaje WHERE mensaje.doctor_id = paciente.doctor_id AND mensaje.paciente_id = paciente.id AND mensaje.origen ='medico') AS leido,
+						(SELECT IF(MAX(mensaje.id) , MAX(mensaje.origen) , '') FROM mensaje WHERE mensaje.doctor_id = paciente.doctor_id AND mensaje.paciente_id = paciente.id AND mensaje.origen ='medico') AS origen,
+						(SELECT IF(MAX(mensaje.id) , MAX(mensaje.fecha) , '') FROM mensaje WHERE mensaje.doctor_id = paciente.doctor_id AND mensaje.paciente_id = paciente.id AND mensaje.origen ='medico') AS fecha,
+						(SELECT IF(MAX(mensaje.id) , MAX(mensaje.ampm) , '') FROM mensaje WHERE mensaje.doctor_id = paciente.doctor_id AND mensaje.paciente_id = paciente.id AND mensaje.origen ='medico') AS ampm
+						FROM paciente
+						JOIN profile ON profile.user_id = paciente.user_id
+						WHERE paciente.user_id = ".Yii::$app->user->id.$buscar;		
 				$query = Mensaje::findBySql($sql);
 			}
 		}
