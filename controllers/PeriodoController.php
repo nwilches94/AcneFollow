@@ -115,6 +115,8 @@ class PeriodoController extends BaseAdminController
 			{
                 $model->save();
 				
+				\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Periodo Actualizado'));
+				
 				return $this->redirect('index');
 			}
             else
@@ -133,7 +135,9 @@ class PeriodoController extends BaseAdminController
 	public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+		
+		\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Periodo Eliminado'));
+		
         return $this->redirect(['index']);
     }
 	

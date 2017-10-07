@@ -49,10 +49,12 @@ class GraficaController extends BaseAdminController
 		
 		if($model->load(Yii::$app->request->post())) {
 			$model->paciente_id = $_GET['id'];
-			$model->fecha = Examen::changeDate($model->fecha, 0);
+			$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'php: Y-m-d');
 			$model->save();
 			
-			return $this->redirect(['/paciente/view', 'id' => $_GET['id']]);
+			\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Estadística Generada'));
+			
+			return $this->redirect(['/examen/index', 'id' => $_GET['id']]);
 		}
 
         return $this->render('index', ['model' => $model]);
@@ -67,6 +69,8 @@ class GraficaController extends BaseAdminController
 			$model->fecha = Examen::changeDate($model->fecha, 0);
 			$model->save();
 			
+			\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Estadística Actualizada'));
+			
 			return $this->redirect(['/examen/index?id='.$_GET['id']]);
 		}
 
@@ -77,7 +81,9 @@ class GraficaController extends BaseAdminController
     {
 		$this->findModel($_GET['grafica'])->delete();
 			
-		return $this->redirect(['/examen/imagen?id='.$_GET['id'].'&paciente_id='.$_GET['paciente_id']]);
+		\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Estadística Eliminada'));
+		
+		return $this->redirect(['/examen/index?id='.$_GET['id']]);
     }
 	
 	protected function findModel($id)

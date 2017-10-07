@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Pacientes'), 'url' =
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?= $this->render('@vendor/dektrium/yii2-user/views/_alert', ['module' => Yii::$app->getModule('user'),]) ?>
+
 <div class="paciente-view">
 
     <h1><?= Html::encode('Datos del Paciente') ?></h1><br>
@@ -44,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					$sm=3; $lg=6;
 				}
 				else {
-					$sm=6; $lg=12;
+					$sm=12; $lg=12;
 				}
 		?>
 		<div class="form-group">
@@ -55,10 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
 			    <?= DetailView::widget([
 			        'model' => $model,
 			        'attributes' => [
-			        	/*[
-			            	'label' => 'Paciente ID',
-							'attribute' => 'id'
-			            ],*/
 			        	[
 							'attribute' => 'name',
 			                'label' => 'Nombres',

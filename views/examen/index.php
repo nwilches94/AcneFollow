@@ -20,9 +20,10 @@ else
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?= $this->render('@vendor/dektrium/yii2-user/views/_alert', ['module' => Yii::$app->getModule('user'),]) ?>
+
 <div class="examen-index">
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 	<br>
     <p>
     	<?php	if(\Yii::$app->user->can('paciente'))

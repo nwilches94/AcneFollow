@@ -158,6 +158,8 @@ class MensajeController extends BaseAdminController
 	public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+		
+		\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Mensaje Eliminado'));
 
         return $this->redirect(['index']);
     }

@@ -8,44 +8,6 @@ $this->title = 'Acne Follow';
 <div class="site-index">
 	<h1>Recomendaciones</h1><br>
 	
-	<div class="row">
-	    <div class="col-md-12">
-	        <div class="panel panel-default">
-	            <div class="panel-body">
-					<blockquote>
-						<div class="col-xs-12 col-md-12" align="center">
-							<h3>RECUERDA:</h3>
-						</div>
-						<div class="col-xs-12 col-md-6">
-							<footer class="textB">Este medicamento <strong>ha sido formulado</strong> porque presentas un acné muy fuerte y es la mejor opción de tratamiento que te puedo ofrecer para mejorar las lesiones que presentas y evitar o mejorar las cicatrices que te pueda ocasionar el acné.</footer>
-							<footer class="textB">En algunos pacientes se ha descrito <strong>depresión y ansiedad</strong> con este medicamento. Pero en mi experiencia están mas deprimidos los pacientes con acné que cuando se ven la piel mejor, pero es importante que me avises si sientes algún cambio de tu estado de ánimo.</footer>
-					  		<footer class="textB"><strong>No puedes donar sangre,</strong> inclusive dos meses después de terminar el medicamento, porque esta sangre puede hacerle daño a una mujer en embarazo.</footer>
-					  	</div>
-					  	<div class="col-xs-12 col-md-6">
-					  		<footer class="textB">Algunos pacientes pueden sentir <strong>dolores musculares,</strong> si son suaves continua con la toma del medicamento y evita esfuerzos grandes o ejercicios de alto impacto.</footer>
-					  		<footer class="textB">Si estas con náuseas, vómito o diarrea, no tomes la cápsula por que la vas a eliminar. Pero si estos síntomas son ocasionados por el medicamento es mejor que consultes con tu Dermatólogo.</footer>
-					  		<footer class="textB">Asiste a los controles de Dermatología con exámenes de laboratorio (Colesterol total, Triglicéridos, TGO, TGP).</footer>
-					  	</div>
-					  	<div class="col-xs-12 col-md-12">
-					  		<footer class="textB"><strong><span style="color:#73879C">SUSPENDE</span></strong> la toma del medicamento si presentas: dolor de cabeza muy fuerte, dolores musculares fuertes, dolor abdominal o alguna reacción que te preocupe y consulta con tu Dermatólogo.</footer>
-					  	</div>
-					  	<div class="col-xs-12 col-md-12">
-					  		<div class="col-xs-4 col-md-4">
-					  			<img src="/img/recomendacion_1.jpg" class="img-responsive center-block">
-					  		</div>
-					  		<div class="col-xs-4 col-md-4">
-					  			<img src="/img/recomendacion_2.jpg" class="img-responsive center-block">
-					  		</div>
-					  		<div class="col-xs-4 col-md-4">
-					  			<img src="/img/recomendacion_3.jpg" class="img-responsive center-block">
-					  		</div>
-				  		</div>
-				  	</blockquote>
-				</div>
-			</div>	
-		</div>
-	</div>	
-	
 	<?php if(Paciente::viewMenu()){ ?>
 		<div class="row">
 		    <div class="col-md-12">
@@ -170,6 +132,45 @@ $this->title = 'Acne Follow';
 				</div>	
 			</div>
 		</div>
-	<?php } ?>		
+	<?php } ?>	
+	
+	<div class="row">
+	    <div class="col-md-12">
+	        <div class="panel panel-default">
+	            <div class="panel-body">
+					<blockquote>
+						<div class="col-xs-12 col-md-12" align="center">
+							<h3>RECUERDA:</h3>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<footer class="textB">Este medicamento <strong>ha sido formulado</strong> porque presentas un acné muy fuerte y es la mejor opción de tratamiento que te puedo ofrecer para mejorar las lesiones que presentas y evitar o mejorar las cicatrices que te pueda ocasionar el acné.</footer>
+							<footer class="textB">En algunos pacientes se ha descrito <strong>depresión y ansiedad</strong> con este medicamento. Pero en mi experiencia están mas deprimidos los pacientes con acné que cuando se ven la piel mejor, pero es importante que me avises si sientes algún cambio de tu estado de ánimo.</footer>
+					  		<footer class="textB"><strong>No puedes donar sangre,</strong> inclusive dos meses después de terminar el medicamento, porque esta sangre puede hacerle daño a una mujer en embarazo.</footer>
+					  	</div>
+					  	<div class="col-xs-12 col-md-6">
+					  		<footer class="textB">Algunos pacientes pueden sentir <strong>dolores musculares,</strong> si son suaves continua con la toma del medicamento y evita esfuerzos grandes o ejercicios de alto impacto.</footer>
+					  		<footer class="textB">Si estas con náuseas, vómito o diarrea, no tomes la cápsula por que la vas a eliminar. Pero si estos síntomas son ocasionados por el medicamento es mejor que consultes con tu Dermatólogo.</footer>
+					  		<footer class="textB">Asiste a los controles de Dermatología con exámenes de laboratorio (Colesterol total, Triglicéridos, TGO, TGP).</footer>
+					  	</div>
+					  	<div class="col-xs-12 col-md-12">
+					  		<footer class="textB"><strong><span style="color:#73879C">SUSPENDE</span></strong> la toma del medicamento si presentas: dolor de cabeza muy fuerte, dolores musculares fuertes, dolor abdominal o alguna reacción que te preocupe y consulta con tu Dermatólogo.</footer>
+					  	</div>
+					  	<div class="col-xs-12 col-md-12">
+					  		<div class="col-xs-4 col-md-4">
+					  			<img src="/img/recomendacion_1.jpg" class="img-responsive center-block">
+					  		</div>
+					  		<div class="col-xs-4 col-md-4">
+					  			<img src="/img/recomendacion_2.jpg" class="img-responsive center-block">
+					  		</div>
+					  		<div class="col-xs-4 col-md-4">
+					  			<img src="/img/recomendacion_3.jpg" class="img-responsive center-block">
+					  		</div>
+				  		</div>
+				  	</blockquote>
+				</div>
+			</div>	
+		</div>
+	</div>
+		
 </div>
 <br>

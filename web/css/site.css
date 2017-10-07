@@ -222,13 +222,13 @@ body .container.body .right_col {
 		display: block;
 	}
 	
-	.nav-md #control_paciente-container{
+	/*.nav-md #control_paciente-container{
 		width: 300px;
 	}
 		
 	.nav-sm #control_paciente-container{
 		width: 230px;
-	}
+	}*/
 	
 	#formula_paciente {
 		padding-right: 20%;

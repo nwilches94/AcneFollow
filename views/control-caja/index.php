@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'attribute' => 'fecha',
 		        'label' => 'Fecha',
 		        'value' => function ($data) {
-					return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y');
+					return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-y');
 			     }
 		    ],
             [
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			    	return Formula::findOne($data->formula_id)->peso;
 			    },
 		    ],
-		    /*[
+		    [
 		        'attribute' => 'dosis',
 		        'label' => 'Dosis (mg)',
 		        'value' => function ($data) {
@@ -58,12 +58,12 @@ $this->params['breadcrumbs'][] = $this->title;
 		    ],
 		    [
 		        'attribute' => 'caja',
-		        'label' => 'Total de Cajas',
+		        'label' => 'Dosis Total de Cajas',
 		        'value' => function ($data) {
 		        	$datos=Formula::findOne($data->formula_id);
 			    	return number_format((($datos->peso*$datos->dosis)/($datos->capsula*30)),0);
 			     }
-		    ],*/
+		    ],
             [
 		        'attribute' => 'capsula',
 		        'label' => 'mg Cápsula',
@@ -93,6 +93,17 @@ $this->params['breadcrumbs'][] = $this->title;
 			    },
 		        "visible" => \Yii::$app->user->can('medico')
 		    ],
+		    [
+				'class' => 'yii\grid\ActionColumn',
+		        'template' => '{delete}',
+		        'buttons' => [
+		        	'delete' => function($url, $model){
+		        		return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/control-caja/delete', 'id' => $model->id, 'paciente_id' => $_GET['id']], 
+		        		['title' => 'Eliminar', 'aria-label' => 'Eliminar', 'data-pjax' => '0', 'data-confirm' => '¿Está seguro de eliminar este elemento?', 'data-method' => 'post']);
+			        }
+			    ],
+			    "visible" => \Yii::$app->user->can('medico')
+			],
         ],
     ]); ?>
 </div>

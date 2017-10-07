@@ -12,8 +12,6 @@ use app\models\Paciente;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<?php $this->registerJsFile('@web/js/datePicker.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
-
 <div class="examen-form">
 
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>

@@ -15,21 +15,13 @@ use app\models\Examen;
 <div class="alert alert-info">
     <?= Yii::t('user', 'Una vez generada la estadística se va mostrar en la vista del Paciente') ?>.
 </div>
-    
-<style>
-	.ui-datepicker-calendar {
-    	display: none;
-	}​
-</style>
-
-<?php $this->registerJsFile('@web/js/datePicker.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 
 <div class="grafica-form">
 	     
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'action' => '/grafica/index?id='.$_GET['id'], 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
 		
 		<div class="form-group">
-			<?= $form->field($model, 'fecha')->widget(DatePicker::className()) ?>
+			<?= $form->field($model, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['changeMonth' => true, 'changeYear' => true]])->textInput(['placeholder' => 'Clic para seleccionar la Fecha'])->label('Fecha') ?>
 			<?= $form->field($model, 'tipo')->dropDownList(['TGO' => 'TGO', 'TGP' => 'TGP', 'Colesterol' => 'Colesterol', 'Triglicéridos' => 'Triglicéridos'], ['prompt'=>'Seleccione el Tipo de Examen'])->label('Tipo de Examen'); ?>
 			<?= $form->field($model, 'valorExamen')->textInput(['placeholder' => 'Parametro 1'])->label('Valor del Examen'); ?>
 			<?= $form->field($model, 'valorReferencia')->textInput(['placeholder' => 'Parametro 2'])->label('Valor de Referencia'); ?>
@@ -71,7 +63,7 @@ use app\models\Examen;
 					        'format' => 'text',
 					        'label' => 'Fecha',
 					        'value' => function ($data) {
-					        	return Examen::changeDateEspanol(\Yii::$app->formatter->asDate($data->fecha, 'php: F Y'));
+					        	return Yii::$app->formatter->asDate($data->fecha, 'php: d-m-Y');
 						     }
 					    ],
 					    [

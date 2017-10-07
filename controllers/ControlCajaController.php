@@ -178,8 +178,10 @@ class ControlCajaController extends BaseAdminController
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+		
+		\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Fórmula Eliminada'));
+		
+        return $this->redirect(['/paciente/view', 'id' => $_GET['paciente_id']]);
     }
 
     /**

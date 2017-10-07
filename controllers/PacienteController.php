@@ -187,7 +187,6 @@ class PacienteController extends BaseAdminController
 		$profile->fecha=Yii::$app->formatter->asDate($profile['fecha'], 'php: d-m-Y');
 		
         if($profile->load(Yii::$app->request->post())) {
-			\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'El Paciente ha sido Actualizado'));
 			
         	$attributes=Yii::$app->request->post();
 			
@@ -198,6 +197,8 @@ class PacienteController extends BaseAdminController
 			$profile->telefono=$attributes['Profile']['telefono'];
 			$profile->fecha=Yii::$app->formatter->asDate($attributes['Profile']['fecha'], 'php: Y-m-d');
 			$profile->save();
+			
+			\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'El Paciente ha sido Actualizado'));
 
             return $this->redirect(['view', 'id' => $id]);
         } 
@@ -269,6 +270,8 @@ class PacienteController extends BaseAdminController
 				$controlCajas->dosisRestante=(($formula->peso*$formula->dosis)-($controlCajas->dosisAcumulada));
 				$controlCajas->dosisCaja=((($formula->peso*$formula->dosis)/($formula->capsula*30))-($formula->cajas));
 				$controlCajas->save();
+				
+				\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Fórmula Generada'));
 			}
         } 
 		

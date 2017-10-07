@@ -10,6 +10,8 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Pacientes'), 'url' =
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?= $this->render('@vendor/dektrium/yii2-user/views/_alert', ['module' => Yii::$app->getModule('user'),]) ?>
+
 <div class="p-create">
 
     <h1><?= Html::encode($this->title) ?></h1><br>
