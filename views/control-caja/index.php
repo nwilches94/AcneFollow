@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'value' => function ($data) {
 			    	return Formula::findOne($data->formula_id)->dosis;
 			    },
+			    "visible" => \Yii::$app->user->can('medico')
 		    ],
 		    [
 		        'attribute' => 'dosis',
@@ -55,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'value' => function ($data) {
 			    	return (Formula::findOne($data->formula_id)->peso * Formula::findOne($data->formula_id)->dosis);
 			    },
+			    "visible" => \Yii::$app->user->can('medico')
 		    ],
 		    [
 		        'attribute' => 'caja',
@@ -62,7 +64,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'value' => function ($data) {
 		        	$datos=Formula::findOne($data->formula_id);
 			    	return number_format((($datos->peso*$datos->dosis)/($datos->capsula*30)),0);
-			     }
+			     },
+				"visible" => \Yii::$app->user->can('medico')
 		    ],
             [
 		        'attribute' => 'capsula',
