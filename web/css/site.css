@@ -173,7 +173,28 @@ body .container.body .right_col {
     border-color: #614051;
 }
 
+.chart-wrapper {
+ position: relative;
+    padding-bottom: 40%;
+    width:100%;
+    float:left;
+}
+
+chart{
+    width: 100% !important;
+  }
+  
 @media (max-width: 320px) {
+	
+	.small {
+		width: 100%;
+		margin-left: 0%;
+	}
+	
+	.smallButton {
+		margin-bottom: 5%;
+	}
+	
 	.space_all {
 		display: block;
 	}
@@ -256,6 +277,16 @@ body .container.body .right_col {
 }
 
 @media (min-width: 321px) and (max-width: 360px) {
+	
+	.small {
+		width: 100%;
+		margin-left: 0%;
+	}
+	
+	.smallButton {
+		margin-bottom: 5%;
+	}
+	
 	.space_all {
 		display: block;
 	}

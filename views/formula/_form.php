@@ -13,7 +13,7 @@ use dektrium\user\models\Profile;
 
 <div class="formula-form">
 	
-    <?php $form = ActiveForm::begin(['id' => 'formula_paciente', 'layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-xs-12 col-sm-9'],],]); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'small col-xs-9 col-ms-9 col-md-9 col-lg-9'],],]); ?>
 		
 		<div class="form-group">
 			<?php 	$paciente=Paciente::find()->where(['user_id' => Yii::$app->user->id])->one();
@@ -29,7 +29,7 @@ use dektrium\user\models\Profile;
 	    </div>
 	    
 	    <div class="form-group">
-			<div class="col-lg-offset-3 col-sm-12 col-lg-9">
+			<div class="small col-xs-offset-3 col-ms-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-9 col-ms-9 col-md-9 col-lg-9">
 	        	<?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => 'btn btn-success']) ?>
 	    	</div>
 		</div>

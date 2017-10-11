@@ -23,13 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php $form = ActiveForm::begin(['method' => 'get', 'action' => Url::toRoute('mensaje/index')]); ?>
 		
 		<div class="form-group">
-			<div class="col-lg-offset-0 col-lg-4" style="padding-left:0px">
+			<div class="col-lg-offset-0 col-xs-9 col-md-4 col-lg-4" style="padding-left:0px">
 				<?= $form->field($model, 'buscar')->textInput(['placeholder' => "Búsqueda por: ID / Cédula / Paciente"])->label(false); ?>
 			</div>
 		</div>	
 		
 		<div class="form-group">
-			<div class="col-lg-offset-0 col-lg-1">
+			<div class="col-lg-offset-0 col-xs-1 col-md-1 col-lg-1">
 				<?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
 			</div>
 		</div>

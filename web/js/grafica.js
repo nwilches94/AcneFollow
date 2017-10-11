@@ -4,18 +4,6 @@ $('input[name^=\"myChart[]\"]').each(function()
 	grafica($('#nameContainer_' + i).val(), $('#myChart_' + i).val(), $('#tipo_' + i).val(), $('#mes_' + i).val(), $('#valorE_' + i).val(), $('#valorR_' + i).val());
 	i++;
 });
-
-$('input[name^=\"myChart_320[]\"]').each(function()
-{
-	grafica($('#nameContainer_' + i).val(), $('#myChart_320_' + i).val(), $('#tipo_' + i).val(), $('#mes_' + i).val(), $('#valorE_' + i).val(), $('#valorR_' + i).val());
-	i++;
-});
-
-$('input[name^=\"myChart_360[]\"]').each(function()
-{
-	grafica($('#nameContainer_' + i).val(), $('#myChart_360_' + i).val(), $('#tipo_' + i).val(), $('#mes_' + i).val(), $('#valorE_' + i).val(), $('#valorR_' + i).val());
-	i++;
-});
  
 function grafica(id, name, tipo, mes, valorExamen, valorReferencia) 
 {
@@ -48,7 +36,7 @@ function grafica(id, name, tipo, mes, valorExamen, valorReferencia)
 		};
 	}
 	
-	Highcharts.chart(id, {
+	var chart = Highcharts.chart(id, {
 		colors: ['#FFFFFF'],
 	    chart: {
 	        type: 'line',
@@ -125,33 +113,29 @@ function grafica(id, name, tipo, mes, valorExamen, valorReferencia)
 	        data: data,
 	    }],
 	});
+	
+	$('#menu_toggle').on('click', function(){
+		
+		var widht = 0;
+		
+		if($('body').hasClass('nav-md'))
+		{
+			if($(window).width() <= 320)
+        		widht = 230; 
+        	
+        	if($(window).width() > 320 && $(window).width() <= 360)
+        		widht = 270;
+	    }
+	    else
+	    {
+	        if($(window).width() <= 320)
+        		widht = 300; 
+        	
+        	if($(window).width() > 320 && $(window).width() <= 360)
+        		widht = 340;
+	    }
+	    
+		if(widht <= 360)
+    		chart.setSize(widht, 400);
+	});
 }
-
-$('#menu_toggle').on('click', function(){
-	
-	var widht_320, widht_360;
-	if($('body').hasClass('nav-md')){
-        widht_320 = 230; widht_360 = 270;
-    }
-    else{
-        widht_320 = 300; widht_360 = 340;
-    }
-
-	var i=0; 
-	$('input[name^=\"myChart[]\"]').each(function()
-	{
-		i++;
-	});
-	
-	$('input[name^=\"myChart_320[]\"]').each(function()
-	{
-		$('#container320_' + i).css('width', widht_320 + 'px');
-		i++;
-	});
-	
-	$('input[name^=\"myChart_360[]\"]').each(function()
-	{
-		$('#container360_' + i).css('width', widht_360 + 'px');
-		i++;
-	});
-});

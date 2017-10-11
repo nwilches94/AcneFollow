@@ -304,7 +304,7 @@ class PacienteController extends BaseAdminController
 			}
 		}
 		
-		$periodos = Periodo::find()->where(['paciente_id' => $paciente['paciente_id']])->orderBy(['fecha' => SORT_DESC])->all();
+		$periodos = Periodo::find()->where(['paciente_id' => $_GET['id']])->orderBy(['fecha' => SORT_DESC])->all();
 		if($periodos)
 		{
 			foreach($periodos as $key => $value) {

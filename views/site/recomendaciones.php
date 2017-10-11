@@ -10,7 +10,7 @@ $this->title = 'Acne Follow';
 	
 	<?php if(Paciente::viewMenu()){ ?>
 		<div class="row">
-		    <div class="col-md-12">
+		    <div class="col-xs12 col-md-12">
 		        <div class="panel panel-default">
 		            <div class="panel-body">
 						<blockquote>
@@ -37,7 +37,7 @@ $this->title = 'Acne Follow';
 	<?php } ?>
 	
 	<div class="row">
-	    <div class="col-md-12">
+	    <div class="col-xs12 col-md-12">
 	        <div class="panel panel-default">
 	            <div class="panel-body">
 					<blockquote>
@@ -68,7 +68,7 @@ $this->title = 'Acne Follow';
 	</div>
 	
 	<div class="row">
-	    <div class="col-md-12">
+	    <div class="col-xs12 col-md-12">
 	        <div class="panel panel-default">
 	            <div class="panel-body">
 					<blockquote>
@@ -94,7 +94,7 @@ $this->title = 'Acne Follow';
 	</div>
 	
 	<div class="row">
-	    <div class="col-md-12">
+	    <div class="col-xs12 col-md-12">
 	        <div class="panel panel-default">
 	            <div class="panel-body">
 					<blockquote>
@@ -115,7 +115,7 @@ $this->title = 'Acne Follow';
 	
 	<?php if(Paciente::viewMenu()){ ?>
 		<div class="row">
-		    <div class="col-md-12">
+		    <div class="col-xs12 col-md-12">
 		        <div class="panel panel-default">
 		            <div class="panel-body">
 						<blockquote>
@@ -135,7 +135,7 @@ $this->title = 'Acne Follow';
 	<?php } ?>	
 	
 	<div class="row">
-	    <div class="col-md-12">
+	    <div class="col-xs12 col-md-12">
 	        <div class="panel panel-default">
 	            <div class="panel-body">
 					<blockquote>

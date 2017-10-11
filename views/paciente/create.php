@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('@vendor/dektrium/yii2-user/views/_alert', ['module' => Yii::$app->getModule('user'),]) ?>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
             	

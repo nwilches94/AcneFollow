@@ -42,15 +42,13 @@ $this->params['breadcrumbs'][] = $this->title;
 				ActiveForm::end(); 
 		?>
 		
-		<?php	if($dataProviderPeriodo && Paciente::getSexo()){
-					$sm=3; $lg=6;
-				}
-				else {
-					$sm=12; $lg=12;
-				}
+		<?php	if($dataProviderPeriodo && Paciente::getSexo())
+					$lg=6;
+				else
+					$lg=12;
 		?>
 		<div class="form-group">
-			<div style="padding-right: 10px" class="col-sm-<?= $sm ?> col-lg-<?= $lg ?>">	
+			<div style="padding-right: 10px" class="col-xs-12 col-lg-<?= $lg ?>">	
 				
 				<br><h2><?= Html::encode('Datos del Paciente') ?></h2>
 				
@@ -100,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 		<?php	if($dataProviderPeriodo && Paciente::getSexo()){ ?>
 						<div class="form-group">
-							<div class="col-sm-12 col-lg-6">
+							<div class="col-xs-12 col-lg-6">
 								<?php  if($dataProviderPeriodo && Paciente::getSexo()) { ?>
 											<?php $this->registerJsFile('@web/js/moment.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 											<?php $this->registerJsFile('@web/js/fullcalendar.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
@@ -114,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?php 	} ?>
 			
 		<div class="form-group">
-			<div class="col-sm-12 col-lg-4">
+			<div class="col-xs-12 col-lg-4">
 				<div class="space_all"></div>
 				<h2><?= Html::encode('Calcular Dosis') ?></h2>
 				
@@ -125,7 +123,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>
 		
 		<div class="form-group">
-			<div class="col-sm-12 col-lg-8">
+			<div class="col-xs-12 col-lg-8">
 				<div class="space_all"></div>
 				<h2><?= Html::encode('Fórmulas') ?></h2>
 				

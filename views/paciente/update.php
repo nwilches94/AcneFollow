@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' 
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="row">
-    <div class="col-md-12">
+    <div class="cols-xs-12 col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
 

@@ -115,7 +115,12 @@ class Paciente extends \yii\db\ActiveRecord
 		}
 		
 		if($profile && $profile['sexo'] == 'Mujer')
-			return true;
+		{
+			if(Periodo::find()->where(['paciente_id' => $_GET['id']])->one())
+				return true;
+			else
+				return false;
+		}
 
 		return false;
     }

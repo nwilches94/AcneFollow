@@ -15,7 +15,7 @@ use yii\jui\DatePicker;
 
 	<div class="form-group">
 				
-		<div class="col-sm-6 col-lg-6" style="vertical-align:middle; padding-left:0px">
+		<div class="col-xs-12 col-lg-6" style="vertical-align:middle; padding-left:0px">
 			
 			<?php $form = ActiveForm::begin(); ?>
 				
@@ -29,25 +29,24 @@ use yii\jui\DatePicker;
 				
 				<h2><?= Html::encode('Crear un Seguimiento de Periodos') ?></h2>
 				 
-				<div class="col-sm-6 col-lg-12" style="vertical-align:middle; padding-left:0px">			
-					<div class="col-sm-3 col-lg-5 periodo">
+				<div class="col-xs-12 col-lg-12" style="vertical-align:middle; padding-left:0px">			
+					<div class="col-xs-3 col-lg-5 periodo">
 						<?= $form->field($model, 'fecha')->widget(DatePicker::className(), [
 						    'language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['multidate' => false, 'autoclose' => true, 'changeMonth' => true, 'changeYear' => true]
 						])->textInput(['placeholder' => 'Fecha Inicio de Periodo'])->label(false); ?>
 					</div>
-					<div class="col-sm-3 col-lg-5 periodo">
+					<div class="col-xs-12 col-lg-5 periodo">
 						<?= $form->field($model, 'fechaFin')->widget(DatePicker::className(), [
 						    'language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['multidate' => false, 'autoclose' => true, 'changeMonth' => true, 'changeYear' => true]
 						])->textInput(['placeholder' => 'Fecha Fin de Periodo'])->label(false); ?>
 					</div>
-					<div class="col-sm-1 col-lg-1">
-			        	<?= Html::submitButton(Yii::t('app', 'Generar'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-			    	</div>
+					
+					<?= Html::submitButton(Yii::t('app', 'Generar'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+			    	
 			    </div>
 			    
 			<?php ActiveForm::end(); ?>
-			    
-			<div class="space_all2"></div>
+			
 		    <br><h2><?= Html::encode('Histórico de Seguimiento de Periodos') ?></h2>
 		    <?php Pjax::begin(); ?>
 			    <?= GridView::widget([
@@ -102,7 +101,7 @@ use yii\jui\DatePicker;
 	
 	<?php if($proximoPeriodo){ ?>
 	    <div class="form-group">
-	    	<div class="col-sm-6 col-lg-6">
+	    	<div class="col-xs-12 col-lg-6">
 	    		<div id='calendar'></div>
 	    	</div>
 	    </div>

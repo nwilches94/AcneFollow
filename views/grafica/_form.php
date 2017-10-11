@@ -18,7 +18,7 @@ use app\models\Examen;
 
 <div class="grafica-form">
 	     
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'action' => '/grafica/index?id='.$_GET['id'], 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'action' => '/grafica/index?id='.$_GET['id'], 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'small col-xs-9 col-ms-9 col-md-9 col-lg-9'],],]); ?>
 		
 		<div class="form-group">
 			<?= $form->field($model, 'fecha')->widget(DatePicker::className(), ['language' => 'es', 'dateFormat' => 'php: d-m-Y', 'clientOptions' => ['changeMonth' => true, 'changeYear' => true]])->textInput(['placeholder' => 'Clic para seleccionar la Fecha'])->label('Fecha') ?>
@@ -28,7 +28,7 @@ use app\models\Examen;
 		</div>
 		
 	    <div class="form-group">
-			<div class="col-lg-offset-3 col-lg-9">
+			<div class="small col-xs-offset-3 col-ms-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-9 col-ms-9 col-md-9 col-lg-9">
 				<?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-success']) ?>
 			</div>
 		</div>

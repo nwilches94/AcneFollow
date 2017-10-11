@@ -63,10 +63,10 @@ class GraficaController extends BaseAdminController
 	public function actionUpdate($id)
     {
 		$model = $this->findModel($_GET['grafica']);
-		$model->fecha = Examen::changeDate($model->fecha, 1);
+		$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'php: d-m-Y');
 		
 		if($model->load(Yii::$app->request->post())) {
-			$model->fecha = Examen::changeDate($model->fecha, 0);
+			$model->fecha = Yii::$app->formatter->asDate($model->fecha, 'php: Y-m-d');
 			$model->save();
 			
 			\Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Estadística Actualizada'));

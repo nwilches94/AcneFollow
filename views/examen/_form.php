@@ -14,7 +14,7 @@ use app\models\Paciente;
 
 <div class="examen-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'small col-xs-9 col-ms-9 col-md-9 col-lg-9'],],]); ?>
 
 	    <?php 	if(\Yii::$app->user->can('medico'))
 					echo $form->field($model, 'paciente_id')->dropDownList($listaPaciente, ['prompt'=>'Seleccione...'])->label('Pacientes');
@@ -30,7 +30,7 @@ use app\models\Paciente;
 		<?= $form->field($model, 'tipo')->dropDownList(['TGO' => 'TGO', 'TGP' => 'TGP', 'Colesterol' => 'Colesterol', 'Triglicéridos' => 'Triglicéridos', 'Otro' => 'Otro'], ['prompt'=>'Seleccione el Tipo de Examen'])->label('Tipo de Examen'); ?>
 		
 		<div class="form-group">
-			<div class="col-lg-offset-3 col-lg-9">
+			<div class="small col-xs-offset-3 col-ms-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-9 col-ms-9 col-md-9 col-lg-9">
 			    <?= \nemmo\attachments\components\AttachmentsInput::widget([
 			            'id' => 'fileIinput', // Optional
 			            'model' => $model,
@@ -48,9 +48,8 @@ use app\models\Paciente;
 		
 		<?= $form->field($model, 'notas')->textarea(['rows' => 4]) ?>
 		 
-	
 	    <div class="form-group">
-			<div class="col-lg-offset-3 col-lg-9">
+			<div class="small col-xs-offset-3 col-ms-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-9 col-ms-9 col-md-9 col-lg-9">
 	        	<?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => 'btn btn-success']) ?>
 	    		<?= Html::a(Yii::t('app', 'Regresar'), ['index'], ['class' => 'btn btn-primary']) ?>
 			</div>

@@ -18,7 +18,7 @@ use dektrium\user\models\Profile;
         <?= Yii::t('user', 'A password will be generated automatically if not provided') ?>.
     </div>
     
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-sm-9'],],]); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'fieldConfig' => ['horizontalCssClasses' => ['wrapper' => 'col-xs-12 col-sm-9'],],]); ?>
 		
 		<div class="form-group">
 			<?= $form->field($profile, 'name')->textInput(['value' => $profile['name'], 'placeholder' => 'Nombres'])->label('Nombres'); ?>
