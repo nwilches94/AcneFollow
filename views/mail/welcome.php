@@ -35,7 +35,9 @@ Su usuario es : <?= $user->email ?><br>
 Su contraseña es: <?= $user->password ?><br><br>
 
 Para poder acceder a la aplicación ingrese al siguiente link: <a href="http://acnefollow.tk">Acnefollow.tk</a><br>
-Recuerda ser constante con el tratamiento y verás los cambios.
+Recuerda ser constante con el tratamiento y verás los cambios.<br><br>
+
+<iframe class="youtube-player" type="text/html" width="600" height="400" src="http://www.youtube.com/embed/-09uLJRoc8M" frameborder="0"></iframe>
 
 <?php if ($token !== null): ?>
 	<?= Yii::t('user', 'In order to complete your registration, please click the link below') ?>.
